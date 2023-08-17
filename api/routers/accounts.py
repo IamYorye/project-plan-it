@@ -6,17 +6,55 @@ from fastapi import (
     APIRouter,
     Request,
 )
-from jwtdown_fastapi.authentication import Token
-from authenticator import authenticator
-
-from pydantic import BaseModel
-
 from queries.accounts import (
     AccountIn,
     AccountOut,
     AccountRepo,
+    AccoutRepository,
+    Error,
     DuplicateAccountError,
 )
+from jwtdown_fastapi.authentication import Token
+from pydantic import BaseModel
+from authenticator import authenticator
+from queries.accounts import AccountIn, AccountOut, AccoutRepository, Error
+from typing import Union, List, Optional
+
+router = APIRouter()
+
+@router.get("/api/accounts", response_model = Union[List[AccountOut], Error])
+def get_all_accounts(
+    repo: AccoutRepository = Depends(),
+):
+    return repo.get_all_accounts()
+
+@router.put("/api/accounts/{account_id}", response_model = Union[AccountOut, Error])
+def update_account(
+    account_id: int,
+    account: AccountIn,
+    repo: AccoutRepository = Depends(),
+) -> Union[Error, AccountOut]:
+    return repo.update_account(account_id, account)
+
+@router.delete("/api/accounts/{account_id}", response_model = bool)
+def delete_account(
+    account_id = int,
+    repo: AccoutRepository = Depends(),
+) -> bool:
+    return repo.delete_account(account_id)
+
+@router.get("/api/accounts/{account_id}", response_model = Optional[AccountOut])
+def get_account(
+    account_id : int,
+    response: Response,
+    repo: AccoutRepository = Depends(),
+) -> AccountOut:
+    account = repo.get_account(account_id)
+    if account is None:
+        response.status_code = 404
+        return None
+
+    return account
 
 
 class AccountForm(BaseModel):
@@ -31,8 +69,6 @@ class AccountToken(Token):
 class HttpError(BaseModel):
     detail: str
 
-
-router = APIRouter()
 
 @router.get("/api/test", response_model=bool)
 async def test_auth(
