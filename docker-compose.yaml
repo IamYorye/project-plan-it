@@ -32,7 +32,7 @@ services:
     environment:
       CORS_HOST: http://localhost:3000
       DATABASE_URL: postgresql://admin:secret@postgres/planiteers
-      SIGNING_KEY: ${SIGNING_KEY}
+      SIGNING_KEY: e139f3176fb60e18f85bdef5aa26174d078750149cb64b227639adc4dd6670b3
       WAIT_HOSTS: postgres:5432
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60
