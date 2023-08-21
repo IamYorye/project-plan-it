@@ -5,8 +5,10 @@ from pydantic import BaseModel
 
 pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
+
 class Error(BaseModel):
     message: str
+
 
 class AccountOut(BaseModel):
     id: int
@@ -18,6 +20,7 @@ class AccountOut(BaseModel):
     picture: Optional[str]
     is_mentor: bool = False
 
+
 class AccountIn(BaseModel):
     email: str
     password: str
@@ -28,8 +31,9 @@ class AccountIn(BaseModel):
     picture: Optional[str]
     is_mentor: bool = False
 
-class AccoutRepository:
-    def get_all_accounts(self) -> Union [Error, List[AccountOut]]:
+
+class AccountRepository:
+    def get_all_accounts(self) -> Union[Error, List[AccountOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -50,23 +54,22 @@ class AccoutRepository:
                     )
 
                     return [
-                    AccountOut(
-                        id = record[0],
-                        first_name = record[1],
-                        last_name = record[2],
-                        email = record[3],
-                        password = record[4],
-                        years_of_experience = record[5],
-                        education = record[6],
-                        picture = record[7],
-                        is_mentor = record[8],
-                    )
-                    for record in db
+                        AccountOut(
+                            id=record[0],
+                            first_name=record[1],
+                            last_name=record[2],
+                            email=record[3],
+                            password=record[4],
+                            years_of_experience=record[5],
+                            education=record[6],
+                            picture=record[7],
+                            is_mentor=record[8],
+                        )
+                        for record in db
                     ]
         except Exception as e:
             print(e)
             return {"message": "Could not get all accounts"}
-
 
     def get_account(self, account_id: int) -> Optional[AccountOut]:
         try:
@@ -86,7 +89,7 @@ class AccoutRepository:
                         FROM account
                         WHERE id = %s
                         """,
-                            [account_id],
+                        [account_id],
                     )
                     record = result.fetchone()
                     if record is None:
@@ -96,24 +99,23 @@ class AccoutRepository:
             print(e)
             return {"message": "Could not get that account"}
 
-
     def delete_account(self, account_id: int) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
-                    """
+                        """
                     DELETE FROM account
                     WHERE id = %s
                     """,
-                    [account_id],
-                )
+                        [account_id],
+                    )
                 return True
         except Exception as e:
             print(e)
             return False
 
-    def update_account(self, account_id: int, account: AccountIn) -> Union [AccountOut, Error]:
+    def update_account(self, account_id: int, account: AccountIn) -> Union[AccountOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -153,16 +155,17 @@ class AccoutRepository:
 
     def record_to_account_out(self, record):
         return AccountOut(
-            id = record[0],
-            first_name = record[1],
-            last_name = record[2],
-            email = record[3],
-            password = record[4],
-            years_of_experience = record[5],
-            education = record[6],
-            picture = record[7],
-            is_mentor = record[8],
+            id=record[0],
+            first_name=record[1],
+            last_name=record[2],
+            email=record[3],
+            password=record[4],
+            years_of_experience=record[5],
+            education=record[6],
+            picture=record[7],
+            is_mentor=record[8],
         )
+
 
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
@@ -193,7 +196,7 @@ class AccountRepo:
             self,
             account: AccountIn,
             hashed_password: str
-            ) -> AccountOutWithPassword:
+    ) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -225,11 +228,11 @@ class AccountRepo:
             first_name=account.first_name,
             last_name=account.last_name,
             hashed_password=hashed_password,
-            years_of_experience = account.years_of_experience,
-            education = account.education,
-            picture = account.picture,
-            is_mentor = account.is_mentor
-            )
+            years_of_experience=account.years_of_experience,
+            education=account.education,
+            picture=account.picture,
+            is_mentor=account.is_mentor
+        )
 
 
 class DuplicateAccountError(ValueError):

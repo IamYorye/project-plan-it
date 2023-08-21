@@ -10,44 +10,48 @@ from queries.accounts import (
     AccountIn,
     AccountOut,
     AccountRepo,
-    AccoutRepository,
+    AccountRepository,
     Error,
     DuplicateAccountError,
 )
 from jwtdown_fastapi.authentication import Token
 from pydantic import BaseModel
 from authenticator import authenticator
-from queries.accounts import AccountIn, AccountOut, AccoutRepository, Error
+from queries.accounts import AccountIn, AccountOut, AccountRepository, Error
 from typing import Union, List, Optional
 
 router = APIRouter()
 
-@router.get("/api/accounts", response_model = Union[List[AccountOut], Error])
+
+@router.get("/api/accounts", response_model=Union[List[AccountOut], Error])
 def get_all_accounts(
-    repo: AccoutRepository = Depends(),
+    repo: AccountRepository = Depends(),
 ):
     return repo.get_all_accounts()
 
-@router.put("/api/accounts/{account_id}", response_model = Union[AccountOut, Error])
+
+@router.put("/api/accounts/{account_id}", response_model=Union[AccountOut, Error])
 def update_account(
     account_id: int,
     account: AccountIn,
-    repo: AccoutRepository = Depends(),
+    repo: AccountRepository = Depends(),
 ) -> Union[Error, AccountOut]:
     return repo.update_account(account_id, account)
 
-@router.delete("/api/accounts/{account_id}", response_model = bool)
+
+@router.delete("/api/accounts/{account_id}", response_model=bool)
 def delete_account(
-    account_id = int,
-    repo: AccoutRepository = Depends(),
+    account_id=int,
+    repo: AccountRepository = Depends(),
 ) -> bool:
     return repo.delete_account(account_id)
 
-@router.get("/api/accounts/{account_id}", response_model = Optional[AccountOut])
+
+@router.get("/api/accounts/{account_id}", response_model=Optional[AccountOut])
 def get_account(
-    account_id : int,
+    account_id: int,
     response: Response,
-    repo: AccoutRepository = Depends(),
+    repo: AccountRepository = Depends(),
 ) -> AccountOut:
     account = repo.get_account(account_id)
     if account is None:
@@ -75,6 +79,7 @@ async def test_auth(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return True
+
 
 @router.post("/api/accounts", response_model=AccountToken | HttpError)
 async def create_account(
