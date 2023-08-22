@@ -6,6 +6,24 @@ At a minimum, you'll need to include the following information in each entry:
     At least one ah-ha! moment that you had during your coding, however small
     Keep your journal in reverse chronological order. Always put new entries at the top.
 
+## Tuesday - August 22, 2023
+
+Today, I worked on:
+
+* Project_stacks endpoints
+
+I started and finished the GET, GET (All), POST, PUT, and DELETE methods for the 'project_stacks' table endpoints.
+
+## Monday - August 21, 2023
+
+Today, I worked on:
+
+* First Merge Request for Project POST/DELETE methods; Started project_stacks endpoints
+
+I finished my endpoints for the Project POST and DELETE request methods then completed the merge request into main after it was reviewed. I also created a new branch 'project-stacks' to begin working on the endpoints (GET, GET, POST, PUT, DELETE) for the project-stacks table.
+
+After pulling updated merged code from Main before prepping my own merge request, I ran into an issue with our migration file not matching. I was informed by teammates that I needed to Drop the tables and rerun docker compose. I used Beekeeper to drop the tables, which had to be done in a certain order due to dependencies, and was able to successfully get all the containers running again after executing docker-compose up.
+
 ## Friday - August 18, 2023
 
 * No Class
