@@ -26,6 +26,7 @@ router = APIRouter()
 @router.get("/api/accounts", response_model=Union[List[AccountOut], Error])
 def get_all_accounts(
     repo: AccountRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_all_accounts()
 
@@ -37,6 +38,7 @@ def update_account(
     account_id: int,
     account: AccountIn,
     repo: AccountRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, AccountOut]:
     return repo.update_account(account_id, account)
 
@@ -45,6 +47,7 @@ def update_account(
 def delete_account(
     account_id=int,
     repo: AccountRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     return repo.delete_account(account_id)
 
@@ -54,6 +57,7 @@ def get_account(
     account_id: int,
     response: Response,
     repo: AccountRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> AccountOut:
     account = repo.get_account(account_id)
     if account is None:
