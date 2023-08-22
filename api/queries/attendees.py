@@ -1,9 +1,20 @@
 import os
 from psycopg_pool import ConnectionPool
 from typing import List, Union, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
+
+
+class Error(BaseModel):
+    message: str
+
+
+class ProjectAttendeeOut(BaseModel):
+    id: int
+    first_name: str
+    last_name: str
+    email: str
 
 
 class AttendeeIn(BaseModel):
@@ -47,3 +58,32 @@ class AttendeeRepo:
             project_id=attendee.project_id,
             account_id=attendee.account_id
         )
+
+    def get_attendees(self, project_id: int) -> Union[Error, List[ProjectAttendeeOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT account.id, account.first_name, account.last_name, account.email
+                        FROM account
+                        INNER JOIN attendees
+                        ON account.id = attendees.account_id
+                        INNER JOIN project
+                        ON project.id = attendees.project_id
+                        WHERE project.id = %s
+                        """,
+                        [project_id],
+                    )
+                    return [
+                        ProjectAttendeeOut(
+                            id=record[0],
+                            first_name=record[1],
+                            last_name=record[2],
+                            email=record[3],
+                        )
+                        for record in db.fetchall()
+                    ]
+        except ValidationError as e:
+            print(e)
+            return {"message": "Could not get attendees"}

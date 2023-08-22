@@ -30,7 +30,9 @@ def get_all_accounts(
     return repo.get_all_accounts()
 
 
-@router.put("/api/accounts/{account_id}", response_model=Union[AccountOut, Error])
+@router.put(
+    "/api/accounts/{account_id}", response_model=Union[AccountOut, Error]
+)
 def update_account(
     account_id: int,
     account: AccountIn,
@@ -72,13 +74,6 @@ class AccountToken(Token):
 
 class HttpError(BaseModel):
     detail: str
-
-
-@router.get("/api/test", response_model=bool)
-async def test_auth(
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    return True
 
 
 @router.post("/api/accounts", response_model=AccountToken | HttpError)

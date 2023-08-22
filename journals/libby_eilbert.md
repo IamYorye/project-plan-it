@@ -17,3 +17,12 @@ Today I worked with Jaspreet on:
 - merging our branches with main
 
 Took a while to resolve merge conflicts because we'd both been working in the same files, but now all the accounts endpoints are finished.
+
+
+8/21/23
+
+Today I worked on an endpoint to create an 'attendee,' which is just a way to link an account to a project, for when a user wants to join a project.
+
+8/22/23
+
+Today I worked on an endpoint to list all the attendees of a given project. Spent a long time debugging because it wasn't working and the error I was getting in Docker was not very descriptive, but as soon as I showed it to my team I was able to see that I had an inconsistency in my response model in the router and in the query.
