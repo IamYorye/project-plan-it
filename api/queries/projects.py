@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 from queries.pool import pool
 
@@ -24,7 +25,6 @@ class ProjectOut(BaseModel):
 
 
 class ProjectRepository:
-
     def delete(self, project_id: int) -> bool:
         try:
             with pool.connection() as conn:
@@ -47,7 +47,8 @@ class ProjectRepository:
                 result = db.execute(
                     """
                     INSERT INTO project
-                        (project_name, project_picture, goal, is_completed, owner_id)
+                        (project_name, project_picture, goal, is_completed,
+                        owner_id)
                     VALUES
                         (%s, %s, %s, %s, %s)
                     RETURNING id;
@@ -57,9 +58,93 @@ class ProjectRepository:
                         project.project_picture,
                         project.goal,
                         project.is_completed,
-                        project.owner_id
-                    ]
+                        project.owner_id,
+                    ],
                 )
                 id = result.fetchone()[0]
                 old_data = project.dict()
                 return ProjectOut(id=id, **old_data)
+
+
+class ProjectQueries:
+    def get_all_projects(self) -> List[ProjectOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT id, project_name, project_picture, goal,
+                            is_completed, owner_id
+                        FROM project"""
+                    )
+
+                    return [
+                        ProjectOut(
+                            id=row[0],
+                            project_name=row[1],
+                            project_picture=row[2],
+                            goal=row[3],
+                            is_completed=row[4],
+                            owner_id=row[5],
+                        )
+                        for row in cur.fetchall()
+                    ]
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all projects"}
+
+    def get_project(self, id: int) -> ProjectOut:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT id, project_name, project_picture, goal,
+                            is_completed, owner_id
+                        FROM project
+                        WHERE id = %s
+                        """,
+                        [id],
+                    )
+
+                    row = cur.fetchone()
+                    if row is not None:
+                        return ProjectOut(
+                            id=row[0],
+                            project_name=row[1],
+                            project_picture=row[2],
+                            goal=row[3],
+                            is_completed=row[4],
+                            owner_id=row[5],
+                        )
+        except Exception as e:
+            print(e)
+            raise ValueError("Could not get that project")
+
+    def update_project(self, id: int, data: ProjectIn) -> None:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        UPDATE project
+                        SET project_name = %s,
+                            project_picture = %s,
+                            goal = %s,
+                            is_completed = %s,
+                            owner_id = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            data.project_name,
+                            data.project_picture,
+                            data.goal,
+                            data.is_completed,
+                            data.owner_id,
+                            id,
+                        ],
+                    )
+                    conn.commit()
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update that project"}

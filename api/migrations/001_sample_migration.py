@@ -78,5 +78,5 @@ steps = [
         """
         DROP TABLE attendees;
         """,
-    ]
+    ],
 ]

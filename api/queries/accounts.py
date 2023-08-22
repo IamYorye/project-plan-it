@@ -141,8 +141,8 @@ class AccountRepository:
                             account.education,
                             account.picture,
                             account.is_mentor,
-                            account_id
-                        ]
+                            account_id,
+                        ],
                     )
                     return self.account_in_to_out(account_id, account)
         except Exception as e:
@@ -189,7 +189,7 @@ class AccountRepo:
                     email=ac[1],
                     first_name=ac[2],
                     last_name=ac[3],
-                    hashed_password=ac[4]
+                    hashed_password=ac[4],
                 )
 
     def create(
@@ -215,7 +215,7 @@ class AccountRepo:
                         account.years_of_experience,
                         account.education,
                         account.picture,
-                        account.is_mentor
+                        account.is_mentor,
                     ],
                 )
                 id = result.fetchone()[0]
