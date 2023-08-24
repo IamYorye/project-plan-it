@@ -19,9 +19,11 @@ class AccountOut(BaseModel):
     education: Optional[str]
     picture: Optional[str]
     is_mentor: bool = False
+    username: str
 
 
 class AccountIn(BaseModel):
+    username: str
     email: str
     password: str
     first_name: str
@@ -48,6 +50,7 @@ class AccountRepository:
                             , education
                             , picture
                             , is_mentor
+                            , username
                         FROM account
                         ORDER BY first_name, last_name;
                         """
@@ -64,6 +67,7 @@ class AccountRepository:
                             education=record[6],
                             picture=record[7],
                             is_mentor=record[8],
+                            username=record[9],
                         )
                         for record in db
                     ]
@@ -81,6 +85,7 @@ class AccountRepository:
                             , first_name
                             , last_name
                             , email
+                            , username
                             , password
                             , years_of_experience
                             , education
@@ -115,7 +120,9 @@ class AccountRepository:
             print(e)
             return False
 
-    def update_account(self, account_id: int, account: AccountIn) -> Union[AccountOut, Error]:
+    def update_account(
+        self, account_id: int, account: AccountIn
+    ) -> Union[AccountOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -125,6 +132,7 @@ class AccountRepository:
                         SET first_name = %s
                             , last_name = %s
                             , email = %s
+                            , username = %s
                             , password = %s
                             , years_of_experience = %s
                             , education = %s
@@ -136,6 +144,7 @@ class AccountRepository:
                             account.first_name,
                             account.last_name,
                             account.email,
+                            account.username,
                             account.password,
                             account.years_of_experience,
                             account.education,
@@ -164,6 +173,7 @@ class AccountRepository:
             education=record[6],
             picture=record[7],
             is_mentor=record[8],
+            username=record[9],
         )
 
 
@@ -172,44 +182,47 @@ class AccountOutWithPassword(AccountOut):
 
 
 class AccountRepo:
-    def get(self, email: str) -> AccountOutWithPassword:
+    def get(self, username: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, email, first_name, last_name, password
+                    SELECT id, email, first_name, last_name, username, password
                     FROM account
-                    WHERE email = %s;
+                    WHERE username = %s;
                     """,
-                    [email],
+                    [username],
                 )
                 ac = cur.fetchone()
-                return AccountOutWithPassword(
-                    id=ac[0],
-                    email=ac[1],
-                    first_name=ac[2],
-                    last_name=ac[3],
-                    hashed_password=ac[4],
-                )
+                if ac is not None:
+                    return AccountOutWithPassword(
+                        id=ac[0],
+                        email=ac[1],
+                        first_name=ac[2],
+                        last_name=ac[3],
+                        username=ac[4],
+                        hashed_password=ac[5],
+                    )
+                else:
+                    return {"message": "Account not found"}
 
     def create(
-            self,
-            account: AccountIn,
-            hashed_password: str
+        self, account: AccountIn, hashed_password: str
     ) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
                     INSERT INTO account (
-                        first_name, last_name, email, password, years_of_experience, education, picture, is_mentor
+                        first_name, last_name, username, email, password, years_of_experience, education, picture, is_mentor
                     )
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-                    RETURNING id, first_name, last_name, password, years_of_experience, education, picture, is_mentor
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    RETURNING id, first_name, last_name, username, email, password, years_of_experience, education, picture, is_mentor
                     """,
                     [
                         account.first_name,
                         account.last_name,
+                        account.username,
                         account.email,
                         hashed_password,
                         account.years_of_experience,
@@ -224,6 +237,7 @@ class AccountRepo:
     def account_in_to_out(self, id: int, account: AccountIn, hashed_password):
         return AccountOutWithPassword(
             id=id,
+            username=account.username,
             email=account.email,
             first_name=account.first_name,
             last_name=account.last_name,
@@ -231,7 +245,7 @@ class AccountRepo:
             years_of_experience=account.years_of_experience,
             education=account.education,
             picture=account.picture,
-            is_mentor=account.is_mentor
+            is_mentor=account.is_mentor,
         )
 
 
