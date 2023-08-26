@@ -6,6 +6,7 @@ function ProjectForm(){
     const [project_picture, setProjectPicture] = useState('')
     const [goal, setGoal] = useState('')
     const [is_completed, setIsCompleted] = useState(false)
+    const [tech_stack, setTechStack] = useState([])
     const [owner_id, setOwnerId] = useState([])
 
     const handleProjectNameChange = (event) => {
@@ -52,6 +53,10 @@ function ProjectForm(){
             setOwnerId(data.owner_id)
         }
 
+    }
+
+    const handleTechStack = async (event) => {
+        event.preventDefault()
     }
 
     useEffect(() => {
