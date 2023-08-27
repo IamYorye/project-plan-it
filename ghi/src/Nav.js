@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 function Nav() {
 	return (
 		<>
-			<nav className='navbar navbar-expand-lg navbar-dark bg-success'>
+			<nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
 				<div className='container-fluid'>
 					<NavLink className='navbar-brand' to='/'>
 						Project Plan-IT
@@ -23,7 +23,7 @@ function Nav() {
 						<ul className='nav nav-pills'>
 							<li className='nav-item'>
 								<a className='nav-link active' aria-current='page' href='/'>
-									Active
+									Home
 								</a>
 							</li>
 							<li className='nav-item dropdown'>
@@ -34,12 +34,12 @@ function Nav() {
 									role='button'
 									aria-expanded='false'
 								>
-									Dropdown
+									Projects
 								</a>
 								<ul className='dropdown-menu'>
 									<li>
 										<a className='dropdown-item' href='/'>
-											Action
+											List Projects
 										</a>
 									</li>
 									<li>
@@ -57,18 +57,29 @@ function Nav() {
 									</li>
 									<li>
 										<a className='dropdown-item' href='/'>
-											Separated link
+											Create A Project
 										</a>
 									</li>
 								</ul>
 							</li>
 							<li className='nav-item'>
-								<a className='nav-link' href='localhost:3000'>
+								<a
+									className='nav-link d-md-flex justify-content-md-end'
+									href='localhost:3000'
+								>
 									Link
 								</a>
 							</li>
 						</ul>
 					</div>
+				</div>
+				<div className='d-grid gap-2 d-md-flex justify-content-md-end'>
+					<button className='btn btn-primary me-md-2' type='button'>
+						Login
+					</button>
+					<button className='btn btn-primary me-md-2' type='button'>
+						SignUp
+					</button>
 				</div>
 			</nav>
 		</>
