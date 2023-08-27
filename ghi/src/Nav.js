@@ -74,8 +74,10 @@ function Nav() {
 					</div>
 				</div>
 				<div className='d-grid gap-2 d-md-flex justify-content-md-end'>
-					<button className='btn btn-primary me-md-2' type='button'>
-						Login
+					<button className='btn btn-light me-md-2' type='button'>
+						<a className='nav-link' aria-current='page' href='/login'>
+							Login
+						</a>
 					</button>
 					<button className='btn btn-primary me-md-2' type='button'>
 						SignUp
