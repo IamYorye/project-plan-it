@@ -4,6 +4,7 @@ import "./App.css";
 import SignupForm from "./Account/SignUpForm";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginForm from "./Account/LoginForm";
+import ProjectForm from "./Project/ProjectForm";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 					<Routes>
 						<Route path='/signup' element={<SignupForm />}></Route>
 						<Route path='/login' element={<LoginForm />}></Route>
+						<Route path="/projects/new" element={<ProjectForm />}></Route>
 					</Routes>
 				</AuthProvider>
 			</BrowserRouter>
