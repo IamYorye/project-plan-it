@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from "react-router-dom";
 
 function ProjectForm(){
 
@@ -11,6 +12,7 @@ function ProjectForm(){
     const [owner_id, setOwnerId] = useState('')
     const [tech_stack, setTechStack ] = useState('')
     const [tech_stacks, setTechStacks] = useState([])
+    const navigate = useNavigate()
 
 
     const handleProjectNameChange = (event) => {
@@ -74,6 +76,8 @@ function ProjectForm(){
             setIsCompleted(false)
             setOwnerId('')
         }
+        event.target.reset();
+        navigate("/projects")
 
     }
 
@@ -101,7 +105,7 @@ function ProjectForm(){
 
     useEffect(() => {
         fetchTechStackData()
-    }, [])
+    }, []);
 
     return (
         <div className="row">
@@ -139,7 +143,7 @@ function ProjectForm(){
                                 ))}
                                 </select>
                                 <div className="mb-3">
-                            <button type="submit" className="btn btn-primary me-3">Create Project</button>
+                            <button type="submit" className="btn btn-primary me">Create Project</button>
                             </div>
                         </div>
                     </form>
