@@ -6,6 +6,12 @@ At a minimum, you'll need to include the following information in each entry:
     At least one ah-ha! moment that you had during your coding, however small
     Keep your journal in reverse chronological order. Always put new entries at the top.
 
+## Monday - August 28, 2023
+
+Today, I worked on:
+
+- Navbar and Dashboard
+
 ## Friday - August 25, 2023
 
 Today, I worked on:
