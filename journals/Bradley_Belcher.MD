@@ -1,3 +1,7 @@
+28 August 2023
+25 August 2023
+24 August 2023
+23 August 2023
 22 August 2023
 
 this morning I got my code functioning and updated my merge request. My partners confirmed the code is working and I merged to main. I then got started on the next job of creating the user_stacks backend API. since i spent so much time creating the other back end I learned a lot and this was much, much easier to code and implement. I've already got most of it working and think I'll be merging before the end of the day.
