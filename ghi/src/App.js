@@ -5,6 +5,7 @@ import SignupForm from "./Account/SignUpForm";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginForm from "./Account/LoginForm";
 import ProjectForm from "./Project/ProjectForm";
+import ProjectList from "./Project/ProjectList";
 
 function App() {
 	return (
@@ -15,6 +16,7 @@ function App() {
 						<Route path='/signup' element={<SignupForm />}></Route>
 						<Route path='/login' element={<LoginForm />}></Route>
 						<Route path="/projects/new" element={<ProjectForm />}></Route>
+						<Route path="/projects" element={<ProjectList />}></Route>
 					</Routes>
 				</AuthProvider>
 			</BrowserRouter>
