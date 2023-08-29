@@ -1,11 +1,16 @@
 import React from "react";
 import "./LandingPage.css";
 import logo from "./media/logo.png";
+import solarsystem from "./media/solar-system.mp4";
 
 function LandingPage() {
   return (
     <div>
       <div className="container-fluid">
+        <video autoPlay muted loop>
+          <source src={solarsystem} className="video" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <div className="nav-container">
           <header className="nav-header">
             <div>
@@ -31,7 +36,7 @@ function LandingPage() {
             <h2 className="subtitle">
               Unleash Your Coding Dreams with Collaborative Projects!
             </h2>
-            <p className="col-lg-8 mx-auto fs-5 text-muted">
+            <p className="page-text">
               Welcome to Project Plan-It, the ultimate platform where software
               engineers, developers, and coders unite to transform passion into
               reality. Create, collaborate, and conquer coding projects that
@@ -40,11 +45,29 @@ function LandingPage() {
             </p>
             <div>
               <button className="browser-buttons" type="button">
-                HACK THE PLANET!
+                JOIN OUR COMMUNITY!
               </button>
             </div>
           </div>
         </div>
+      </div>
+      <div className="container">
+        <footer className="nav-header">
+          <div>
+            <p>© 2023 Planiteers</p>
+          </div>
+          <div className="footer-nav">
+            <nav>
+              <a href="/">Home</a>
+            </nav>
+            <nav>
+              <a ahref="/">Pricing</a>
+            </nav>
+            <nav>
+              <a ahref="/">About</a>
+            </nav>
+          </div>
+        </footer>
       </div>
     </div>
   );
