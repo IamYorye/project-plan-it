@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { Link } from "react-router-dom";
 
 function ProjectList() {
 
@@ -24,7 +25,6 @@ function ProjectList() {
             if (response.ok) {
                 const data = await response.json();
                 setProjects(data);
-                console.log(data);
             }
         } catch (error) {
             console.error("Error fetching projects:", error);
@@ -64,7 +64,7 @@ function ProjectList() {
                         <div className="card-body">
                             <h5 className="card-title">{project.project_name}</h5>
                             <p className="card-text">{project.goal}</p>
-                            <a href="/projects" className="btn btn-primary">Details</a>
+                            <Link to={`/project-details/${project.id}`} className="btn btn-primary">Details</Link>
                         </div>
                     </div>
                     </div>

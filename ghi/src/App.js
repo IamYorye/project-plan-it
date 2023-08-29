@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginForm from "./Account/LoginForm";
 import ProjectForm from "./Project/ProjectForm";
 import ProjectList from "./Project/ProjectList";
+import ProjectDetails from "./Project/ProjectDetails";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 						<Route path='/login' element={<LoginForm />}></Route>
 						<Route path="/projects/new" element={<ProjectForm />}></Route>
 						<Route path="/projects" element={<ProjectList />}></Route>
+						<Route path="/project-details/:id" component={ProjectDetails}></Route>
 					</Routes>
 				</AuthProvider>
 			</BrowserRouter>
