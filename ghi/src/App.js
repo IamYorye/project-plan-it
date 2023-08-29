@@ -6,11 +6,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginForm from "./Account/LoginForm";
 import ProjectForm from "./Project/ProjectForm";
 import ProjectList from "./Project/ProjectList";
+import Nav from "./nav";
 
 function App() {
 	return (
 		<div>
 			<BrowserRouter>
+				<Nav />
 				<AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
 					<Routes>
 						<Route path='/signup' element={<SignupForm />}></Route>
