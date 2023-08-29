@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import { AuthProvider, useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
 import SignupForm from "./SignUpForm";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import Nav from "./nav";
-import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import Dashboard from "./Dashboard";
 
 function App() {
 	const { token } = useAuthContext();
@@ -19,18 +19,28 @@ function App() {
 
 	async function getProjects() {
 		const url = `${process.env.REACT_APP_API_HOST}/api/projects/`;
-		const response = await fetch(url);
+		const fetchConfig = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		const response = await fetch(url, fetchConfig);
 		if (response.ok) {
 			const data = await response.json();
 			setProjects(data.projects);
 		} else {
-			console.error("An error has occurred fetching the projects");
+			console.error("An error occurred fetching the projects");
 		}
 	}
 
 	async function getAccounts() {
 		const url = `${process.env.REACT_APP_API_HOST}/api/accounts/`;
-		const response = await fetch(url);
+		const fetchConfig = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		const response = await fetch(url, fetchConfig);
 		if (response.ok) {
 			const data = await response.json();
 			setAccounts(data.accounts);
@@ -41,7 +51,12 @@ function App() {
 
 	async function getTechStacks() {
 		const url = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`;
-		const response = await fetch(url);
+		const fetchConfig = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		const response = await fetch(url, fetchConfig);
 		if (response.ok) {
 			const data = await response.json();
 			setTechStacks(data.techStacks);
@@ -52,7 +67,12 @@ function App() {
 
 	async function getUserStacks() {
 		const url = `${process.env.REACT_APP_API_HOST}/api/user-stacks/`;
-		const response = await fetch(url);
+		const fetchConfig = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		const response = await fetch(url, fetchConfig);
 		if (response.ok) {
 			const data = await response.json();
 			setUserStacks(data.userStacks);
@@ -63,7 +83,12 @@ function App() {
 
 	async function getProjectStacks() {
 		const url = `${process.env.REACT_APP_API_HOST}/api/project-stacks/`;
-		const response = await fetch(url);
+		const fetchConfig = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		const response = await fetch(url, fetchConfig);
 		if (response.ok) {
 			const data = await response.json();
 			setProjectStacks(data.projectStacks);
@@ -74,7 +99,12 @@ function App() {
 
 	async function getAttendees() {
 		const url = `${process.env.REACT_APP_API_HOST}/api/attendees/`;
-		const response = await fetch(url);
+		const fetchConfig = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		const response = await fetch(url, fetchConfig);
 		if (response.ok) {
 			const data = await response.json();
 			setAttendees(data.attendees);
@@ -90,7 +120,7 @@ function App() {
 		getUserStacks();
 		getProjectStacks();
 		getAttendees();
-	}, []);
+	}, [token]);
 
 	return (
 		<div>
@@ -98,6 +128,7 @@ function App() {
 				<AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
 					<Nav />
 					<Routes>
+						<Route path='/' element={<Dashboard projects={projects} />}></Route>
 						<Route path='/signup' element={<SignupForm />}></Route>
 						<Route path='/login' element={<LoginForm />}></Route>
 					</Routes>
