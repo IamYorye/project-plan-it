@@ -8,8 +8,10 @@ function ProjectForm(){
     const [project_picture, setProjectPicture] = useState('')
     const [goal, setGoal] = useState('')
     const [is_completed, setIsCompleted] = useState(false)
+    const [owner_id, setOwnerId] = useState('')
     const [tech_stack, setTechStack ] = useState('')
     const [tech_stacks, setTechStacks] = useState([])
+
 
     const handleProjectNameChange = (event) => {
         const value = event.target.value
@@ -36,6 +38,11 @@ function ProjectForm(){
         setTechStack(value)
     }
 
+    const handleOwnerIdChange = (event) => {
+        const value = event.target.value
+        setOwnerId(value)
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault()
 
@@ -44,7 +51,7 @@ function ProjectForm(){
         data.project_picture = project_picture
         data.goal = goal
         data.is_completed = is_completed
-        data.tech_stack = tech_stack
+        data.owner_id = owner_id
 
         const projectUrl = "http://localhost:8000/api/projects"
         const fetchConfig = {
@@ -64,8 +71,8 @@ function ProjectForm(){
             setProjectName('')
             setProjectPicture('')
             setGoal('')
-            setIsCompleted('')
-            setTechStack('')
+            setIsCompleted(false)
+            setOwnerId('')
         }
 
     }
@@ -92,7 +99,6 @@ function ProjectForm(){
     };
 
 
-
     useEffect(() => {
         fetchTechStackData()
     }, [])
@@ -115,9 +121,13 @@ function ProjectForm(){
                             <input onChange={handleGoalChange} value={goal} placeholder="goal" required type="text" name="goal" id="goal" className="form-control" />
                             <label htmlFor="goal">Goal</label>
                         </div>
-                        <div className="form-floating mb-3">
+                        <div className="form-check form-switch mb-3">
                             <input onChange={handleIsCompletedChange} value={is_completed} placeholder="is_completed" required type="checkbox" name="is_completed" id="is_completed" className="form-check-input" />
                             <label htmlFor="is_completed" className="form-check-label">Completed ?</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input onChange={handleOwnerIdChange} value={owner_id} placeholder="owner_id" required type="text" name="owner_id" id="owner_id" className="form-control" />
+                            <label htmlFor="owner_id" className="form-check-label">Owner Identification</label>
                         </div>
                         <div className="form-floating mb-3">
                             <select onChange={handleTechStackChange} value={tech_stack} required id="tech_stack" name="tech_stack" className="form-select">
@@ -128,7 +138,9 @@ function ProjectForm(){
                                     </option>
                                 ))}
                                 </select>
-                            <button type="submit" className="btn btn-primary">Create Project</button>
+                                <div className="mb-3">
+                            <button type="submit" className="btn btn-primary me-3">Create Project</button>
+                            </div>
                         </div>
                     </form>
                 </div>
