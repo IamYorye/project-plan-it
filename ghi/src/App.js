@@ -15,13 +15,8 @@ function App() {
 					<Routes>
 						<Route path='/signup' element={<SignupForm />}></Route>
 						<Route path='/login' element={<LoginForm />}></Route>
-<<<<<<< HEAD
 						<Route path='/projects/new' element={<ProjectForm />}></Route>
 						<Route path='/projects' element={<ProjectList />}></Route>
-=======
-						<Route path="/projects/new" element={<ProjectForm />}></Route>
-						<Route path="/projects" element={<ProjectList />}></Route>
->>>>>>> 4b8ad712fd84e10e9a35b7677fec4e5ceedfbccc
 					</Routes>
 				</AuthProvider>
 			</BrowserRouter>
