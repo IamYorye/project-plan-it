@@ -62,7 +62,8 @@
 }
 
 .App-logo-large {
-  max-width: 60%;
+  max-width: 70%;
+  vertical-align: center;
 }
 
 .page-section {
@@ -80,6 +81,7 @@ h2 {
   padding-bottom: 2rem;
   line-height: 1.5;
 }
+
 .page-text {
   font-size: 1.2rem;
   max-width: 1000px;
@@ -168,6 +170,8 @@ h3 {
   width: auto;
   height: 70%;
   max-width: 100%;
+  justify-self: center;
+  align-self: center;
 }
 
 .hack-the-planet {
@@ -179,4 +183,8 @@ h3 {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+}
+
+img {
+  display: inline-block;
 }

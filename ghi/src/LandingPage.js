@@ -3,15 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
 import video from "./media/solarsystem.mp4";
-import { useNavigate } from "react-router-dom";
-
-const mediaFiles = require.context("./media", false, /\.(png|mp4)$/);
-
-const media = mediaFiles.keys().reduce((acc, curr) => {
-  const key = curr.split("/").pop();
-  acc[key] = mediaFiles(curr).default;
-  return acc;
-}, {});
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -58,21 +49,22 @@ function LandingPage() {
                 className="App-logo-large"
                 alt="logo"
               />
-            </div>
-            <h2>Unleash Your Coding Dreams with Collaborative Projects!</h2>
-            <p>
-              Welcome to Project Plan-It, the ultimate platform where software
-              engineers, developers, and coders unite to transform passion into
-              reality. Create, collaborate, and conquer coding projects that
-              once seemed too complex to tackle alone. Join our vibrant
-              community and experience the thrill of building together!
-            </p>
-            <div>
-              <Link to="/signup">
-                <button className="browser-buttons" type="button">
-                  JOIN OUR COMMUNITY!
-                </button>
-              </Link>
+
+              <h2>Unleash Your Coding Dreams with Collaborative Projects!</h2>
+              <p>
+                Welcome to Project Plan-It, the ultimate platform where software
+                engineers, developers, and coders unite to transform passion
+                into reality. Create, collaborate, and conquer coding projects
+                that once seemed too complex to tackle alone. Join our vibrant
+                community and experience the thrill of building together!
+              </p>
+              <div>
+                <Link to="/signup">
+                  <button className="browser-buttons" type="button">
+                    JOIN OUR COMMUNITY!
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
