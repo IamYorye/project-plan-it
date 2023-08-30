@@ -15,6 +15,7 @@ class ProjectAttendeeOut(BaseModel):
     first_name: str
     last_name: str
     email: str
+    username: str
 
 
 class AttendeeIn(BaseModel):
@@ -41,10 +42,7 @@ class AttendeeRepo:
                         VALUES (%s, %s)
                         RETURNING id, project_id, account_id
                         """,
-                        [
-                            attendee.project_id,
-                            attendee.account_id
-                        ],
+                        [attendee.project_id, attendee.account_id],
                     )
                     id = result.fetchone()[0]
                     return self.attendee_in_to_out(id, attendee)
@@ -56,16 +54,18 @@ class AttendeeRepo:
         return AttendeeOut(
             id=id,
             project_id=attendee.project_id,
-            account_id=attendee.account_id
+            account_id=attendee.account_id,
         )
 
-    def get_attendees(self, project_id: int) -> Union[Error, List[ProjectAttendeeOut]]:
+    def get_attendees(
+        self, project_id: int
+    ) -> Union[Error, List[ProjectAttendeeOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT account.id, account.first_name, account.last_name, account.email
+                        SELECT account.id, account.first_name, account.last_name, account.email, account.username
                         FROM account
                         INNER JOIN attendees
                         ON account.id = attendees.account_id
@@ -81,6 +81,7 @@ class AttendeeRepo:
                             first_name=record[1],
                             last_name=record[2],
                             email=record[3],
+                            username=record[4],
                         )
                         for record in db.fetchall()
                     ]

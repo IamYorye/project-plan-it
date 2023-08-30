@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
 import video from "./media/solarsystem.mp4";
+import { useNavigate } from "react-router-dom";
 
 const mediaFiles = require.context("./media", false, /\.(png|mp4)$/);
 

@@ -1,25 +1,37 @@
-import { useEffect, useState } from "react";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
-import SignupForm from "./SignUpForm";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginForm from "./LoginForm";
+import SignupForm from "./Account/SignUpForm";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import LoginForm from "./Account/LoginForm";
+import ProjectForm from "./Project/ProjectForm";
+import ProjectList from "./Project/ProjectList";
+import Nav from "./navbar";
 import LandingPage from "./LandingPage";
+import Dashboard from "./Dashboard/Dashboard";
 
 function App() {
-  return (
-    <div>
-      <BrowserRouter>
-        <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
-          <Routes>
-            <Route path="/signup" element={<SignupForm />}></Route>
-            <Route path="/login" element={<LoginForm />}></Route>
-            <Route path="/" element={<LandingPage />}></Route>
-          </Routes>
-        </AuthProvider>
-      </BrowserRouter>
-    </div>
-  );
-}
+	const { token } = useToken();
 
+	const domain = /https:\/\/[^/]+/;
+	const basename = process.env.PUBLIC_URL.replace(domain, "");
+
+	return (
+		<div>
+			<BrowserRouter basename={basename}>
+				<AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
+					<Nav />
+					<Routes>
+						<Route path='/dashboard' element={<Dashboard />}></Route>
+						<Route path='/' element={<LandingPage />}></Route>
+						<Route path='/signup' element={<SignupForm />}></Route>
+						<Route path='/login' element={<LoginForm />}></Route>
+						<Route path='/projects/new' element={<ProjectForm />}></Route>
+						<Route path='/projects' element={<ProjectList />}></Route>
+					</Routes>
+				</AuthProvider>
+			</BrowserRouter>
+		</div>
+	);
+}
 export default App;
