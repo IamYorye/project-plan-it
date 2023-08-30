@@ -1,5 +1,6 @@
 .container-fluid {
   position: relative;
+  color: white;
 }
 
 .container-fluid video {
@@ -12,6 +13,16 @@
   z-index: -1;
 }
 
+.container-fluid-1 {
+  position: relative;
+  background: linear-gradient(
+    to right,
+    rgb(106, 17, 203) 0%,
+    rgb(119, 212, 255) 100%
+  );
+  color: white;
+  padding-top: 2rem;
+}
 .nav-container {
   display: flex;
 }
@@ -51,7 +62,7 @@
 }
 
 .App-logo-large {
-  max-width: 50%;
+  max-width: 60%;
 }
 
 .page-section {
@@ -59,35 +70,19 @@
   flex-direction: column;
   justify-content: center;
   padding: 1.25rem;
-  max-width: 100%;
+  max-width: 900px;
   margin: auto;
   text-align: center;
 }
 
-.page-section-2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 2rem;
-  max-width: 100%;
-  margin: auto;
-  text-align: center;
-  background: linear-gradient(
-    to right,
-    rgb(106, 17, 203) 0%,
-    rgb(119, 212, 255) 100%
-  );
+h2 {
+  margin: 15px;
+  padding-bottom: 2rem;
+  line-height: 1.5;
 }
-
-.subtitle {
-  padding: 15px;
-  color: white;
-}
-
 .page-text {
   font-size: 1.2rem;
   max-width: 1000px;
-  color: white;
   margin-left: auto;
   margin-right: auto;
 }
@@ -120,17 +115,6 @@
   text-decoration: none;
 }
 
-.page-text-middle {
-  flex: 0 0 75%;
-  max-width: 100%;
-  margin: 0, auto;
-}
-
-.page-text-middle h2 {
-  margin-top: 1.5rem;
-  margin-bottom: 3rem;
-}
-
 .features-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -138,10 +122,13 @@
   align-content: center;
   justify-items: center;
   align-items: stretch;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   font-size: 0.85rem;
-  padding: 2.5rem;
+}
+
+h3 {
+  padding: 1.25rem;
 }
 
 .icon {
@@ -163,21 +150,6 @@
   }
 }
 
-.page-section-middle-2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 2rem;
-  max-width: 100%;
-  margin: auto;
-  text-align: center;
-  background: linear-gradient(
-    to right,
-    rgb(106, 17, 203) 0%,
-    rgb(119, 212, 255) 100%
-  );
-}
-
 .icon-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -194,7 +166,7 @@
 
 .logo-icon {
   width: auto;
-  height: 65%;
+  height: 70%;
   max-width: 100%;
 }
 

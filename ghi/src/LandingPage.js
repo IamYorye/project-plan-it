@@ -51,17 +51,15 @@ function LandingPage() {
         </div>
         <div className="container">
           <div className="page-section">
-            <div>
+            <div className="page-text">
               <img
                 src={require("./media/logo.png")}
                 className="App-logo-large"
                 alt="logo"
               />
             </div>
-            <h2 className="subtitle">
-              Unleash Your Coding Dreams with Collaborative Projects!
-            </h2>
-            <p className="page-text">
+            <h2>Unleash Your Coding Dreams with Collaborative Projects!</h2>
+            <p>
               Welcome to Project Plan-It, the ultimate platform where software
               engineers, developers, and coders unite to transform passion into
               reality. Create, collaborate, and conquer coding projects that
@@ -78,33 +76,33 @@ function LandingPage() {
           </div>
         </div>
       </div>
-      <div className="container-fluid">
-        <div className="page-section">
-          <div className="page-text-middle">
-            <h2>Elevate Your Coding Journey in A Supportive Community!</h2>
-            <p>
-              Dive into a world tailored for coding enthusiasts like you. At
-              Project Plan-It, we're a gathering of developers, engineers, and
-              coders of all languages, ready to embark on ambitious projects
-              together. Whether you're starting a new venture or offering your
-              expertise as a mentor, this is where ideas flourish and
-              friendships form.
-            </p>
-            <div>
-              <Link to="/signup">
-                <button className="browser-buttons" type="button">
-                  SIGN UP NOW!
-                </button>
-              </Link>
+      <div className="container-fluid-1">
+        <div className="container">
+          <div className="page-section">
+            <div className="page-text">
+              <h2>Elevate Your Coding Journey in A Supportive Community!</h2>
+              <p>
+                Dive into a world tailored for coding enthusiasts like you. At
+                Project Plan-It, we're a gathering of developers, engineers, and
+                coders of all languages, ready to embark on ambitious projects
+                together. Whether you're starting a new venture or offering your
+                expertise as a mentor, this is where ideas flourish and
+                friendships form.
+              </p>
+              <div>
+                <Link to="/signup">
+                  <button className="browser-buttons" type="button">
+                    SIGN UP NOW!
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="container-fluid">
+      <div className="container">
         <div className="page-section">
-          <h2 className="page-text-middle">
-            Empowering Coders: Where Collaboration Ignites Brilliance!
-          </h2>
+          <h2>Empowering Coders: Where Collaboration Ignites Brilliance!</h2>
           <div className="features-grid">
             <div className="grid-item">
               <img src={require("./media/lightbulb.png")} className="icon" />
@@ -150,69 +148,91 @@ function LandingPage() {
           </div>
         </div>
       </div>
-      <div className="container-fluid-colored">
-        <div className="page-section-2">
-          <h2 className="page-text-middle">
-            All programming languages are welcome! If it's used to program, than
-            you'll find it here!
-          </h2>
-          <div className="icon-grid">
-            <div className="grid-item">
-              <img
-                src={require("./media/pythonlogo.png")}
-                className="logo-icon"
-              />
-            </div>
-            <div className="grid-item">
-              <img
-                src={require("./media/reactlogo.png")}
-                className="logo-icon"
-              />
-            </div>
-            <div className="grid-item">
-              <img src={require("./media/jslogo.png")} className="logo-icon" />
-            </div>
-            <div className="grid-item">
-              <img
-                src={require("./media/html5logo.png")}
-                className="logo-icon"
-              />
-            </div>
-            <div className="grid-item">
-              <img src={require("./media/csslogo.png")} className="logo-icon" />
-            </div>
-            <div className="grid-item">
-              <img src={require("./media/nodejs.png")} className="logo-icon" />
-            </div>
-            <div className="grid-item">
-              <img src={require("./media/npmlogo.png")} className="logo-icon" />
-            </div>
-            <div className="grid-item">
-              <img src={require("./media/sqllogo.png")} className="logo-icon" />
-            </div>
-            <div className="grid-item">
-              <img src={require("./media/tslogo.png")} className="logo-icon" />
-            </div>
-            <div className="grid-item">
-              <img src={require("./media/vsclogo.png")} className="logo-icon" />
+      <div className="container-fluid-1">
+        <div className="container">
+          <div className="page-section">
+            <h2>
+              All programming languages are welcome! If it's used to program,
+              than you'll find it here!
+            </h2>
+            <div className="icon-grid">
+              <div className="grid-item">
+                <img
+                  src={require("./media/pythonlogo.png")}
+                  className="logo-icon"
+                />
+              </div>
+              <div className="grid-item">
+                <img
+                  src={require("./media/reactlogo.png")}
+                  className="logo-icon"
+                />
+              </div>
+              <div className="grid-item">
+                <img
+                  src={require("./media/jslogo.png")}
+                  className="logo-icon"
+                />
+              </div>
+              <div className="grid-item">
+                <img
+                  src={require("./media/html5logo.png")}
+                  className="logo-icon"
+                />
+              </div>
+              <div className="grid-item">
+                <img
+                  src={require("./media/csslogo.png")}
+                  className="logo-icon"
+                />
+              </div>
+              <div className="grid-item">
+                <img
+                  src={require("./media/nodejs.png")}
+                  className="logo-icon"
+                />
+              </div>
+              <div className="grid-item">
+                <img
+                  src={require("./media/npmlogo.png")}
+                  className="logo-icon"
+                />
+              </div>
+              <div className="grid-item">
+                <img
+                  src={require("./media/sqllogo.png")}
+                  className="logo-icon"
+                />
+              </div>
+              <div className="grid-item">
+                <img
+                  src={require("./media/tslogo.png")}
+                  className="logo-icon"
+                />
+              </div>
+              <div className="grid-item">
+                <img
+                  src={require("./media/vsclogo.png")}
+                  className="logo-icon"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="container-fluid">
+      <div className="container">
         <div className="page-section">
-          <h2 className="page-text-middle"></h2>.
-          <p className="col-lg-8 mx-auto lead">
-            This takes the basic jumbotron above and makes its background
-            edge-to-edge with a <code>.container</code> inside to align content.
-            Similar to above, it's been recreated with built-in grid and utility
-            classes.
-          </p>
+          <div className="page-text">
+            <h2>
+              Here's Some Projects Currently Being Worked On! Take a Look and
+              See what You Are Interested In!
+            </h2>
+          </div>
         </div>
       </div>
-      <div className="container-fluid">
+      <div className="container-fluid-1">
         <div className="page-section">
-          <h2 className="page-text-middle">
+          <h2>
             Join our community and become start building your dream projects
             today! Click the image below to get started!
           </h2>
@@ -226,24 +246,24 @@ function LandingPage() {
             />
           </div>
         </div>
-      </div>
-      <div className="container">
-        <footer className="nav-header">
-          <div>
-            <p>© 2023 Planiteers</p>
-          </div>
-          <div className="footer-nav">
-            <nav>
-              <a href="/">Home</a>
-            </nav>
-            <nav>
-              <a href="/">Pricing</a>
-            </nav>
-            <nav>
-              <a href="/">About</a>
-            </nav>
-          </div>
-        </footer>
+        <div className="container">
+          <footer className="nav-header">
+            <div>
+              <p>© 2023 Planiteers</p>
+            </div>
+            <div className="footer-nav">
+              <nav>
+                <a href="/">Home</a>
+              </nav>
+              <nav>
+                <a href="/">Pricing</a>
+              </nav>
+              <nav>
+                <a href="/">About</a>
+              </nav>
+            </div>
+          </footer>
+        </div>
       </div>
     </div>
   );
