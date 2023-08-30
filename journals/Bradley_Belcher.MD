@@ -1,3 +1,10 @@
+29 August 2023
+I'm still working on the landing page. I'm really trying to incorporate some more advanced webpage design and concepts. Today I spent a couple hours learning about and writing code to use react webpacks to import all my media that I had spent a lot of time creating from the file folder. I didn't want to have to import over a dozen files individually, so spent time writing a const webpack that import all my media. It worked and I was able to get all imgs on the page working. however, when I tried to do a git push to update everything, including the video file, there was huge wait time and it never seemed to update. I have come to teh conclusion that adding the media, especially the video, directly to the project may be causing the delay and issues due to file sizes. While it's only a couple hundred kb per img and less than 8mb for the video, I can't figure out any other reason. I am now uploading all the data to a file sharing site that i can link with URL's instead. Wasted about 4 hours researching and writing that react code. At least I learned something new.
+
+28 August 2023
+25 August 2023
+24 August 2023
+23 August 2023
 22 August 2023
 
 this morning I got my code functioning and updated my merge request. My partners confirmed the code is working and I merged to main. I then got started on the next job of creating the user_stacks backend API. since i spent so much time creating the other back end I learned a lot and this was much, much easier to code and implement. I've already got most of it working and think I'll be merging before the end of the day.

@@ -6,6 +6,7 @@ import LoginForm from "./Account/LoginForm";
 import ProjectForm from "./Project/ProjectForm";
 import ProjectList from "./Project/ProjectList";
 import Nav from "./nav";
+import LandingPage from "./LandingPage";
 
 function App() {
 	return (
@@ -24,5 +25,4 @@ function App() {
 		</div>
 	);
 }
-
 export default App;
