@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
+import Select from 'react-select'
 
 function ProjectForm(){
 
@@ -9,7 +10,7 @@ function ProjectForm(){
     const [project_picture, setProjectPicture] = useState('')
     const [goal, setGoal] = useState('')
     const [owner_id, setOwnerId] = useState('')
-    const [tech_stack, setTechStack ] = useState('')
+    const [selectedTechStacks, setSelectedTechStacks] = useState([]);
     const [tech_stacks, setTechStacks] = useState([])
     const navigate = useNavigate()
 
@@ -29,10 +30,10 @@ function ProjectForm(){
         setGoal(value)
     }
 
-    const handleTechStackChange = (event) => {
-        const value = event.target.value
-        setTechStack(value)
-    }
+    const handleTechStackChange = (selectedOptions) => {
+        const selectedTechStackValues = selectedOptions.map(option => option.value);
+        setSelectedTechStacks(selectedTechStackValues);
+    };
 
     const handleOwnerIdChange = (event) => {
         const value = event.target.value
@@ -122,16 +123,18 @@ function ProjectForm(){
                             <label htmlFor="owner_id" className="form-check-label">Owner Identification</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <select onChange={handleTechStackChange} value={tech_stack} required id="tech_stack" name="tech_stack" className="form-select">
-                                <option value="">Choose Tech Stacks for this Project</option>
-                                {tech_stacks.map((tech_stack, index) => (
-                                    <option key={index} value={tech_stack}>
-                                        {tech_stack}
-                                    </option>
-                                ))}
-                                </select>
-                                <div className="mb-3">
-                            <button type="submit" className="btn btn-primary me">Create Project</button>
+                            <Select
+                            isMulti
+                            name="tech_stacks"
+                            options={tech_stacks.map(tech_stack => ({
+                            value: tech_stack,
+                            label: tech_stack
+                        }))}
+                            onChange={handleTechStackChange}
+                            value={selectedTechStacks.map(value => ({ value, label: value }))}
+                            />
+                            <div className="mb-3">
+                                <button type="submit" className="btn btn-primary me">Create Project</button>
                             </div>
                         </div>
                     </form>
