@@ -8,7 +8,6 @@ function ProjectForm(){
     const [project_name, setProjectName] = useState('')
     const [project_picture, setProjectPicture] = useState('')
     const [goal, setGoal] = useState('')
-    const [is_completed, setIsCompleted] = useState(false)
     const [owner_id, setOwnerId] = useState('')
     const [tech_stack, setTechStack ] = useState('')
     const [tech_stacks, setTechStacks] = useState([])
@@ -30,11 +29,6 @@ function ProjectForm(){
         setGoal(value)
     }
 
-    const handleIsCompletedChange = (event) => {
-        const value = event.target.checked
-        setIsCompleted(value)
-    }
-
     const handleTechStackChange = (event) => {
         const value = event.target.value
         setTechStack(value)
@@ -52,7 +46,6 @@ function ProjectForm(){
         data.project_name = project_name
         data.project_picture = project_picture
         data.goal = goal
-        data.is_completed = is_completed
         data.owner_id = owner_id
 
         const projectUrl = "http://localhost:8000/api/projects"
@@ -73,7 +66,6 @@ function ProjectForm(){
             setProjectName('')
             setProjectPicture('')
             setGoal('')
-            setIsCompleted(false)
             setOwnerId('')
         }
         event.target.reset();
@@ -124,10 +116,6 @@ function ProjectForm(){
                         <div className="form-floating mb-3">
                             <input onChange={handleGoalChange} value={goal} placeholder="goal" required type="text" name="goal" id="goal" className="form-control" />
                             <label htmlFor="goal">Goal</label>
-                        </div>
-                        <div className="form-check form-switch mb-3">
-                            <input onChange={handleIsCompletedChange} value={is_completed} placeholder="is_completed" required type="checkbox" name="is_completed" id="is_completed" className="form-check-input" />
-                            <label htmlFor="is_completed" className="form-check-label">Completed ?</label>
                         </div>
                         <div className="form-floating mb-3">
                             <input onChange={handleOwnerIdChange} value={owner_id} placeholder="owner_id" required type="text" name="owner_id" id="owner_id" className="form-control" />

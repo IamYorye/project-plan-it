@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuthContext } from '@galvanize-inc/jwtdown-for-react';
 
 function ProjectDetails() {
+    const {token} = useAuthContext();
     const { id } = useParams();
     const [project, setProject] = useState(null);
 
