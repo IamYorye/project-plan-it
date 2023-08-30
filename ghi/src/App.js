@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
 import SignupForm from "./Account/SignUpForm";

@@ -123,24 +123,30 @@ function ProjectForm(){
                             <label htmlFor="owner_id" className="form-check-label">Owner Identification</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <Select
-                            isMulti
-                            name="tech_stacks"
-                            options={tech_stacks.map(tech_stack => ({
+                    <Select
+                        isMulti
+                        name="tech_stacks"
+                        options={tech_stacks.map(tech_stack => ({
                             value: tech_stack,
                             label: tech_stack
                         }))}
-                            onChange={handleTechStackChange}
-                            value={selectedTechStacks.map(value => ({ value, label: value }))}
-                            />
-                            <div className="mb-3">
-                                <button type="submit" className="btn btn-primary me">Create Project</button>
-                            </div>
-                        </div>
-                    </form>
+                        onChange={handleTechStackChange}
+                        value={selectedTechStacks.map(value => ({ value, label: value }))}
+                    />
                 </div>
-            </div>
+                <div className="form-floating mb-3 text-center">
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        style={{ backgroundColor: 'green', marginRight: '10px' }}
+                    >
+                        Create Project
+                    </button>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
     )
 
 }
