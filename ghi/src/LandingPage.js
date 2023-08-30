@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./LandingPage.css";
 import video from "./media/solarsystem.mp4";
 
@@ -11,6 +13,12 @@ const media = mediaFiles.keys().reduce((acc, curr) => {
 }, {});
 
 function LandingPage() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/signup");
+  };
+
   return (
     <div>
       <div className="container-fluid">
@@ -21,21 +29,23 @@ function LandingPage() {
         <div className="nav-container">
           <header className="nav-header">
             <div>
-              <a href="/" className="planit-logo">
+              <Link to="/" className="planit-logo">
                 <img
                   src={require("./media/logo.png")}
                   className="App-logo"
-                  alt="logo"
+                  alt="Plan-it Logo Small"
+                  onClick={handleClick}
+                  style={{ cursor: "pointer" }}
                 />
-              </a>
+              </Link>
             </div>
             <div>
-              <button type="button" className="btn btn-primary me-3">
+              <Link to="/login" className="btn btn-primary">
                 Login
-              </button>
-              <button type="button" className="btn btn-primary">
+              </Link>
+              <Link to="/signup" className="btn btn-primary">
                 Sign-Up
-              </button>
+              </Link>
             </div>
           </header>
         </div>
@@ -59,15 +69,17 @@ function LandingPage() {
               community and experience the thrill of building together!
             </p>
             <div>
-              <button className="browser-buttons" type="button">
-                JOIN OUR COMMUNITY!
-              </button>
+              <Link to="/signup">
+                <button className="browser-buttons" type="button">
+                  JOIN OUR COMMUNITY!
+                </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
       <div className="container-fluid">
-        <div className="page-section-middle">
+        <div className="page-section">
           <div className="page-text-middle">
             <h2>Elevate Your Coding Journey in A Supportive Community!</h2>
             <p>
@@ -79,113 +91,139 @@ function LandingPage() {
               friendships form.
             </p>
             <div>
-              <button className="browser-buttons" type="button">
-                SIGN UP NOW!
-              </button>
+              <Link to="/signup">
+                <button className="browser-buttons" type="button">
+                  SIGN UP NOW!
+                </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
       <div className="container-fluid">
-        <div className="my-5">
-          <div className="p-5 text-center bg-body-tertiary">
-            <div className="container py-5">
-              <h2 className="page-text-middle">
-                Empowering Coders: Where Collaboration Ignites Brilliance!
-              </h2>
-              <div className="features-grid">
-                <div className="grid-item">
-                  <img
-                    src={require("./media/lightbulb.png")}
-                    className="icon"
-                  />
-                  <h3>Ideas</h3>
-                  <p>
-                    Ignite innovation in our creative hub! Share and refine
-                    coding project ideas with a vibrant community of
-                    visionaries. Together, we'll shape concepts into
-                    groundbreaking projects that redefine coding possibilities.
-                  </p>
-                </div>
+        <div className="page-section">
+          <h2 className="page-text-middle">
+            Empowering Coders: Where Collaboration Ignites Brilliance!
+          </h2>
+          <div className="features-grid">
+            <div className="grid-item">
+              <img src={require("./media/lightbulb.png")} className="icon" />
+              <h3>Ideas</h3>
+              <p>
+                Ignite innovation in our creative hub! Share and refine coding
+                project ideas with a vibrant community of visionaries. Together,
+                we'll shape concepts into groundbreaking projects that redefine
+                coding possibilities.
+              </p>
+            </div>
 
-                <div className="grid-item">
-                  <img src={require("./media/gears.png")} className="icon" />
-                  <h3>Create</h3>
-                  <p>
-                    Transform ideas into reality with our intuitive project
-                    creation tools. Build a dedicated space for your coding
-                    dreams, where you can outline, plan, and lay the foundation
-                    for your ambitious projects.
-                  </p>
-                </div>
-                <div className="grid-item">
-                  <img src={require("./media/group.png")} className="icon" />
-                  <h3>Collaborate</h3>
-                  <p>
-                    Join forces with a community of passionate coders. Find
-                    mentors, share insights, and synergize your skills to
-                    conquer challenges together. Collaboration fuels innovation,
-                    and together, we turn concepts into cutting-edge creations.
-                  </p>
-                </div>
-                <div className="grid-item">
-                  <img src={require("./media/publish.png")} className="icon" />
-                  <h3>Publish</h3>
-                  <p>
-                    It's time to unveil your masterpiece to the world. With a
-                    few clicks, your project goes live, accessible to
-                    enthusiasts, potential users, and fellow developers. Embrace
-                    the satisfaction of sharing your coding triumphs with a
-                    global audience.
-                  </p>
-                </div>
-              </div>
+            <div className="grid-item">
+              <img src={require("./media/gears.png")} className="icon" />
+              <h3>Create</h3>
+              <p>
+                Transform ideas into reality with our intuitive project creation
+                tools. Build a dedicated space for your coding dreams, where you
+                can outline, plan, and lay the foundation for your ambitious
+                projects.
+              </p>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="container-fluid">
-        <div className="my-5">
-          <div className="p-5 text-center bg-body-tertiary">
-            <div className="container py-5">
-              <h1 className="text-body-emphasis">Full-width jumbotron</h1>
-              <p className="col-lg-8 mx-auto lead">
-                This takes the basic jumbotron above and makes its background
-                edge-to-edge with a <code>.container</code> inside to align
-                content. Similar to above, it's been recreated with built-in
-                grid and utility classes.
+            <div className="grid-item">
+              <img src={require("./media/group.png")} className="icon" />
+              <h3>Collaborate</h3>
+              <p>
+                Join forces with a community of passionate coders. Find mentors,
+                share insights, and synergize your skills to conquer challenges
+                together. Collaboration fuels innovation, and together, we turn
+                concepts into cutting-edge creations.
+              </p>
+            </div>
+            <div className="grid-item">
+              <img src={require("./media/publish.png")} className="icon" />
+              <h3>Publish</h3>
+              <p>
+                It's time to unveil your masterpiece to the world. With a few
+                clicks, your project goes live, accessible to enthusiasts,
+                potential users, and fellow developers. Embrace the satisfaction
+                of sharing your coding triumphs with a global audience.
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div className="container-fluid">
-        <div className="my-5">
-          <div className="p-5 text-center bg-body-tertiary">
-            <div className="container py-5">
-              <h1 className="text-body-emphasis">Full-width jumbotron</h1>
-              <p className="col-lg-8 mx-auto lead">
-                This takes the basic jumbotron above and makes its background
-                edge-to-edge with a <code>.container</code> inside to align
-                content. Similar to above, it's been recreated with built-in
-                grid and utility classes.
-              </p>
+      <div className="container-fluid-colored">
+        <div className="page-section-2">
+          <h2 className="page-text-middle">
+            All programming languages are welcome! If it's used to program, than
+            you'll find it here!
+          </h2>
+          <div className="icon-grid">
+            <div className="grid-item">
+              <img
+                src={require("./media/pythonlogo.png")}
+                className="logo-icon"
+              />
+            </div>
+            <div className="grid-item">
+              <img
+                src={require("./media/reactlogo.png")}
+                className="logo-icon"
+              />
+            </div>
+            <div className="grid-item">
+              <img src={require("./media/jslogo.png")} className="logo-icon" />
+            </div>
+            <div className="grid-item">
+              <img
+                src={require("./media/html5logo.png")}
+                className="logo-icon"
+              />
+            </div>
+            <div className="grid-item">
+              <img src={require("./media/csslogo.png")} className="logo-icon" />
+            </div>
+            <div className="grid-item">
+              <img src={require("./media/nodejs.png")} className="logo-icon" />
+            </div>
+            <div className="grid-item">
+              <img src={require("./media/npmlogo.png")} className="logo-icon" />
+            </div>
+            <div className="grid-item">
+              <img src={require("./media/sqllogo.png")} className="logo-icon" />
+            </div>
+            <div className="grid-item">
+              <img src={require("./media/tslogo.png")} className="logo-icon" />
+            </div>
+            <div className="grid-item">
+              <img src={require("./media/vsclogo.png")} className="logo-icon" />
             </div>
           </div>
         </div>
       </div>
       <div className="container-fluid">
-        <div className="my-5">
-          <div className="p-5 text-center bg-body-tertiary">
-            <div className="container py-5">
-              <h1 className="text-body-emphasis">Full-width jumbotron</h1>
-              <p className="col-lg-8 mx-auto lead">
-                This takes the basic jumbotron above and makes its background
-                edge-to-edge with a <code>.container</code> inside to align
-                content. Similar to above, it's been recreated with built-in
-                grid and utility classes.
-              </p>
-            </div>
+        <div className="page-section">
+          <h2 className="page-text-middle"></h2>.
+          <p className="col-lg-8 mx-auto lead">
+            This takes the basic jumbotron above and makes its background
+            edge-to-edge with a <code>.container</code> inside to align content.
+            Similar to above, it's been recreated with built-in grid and utility
+            classes.
+          </p>
+        </div>
+      </div>
+      <div className="container-fluid">
+        <div className="page-section">
+          <h2 className="page-text-middle">
+            Join our community and become start building your dream projects
+            today! Click the image below to get started!
+          </h2>
+          <div>
+            <img
+              className="hack-the-planet"
+              src={require("./media/htp.png")}
+              alt="ClickableImage"
+              onClick={handleClick}
+              style={{ cursor: "pointer" }}
+            />
           </div>
         </div>
       </div>
@@ -199,10 +237,10 @@ function LandingPage() {
               <a href="/">Home</a>
             </nav>
             <nav>
-              <a ahref="/">Pricing</a>
+              <a href="/">Pricing</a>
             </nav>
             <nav>
-              <a ahref="/">About</a>
+              <a href="/">About</a>
             </nav>
           </div>
         </footer>
