@@ -2,14 +2,25 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink, useLocation } from "react-router-dom";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
 export default function Nav() {
+	const { logout } = useToken();
 	const location = useLocation();
 	const isProjectsActive = location.pathname === "/projects";
+
+	if (location.pathname === "/dashboard") {
+		return null;
+	}
+
+	if (location.pathname === "/") {
+		return null;
+	}
+
 	return (
 		<Disclosure as='nav' className='bg-gray-900'>
 			{({ open }) => (
@@ -27,7 +38,7 @@ export default function Nav() {
 								<div className='hidden sm:ml-6 sm:block'>
 									<div className='flex space-x-4'>
 										<a
-											href='/'
+											href='/dashboard'
 											className={classNames(
 												"rounded-md",
 												isProjectsActive
@@ -119,19 +130,6 @@ export default function Nav() {
 																"block px-4 py-2 text-sm text-gray-700"
 															)}
 														>
-															Settings
-														</a>
-													)}
-												</Menu.Item>
-												<Menu.Item>
-													{({ active }) => (
-														<a
-															href='#'
-															className={classNames(
-																active ? "bg-gray-100" : "",
-																"block px-4 py-2 text-sm text-gray-700"
-															)}
-														>
 															Sign out
 														</a>
 													)}
@@ -203,14 +201,6 @@ export default function Nav() {
 										tom@example.com
 									</div>
 								</div>
-								<button
-									type='button'
-									className='relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
-								>
-									<span className='absolute -inset-1.5' />
-									<span className='sr-only'>View notifications</span>
-									<BellIcon className='h-6 w-6' aria-hidden='true' />
-								</button>
 							</div>
 							<div className='mt-3 space-y-1 px-2'>
 								<Disclosure.Button
