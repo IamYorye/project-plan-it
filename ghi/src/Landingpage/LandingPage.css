@@ -188,3 +188,11 @@ h3 {
 img {
   display: inline-block;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  display: none;
+}
