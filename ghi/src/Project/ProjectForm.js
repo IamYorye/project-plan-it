@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from "react-router-dom";
+import Select from 'react-select'
 
 function ProjectForm(){
 
@@ -7,10 +9,10 @@ function ProjectForm(){
     const [project_name, setProjectName] = useState('')
     const [project_picture, setProjectPicture] = useState('')
     const [goal, setGoal] = useState('')
-    const [is_completed, setIsCompleted] = useState(false)
     const [owner_id, setOwnerId] = useState('')
-    const [tech_stack, setTechStack ] = useState('')
+    const [selectedTechStacks, setSelectedTechStacks] = useState([]);
     const [tech_stacks, setTechStacks] = useState([])
+    const navigate = useNavigate()
 
 
     const handleProjectNameChange = (event) => {
@@ -28,15 +30,10 @@ function ProjectForm(){
         setGoal(value)
     }
 
-    const handleIsCompletedChange = (event) => {
-        const value = event.target.checked
-        setIsCompleted(value)
-    }
-
-    const handleTechStackChange = (event) => {
-        const value = event.target.value
-        setTechStack(value)
-    }
+    const handleTechStackChange = (selectedOptions) => {
+        const selectedTechStackValues = selectedOptions.map(option => option.value);
+        setSelectedTechStacks(selectedTechStackValues);
+    };
 
     const handleOwnerIdChange = (event) => {
         const value = event.target.value
@@ -50,8 +47,8 @@ function ProjectForm(){
         data.project_name = project_name
         data.project_picture = project_picture
         data.goal = goal
-        data.is_completed = is_completed
         data.owner_id = owner_id
+
 
         const projectUrl = "http://localhost:8000/api/projects"
         const fetchConfig = {
@@ -71,9 +68,10 @@ function ProjectForm(){
             setProjectName('')
             setProjectPicture('')
             setGoal('')
-            setIsCompleted(false)
             setOwnerId('')
         }
+        event.target.reset();
+        navigate("/projects")
 
     }
 
@@ -90,7 +88,6 @@ function ProjectForm(){
         if (response.ok) {
             const data = await response.json();
             const tech_stacks = data.map(tech_stack => tech_stack.stacks.join(', '));
-            console.log(data);
             setTechStacks(tech_stacks || []);
         }
     } catch (error) {
@@ -101,7 +98,7 @@ function ProjectForm(){
 
     useEffect(() => {
         fetchTechStackData()
-    }, [])
+    }, []);
 
     return (
         <div className="row">
@@ -121,31 +118,35 @@ function ProjectForm(){
                             <input onChange={handleGoalChange} value={goal} placeholder="goal" required type="text" name="goal" id="goal" className="form-control" />
                             <label htmlFor="goal">Goal</label>
                         </div>
-                        <div className="form-check form-switch mb-3">
-                            <input onChange={handleIsCompletedChange} value={is_completed} placeholder="is_completed" required type="checkbox" name="is_completed" id="is_completed" className="form-check-input" />
-                            <label htmlFor="is_completed" className="form-check-label">Completed ?</label>
-                        </div>
                         <div className="form-floating mb-3">
                             <input onChange={handleOwnerIdChange} value={owner_id} placeholder="owner_id" required type="text" name="owner_id" id="owner_id" className="form-control" />
                             <label htmlFor="owner_id" className="form-check-label">Owner Identification</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <select onChange={handleTechStackChange} value={tech_stack} required id="tech_stack" name="tech_stack" className="form-select">
-                                <option value="">Choose Tech Stacks for this Project</option>
-                                {tech_stacks.map((tech_stack, index) => (
-                                    <option key={index} value={tech_stack}>
-                                        {tech_stack}
-                                    </option>
-                                ))}
-                                </select>
-                                <div className="mb-3">
-                            <button type="submit" className="btn btn-primary me-3">Create Project</button>
-                            </div>
-                        </div>
-                    </form>
+                    <Select
+                        isMulti
+                        name="tech_stacks"
+                        options={tech_stacks.map(tech_stack => ({
+                            value: tech_stack,
+                            label: tech_stack
+                        }))}
+                        onChange={handleTechStackChange}
+                        value={selectedTechStacks.map(value => ({ value, label: value }))}
+                    />
                 </div>
-            </div>
+                <div className="form-floating mb-3 text-center">
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        style={{ backgroundColor: 'green', marginRight: '10px' }}
+                    >
+                        Create Project
+                    </button>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
     )
 
 }

@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import LoginForm from "./Account/LoginForm";
 import ProjectForm from "./Project/ProjectForm";
 import ProjectList from "./Project/ProjectList";
+import ProjectDetails from "./Project/ProjectDetails";
 import Nav from "./navbar";
 import LandingPage from "./LandingPage/LandingPage";
 import Dashboard from "./Dashboard/Dashboard";
@@ -28,6 +29,7 @@ function App() {
             <Route path="/login" element={<LoginForm />}></Route>
             <Route path="/projects/new" element={<ProjectForm />}></Route>
             <Route path="/projects" element={<ProjectList />}></Route>
+						<Route path="/project-details/:project_id/:account_id" element={<ProjectDetails />}></Route>
           </Routes>
         </AuthProvider>
       </BrowserRouter>
