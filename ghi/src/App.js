@@ -17,7 +17,7 @@ function App() {
 						<Route path='/login' element={<LoginForm />}></Route>
 						<Route path="/projects/new" element={<ProjectForm />}></Route>
 						<Route path="/projects" element={<ProjectList />}></Route>
-						<Route path="/project-details/:id" component={ProjectDetails}></Route>
+						<Route path="/project-details/:project_id/:account_id" element={<ProjectDetails />}></Route>
 					</Routes>
 				</AuthProvider>
 			</BrowserRouter>

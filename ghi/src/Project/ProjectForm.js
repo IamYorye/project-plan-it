@@ -49,6 +49,7 @@ function ProjectForm(){
         data.goal = goal
         data.owner_id = owner_id
 
+
         const projectUrl = "http://localhost:8000/api/projects"
         const fetchConfig = {
             method: "post",
@@ -87,7 +88,6 @@ function ProjectForm(){
         if (response.ok) {
             const data = await response.json();
             const tech_stacks = data.map(tech_stack => tech_stack.stacks.join(', '));
-            console.log(data);
             setTechStacks(tech_stacks || []);
         }
     } catch (error) {

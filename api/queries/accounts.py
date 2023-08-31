@@ -85,12 +85,12 @@ class AccountRepository:
                             , first_name
                             , last_name
                             , email
-                            , username
                             , password
                             , years_of_experience
                             , education
                             , picture
                             , is_mentor
+                            , username
                         FROM account
                         WHERE id = %s
                         """,
