@@ -8,7 +8,7 @@ function ProjectDetails(){
 
 
     const {token} = useAuthContext()
-    const {project_id, account_id} = useParams()
+    const {project_id, id} = useParams()
     const [project, setProject] = useState([])
     const [account, setAccount] = useState([])
 
@@ -16,7 +16,8 @@ function ProjectDetails(){
         const projectUrl = `http://localhost:8000/api/projects/${project_id}`
         const fetchConfig = {
             headers: {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
             }
         }
 
@@ -32,10 +33,11 @@ function ProjectDetails(){
     }
 
     const fetchAccountDetails = async () => {
-        const accountUrl = `${process.env.REACT_APP_API_HOST}/api/accounts/${account_id}`
+        const accountUrl = `${process.env.REACT_APP_API_HOST}/api/accounts/${id}`
         const fetchConfig = {
             headers: {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
             }
         }
 
@@ -55,7 +57,7 @@ function ProjectDetails(){
         const joinUrl = `http://localhost:8000/api/attendees`
         const data = {
             project_id: project_id,
-            account_id: account_id
+            account_id: id
         }
 
         const fetchConfig = {
