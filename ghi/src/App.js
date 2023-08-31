@@ -7,31 +7,31 @@ import LoginForm from "./Account/LoginForm";
 import ProjectForm from "./Project/ProjectForm";
 import ProjectList from "./Project/ProjectList";
 import Nav from "./navbar";
-import LandingPage from "./LandingPage";
+import LandingPage from "./LandingPage/LandingPage";
 import Dashboard from "./Dashboard/Dashboard";
 
 function App() {
-	const { token } = useToken();
+  const { token } = useToken();
 
-	const domain = /https:\/\/[^/]+/;
-	const basename = process.env.PUBLIC_URL.replace(domain, "");
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
 
-	return (
-		<div>
-			<BrowserRouter basename={basename}>
-				<AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
-					<Nav />
-					<Routes>
-						<Route path='/dashboard' element={<Dashboard />}></Route>
-						<Route path='/' element={<LandingPage />}></Route>
-						<Route path='/signup' element={<SignupForm />}></Route>
-						<Route path='/login' element={<LoginForm />}></Route>
-						<Route path='/projects/new' element={<ProjectForm />}></Route>
-						<Route path='/projects' element={<ProjectList />}></Route>
-					</Routes>
-				</AuthProvider>
-			</BrowserRouter>
-		</div>
-	);
+  return (
+    <div>
+      <BrowserRouter basename={basename}>
+        <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
+          <Nav />
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/" element={<LandingPage />}></Route>
+            <Route path="/signup" element={<SignupForm />}></Route>
+            <Route path="/login" element={<LoginForm />}></Route>
+            <Route path="/projects/new" element={<ProjectForm />}></Route>
+            <Route path="/projects" element={<ProjectList />}></Route>
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </div>
+  );
 }
 export default App;
