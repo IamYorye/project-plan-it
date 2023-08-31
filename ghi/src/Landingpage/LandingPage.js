@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
 import video from "./media/solarsystem.mp4";
-import Projectcards from "./Carousel";
+import Projectcards from "./LPFunctions";
 
 function LandingPage() {
   const navigate = useNavigate();
