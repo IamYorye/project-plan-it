@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
@@ -220,6 +220,21 @@ function LandingPage() {
               Here's Some Projects Currently Being Worked On! Take a Look and
               See what You Are Interested In!
             </h2>
+            <div className="max-w-sm rounded overflow-hidden shadow-lg">
+              <img
+                src="/img/card-top.jpg"
+                className="w-full"
+                alt="project fill"
+              ></img>
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">
+                  Place Holder For Heading
+                </div>
+                <p className="text-gray-700 text-base">
+                  Placeholder for project description
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
