@@ -1,5 +1,5 @@
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function Card({ project }) {
   return (
@@ -36,11 +36,42 @@ Card.defaultProps = {
 };
 
 function Carousel({ projects }) {
+  const contentRef = useRef(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (contentRef.current) {
+        const maxScrollLeft =
+          contentRef.current.scrollWidth - contentRef.current.clientWidth;
+        setShowLeftArrow(contentRef.current.scrollLeft > 0);
+        setShowRightArrow(contentRef.current.scrollLeft < maxScrollLeft);
+      }
+    };
+
+    if (contentRef.current) {
+      contentRef.current.addEventListener("scroll", handleScroll);
+      handleScroll(); // Call once to set the initial states
+    }
+
+    return () => {
+      if (contentRef.current) {
+        contentRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
+
   const scrollLeft = () => {
-    document.getElementById("content").scrollLeft -= 325;
+    if (contentRef.current) {
+      contentRef.current.scrollLeft -= 300;
+    }
   };
+
   const scrollRight = () => {
-    document.getElementById("content").scrollLeft += 325;
+    if (contentRef.current) {
+      contentRef.current.scrollLeft += 300;
+    }
   };
 
   return (
@@ -50,25 +81,40 @@ function Carousel({ projects }) {
         Effort Of Bringing New Applications To Life!
       </div>
       <div
+        ref={contentRef}
         id="content"
         className="carousel p-4 flex items-center justify-start overflow-x-auto scroll-smooth  scrollbar-hide"
       >
-        {projects.map((project) => (
+        {projects.slice(0, 10).map((project) => (
           <div key={project.id}>
             <Card project={project} />
           </div>
         ))}
       </div>
       <div className="static">
-        <button onClick={scrollLeft} className="mx-3 m-2 bg-white">
+        <button
+          onClick={scrollLeft}
+          className={`mx-3 m-2 bg-white ${showLeftArrow ? "" : "hidden"}`}
+        >
           <FiChevronLeft size={40} />
         </button>
-        <button onClick={scrollRight} className="mx-3 m-2 bg-white">
+        <button
+          onClick={scrollRight}
+          className={`mx-3 m-2 bg-white ${showRightArrow ? "" : "hidden"}`}
+        >
           <FiChevronRight size={40} />
         </button>
       </div>
     </div>
   );
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 function Projectcards() {
@@ -87,7 +133,7 @@ function Projectcards() {
         }
 
         const data = await response.json();
-        setProjects(data);
+        setProjects(shuffleArray(data)); // shuffle the projects array before setting it to state
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching projects:", error);

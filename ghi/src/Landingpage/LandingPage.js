@@ -85,7 +85,7 @@ function LandingPage() {
               </p>
               <div>
                 <Link to="/signup">
-                  <button className="browser-buttons" type="button">
+                  <button className="browser-buttons-1" type="button">
                     SIGN UP NOW!
                   </button>
                 </Link>

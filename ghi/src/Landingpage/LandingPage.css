@@ -25,6 +25,19 @@
 }
 .nav-container {
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+h2 {
+  margin: 15px !important;
+  padding-bottom: 2rem !important;
+  line-height: 1.5 !important;
+  font-weight: 600 !important;
+  font-size: 1.5rem !important;
 }
 
 .btn-primary {
@@ -38,6 +51,8 @@
   color: white;
   cursor: pointer;
   margin-right: 15px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
 }
 
 .nav-header {
@@ -58,7 +73,7 @@
 }
 
 .App-logo {
-  max-width: 120px;
+  max-width: 100px;
 }
 
 .App-logo-large {
@@ -76,12 +91,6 @@
   text-align: center;
 }
 
-h2 {
-  margin: 15px;
-  padding-bottom: 2rem;
-  line-height: 1.5;
-}
-
 .page-text {
   font-size: 1.2rem;
   max-width: 1000px;
@@ -96,8 +105,23 @@ h2 {
     to right,
     rgb(106, 17, 203) 0%,
     rgb(119, 212, 255) 100%
-  ); /* applied gradient background */
+  ) !important;
   color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  transition: background 0.3s;
+}
+
+.browser-buttons-1 {
+  display: inline-flex;
+  align-items: center;
+  background: white !important;
+  color: rgb(106, 17, 203) !important;
   padding: 0.5rem 1rem;
   border-radius: 50px;
   border: none;
@@ -130,7 +154,9 @@ h2 {
 }
 
 h3 {
-  padding: 1.25rem;
+  padding: 1.25rem !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
 }
 
 .icon {
@@ -183,6 +209,10 @@ h3 {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+}
+
+img {
+  display: inline-block !important;
 }
 
 @tailwind base;

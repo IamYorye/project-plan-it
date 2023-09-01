@@ -11,9 +11,13 @@ writing new code for cards for random population of projects
 spent time making cards and carousel
 difficulty populating projectcards due to token issues. we require someone to be logged into see projects but the main page doesn't require login or token to see, but to access projects requires a token. we need to fix this.
 trouble shooting issues with function being able to access cards via token has taken hours. posted in help me understand.
+Finally finished adding the carousel. Still having issues with the API and had to unlock the projects page in order to access and populate it. I will create a different api later, but for now I have confirmed the cards and carousel will work and populate when the API is working. i have been working on formatting issues to make the page look better and all the different aspects of the page have the same ratios etc.
+added shuffle array to the carousel component. cards are now randomly generated and different everytime. I have added that the maximum amount of cards is 10, and the projects will shuffle each time page is loaded.
 
 29 August 2023
 I'm still working on the landing page. I'm really trying to incorporate some more advanced webpage design and concepts. Today I spent a couple hours learning about and writing code to use react webpacks to import all my media that I had spent a lot of time creating from the file folder. I didn't want to have to import over a dozen files individually, so spent time writing a const webpack that import all my media. It worked and I was able to get all imgs on the page working. however, when I tried to do a git push to update everything, including the video file, there was huge wait time and it never seemed to update. I have come to teh conclusion that adding the media, especially the video, directly to the project may be causing the delay and issues due to file sizes. While it's only a couple hundred kb per img and less than 8mb for the video, I can't figure out any other reason. I am now uploading all the data to a file sharing site that i can link with URL's instead. Wasted about 4 hours researching and writing that react code. At least I learned something new.
+due to tailwind and bootstrap conflicts, i've had to add the !important header to numerous bootstrap classes to make sure it formats correctly.
+made the nav bar at the top scroll with the page.
 
 28 August 2023
 25 August 2023
