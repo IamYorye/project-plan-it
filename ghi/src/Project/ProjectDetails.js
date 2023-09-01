@@ -34,7 +34,6 @@ function ProjectDetails(props){
             if (response.ok) {
                 const project = await response.json()
                 setProject(project)
-                console.log(project)
             }
         } catch (error) {
             console.error("Error fetching project details:", error)
