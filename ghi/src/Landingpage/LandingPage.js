@@ -216,13 +216,7 @@ function LandingPage() {
       </div>
       <div className="container">
         <div className="page-section">
-          <div className="page-text">
-            <h2>
-              Here's Some Projects Currently Being Worked On! Take a Look and
-              See what You Are Interested In!
-            </h2>
-            <Projectcards />
-          </div>
+          <Projectcards />
         </div>
       </div>
       <div className="container-fluid-1">

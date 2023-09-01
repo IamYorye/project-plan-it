@@ -185,10 +185,6 @@ h3 {
   gap: 1rem;
 }
 
-img {
-  display: inline-block;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

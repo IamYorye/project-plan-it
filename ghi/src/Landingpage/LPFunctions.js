@@ -1,13 +1,12 @@
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import React, { useState, useEffect } from "react";
-import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 
 function Card({ project }) {
   return (
-    <div className="card bg-white w-[200px] h-[350px] m-2 rounded-lg shadow-lg">
-      <div className="top">
+    <div className="card bg-white w-[300px] h-[450px] m-2 rounded-lg shadow-lg flex-col">
+      <div className="top flex-shrink-0">
         <img
-          className="w-[200px] h-[200px] object-cover  p-2"
+          className="w-[300px] h-[250px] object-fill  p-2"
           src={
             project?.project_picture ||
             "https://live.staticflickr.com/65535/53156011725_dd6c54efab_w.jpg"
@@ -15,11 +14,11 @@ function Card({ project }) {
           alt={project?.project_name || "Project Name Cannot Be Found"}
         />
       </div>
-      <div className="bottom flex flex-col justify-center items-start p-3">
-        <div className="title font-semibold text-xs my-1">
+      <div className="bottom flex flex-col justify-center p-2 space-y-2 overflow-hidden">
+        <div className="title font-semibold">
           {project?.project_name || "Default Name"}
         </div>
-        <div className="category text-xs font-light my-1">
+        <div className="category text-sm font-light m-1 overflow-hidden">
           {project?.goal || "No Project Goal Found"}
         </div>
       </div>
@@ -38,22 +37,17 @@ Card.defaultProps = {
 
 function Carousel({ projects }) {
   const scrollLeft = () => {
-    document.getElementById("content").scrollLeft -= 400;
+    document.getElementById("content").scrollLeft -= 325;
   };
   const scrollRight = () => {
-    document.getElementById("content").scrollLeft += 400;
+    document.getElementById("content").scrollLeft += 325;
   };
 
   return (
     <div className="relative">
-      <div className="text-center py-4  text-xl font-bold">Carousel</div>
-      <div className="absolute right-0 top-5 ">
-        <button onClick={scrollLeft} className="p-2 m-2 rounded-full bg-white">
-          <FiChevronLeft />
-        </button>
-        <button onClick={scrollRight} className="p-2 m-2 rounded-full bg-white">
-          <FiChevronRight />
-        </button>
+      <div className="text-center py-4  text-xl font-bold">
+        Here's Some Projects Currently Being Worked On! Sign Up Now To Join The
+        Effort Of Bringing New Applications To Life!
       </div>
       <div
         id="content"
@@ -65,28 +59,29 @@ function Carousel({ projects }) {
           </div>
         ))}
       </div>
+      <div className="static">
+        <button onClick={scrollLeft} className="mx-3 m-2 bg-white">
+          <FiChevronLeft size={40} />
+        </button>
+        <button onClick={scrollRight} className="mx-3 m-2 bg-white">
+          <FiChevronRight size={40} />
+        </button>
+      </div>
     </div>
   );
 }
 
 function Projectcards() {
-  const { token } = useAuthContext();
-
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const projectsUrl = "http://localhost:8000/api/projects";
-  const fetchConfig = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(projectsUrl, fetchConfig);
+        const response = await fetch(projectsUrl);
         if (!response.ok) {
           throw new Error("Failed to fetch");
         }
