@@ -3,7 +3,7 @@ import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
 
-function ProjectForm(){
+function ProjectForm(props){
 
     const {token} = useAuthContext();
     const [project_name, setProjectName] = useState('')
@@ -50,7 +50,7 @@ function ProjectForm(){
         data.owner_id = owner_id
 
 
-        const projectUrl = "http://localhost:8000/api/projects"
+        const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects`
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -76,7 +76,7 @@ function ProjectForm(){
     }
 
     const fetchTechStackData = async () => {
-    const techStackUrl = "http://localhost:8000/api/tech-stacks/";
+    const techStackUrl = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`;
     const fetchConfig = {
         headers: {
             "Authorization": `Bearer ${token}`

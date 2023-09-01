@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { Link } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
-function ProjectList() {
+function ProjectList(props) {
 
     const { token } = useAuthContext();
     const [project_name, setProjectName] = useState("");
@@ -16,7 +17,7 @@ function ProjectList() {
     };
 
     const fetchProjectData = async () => {
-        const projectsUrl = "http://localhost:8000/api/projects";
+        const projectsUrl = `${process.env.REACT_APP_API_HOST}/api/projects`;
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -40,18 +41,20 @@ function ProjectList() {
                 "Authorization": `Bearer ${token}`
             }
         }
-
         try {
             const response = await fetch(accountUrl, fetchConfig)
             if(response.ok) {
                 const data = await response.json()
                 setAccount(data)
-                console.log(data)
+
+                const decodedToken = jwtDecode(token)
+				console.log(decodedToken)
             }
         } catch (error) {
             console.error("Error fetching account details:", error)
         }
     }
+
 
     const handleFilterSubmit = (event) => {
         event.preventDefault();
@@ -91,7 +94,7 @@ function ProjectList() {
                                 <div className="card-body">
                                     <h5 className="card-title">{project.project_name}</h5>
                                     <p className="card-text">{project.goal}</p>
-                                    <Link to={`/project-details/${project.id}/${account.id}`} className="btn btn-primary">Details</Link>
+                                    <Link to={`/project-details/${project.id}`} className="btn btn-primary">Details</Link>
                                 </div>
                             </div>
                         </div>

@@ -2,18 +2,26 @@ import { useState, useEffect } from "react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
+import jwtDecode from "jwt-decode";
 
 
-function ProjectDetails(){
+function ProjectDetails(props){
 
 
     const {token} = useAuthContext()
-    const {project_id, id} = useParams()
+    const {project_id} = useParams()
     const [project, setProject] = useState([])
     const [account, setAccount] = useState([])
 
+    const decodedToken = jwtDecode(token)
+
+    const accountId = decodedToken.account.id
+
+
+    console.log("account:", props.account)
+
     const fetchProjectDetails = async () => {
-        const projectUrl = `http://localhost:8000/api/projects/${project_id}`
+        const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects/${project_id}`
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -24,29 +32,30 @@ function ProjectDetails(){
         try {
             const response = await fetch(projectUrl, fetchConfig)
             if (response.ok) {
-                const data = await response.json()
-                setProject(data)
+                const project = await response.json()
+                setProject(project)
+                console.log(project)
             }
         } catch (error) {
             console.error("Error fetching project details:", error)
         }
     }
 
-    const fetchAccountDetails = async () => {
-        const accountUrl = `${process.env.REACT_APP_API_HOST}/api/accounts/${id}`
+    const fetchAccountData = async () => {
+        const accountUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`
         const fetchConfig = {
             headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
+                "Authorization": `Bearer ${token}`
             }
         }
-
         try {
             const response = await fetch(accountUrl, fetchConfig)
             if(response.ok) {
                 const data = await response.json()
                 setAccount(data)
-                console.log(data)
+
+                const decodedToken = jwtDecode(token)
+				console.log(decodedToken)
             }
         } catch (error) {
             console.error("Error fetching account details:", error)
@@ -54,10 +63,10 @@ function ProjectDetails(){
     }
 
     const handleJoinProject = async () => {
-        const joinUrl = `http://localhost:8000/api/attendees`
+        const joinUrl = `${process.env.REACT_APP_API_HOST}/api/attendees`
         const data = {
             project_id: project_id,
-            account_id: id
+            account_id: accountId
         }
 
         const fetchConfig = {
@@ -84,7 +93,7 @@ function ProjectDetails(){
 
     useEffect(() => {
         fetchProjectDetails();
-        fetchAccountDetails();
+        fetchAccountData()
     }, []);
 
     if(!project) {
