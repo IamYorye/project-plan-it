@@ -3,7 +3,7 @@ import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
-function ProjectList(props) {
+function ProjectList() {
 
     const { token } = useAuthContext();
     const [project_name, setProjectName] = useState("");

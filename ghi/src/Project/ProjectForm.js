@@ -2,17 +2,21 @@ import { useState, useEffect } from "react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
+import jwtDecode from "jwt-decode";
 
-function ProjectForm(props){
+function ProjectForm(){
 
     const {token} = useAuthContext();
     const [project_name, setProjectName] = useState('')
     const [project_picture, setProjectPicture] = useState('')
     const [goal, setGoal] = useState('')
-    const [owner_id, setOwnerId] = useState('')
     const [selectedTechStacks, setSelectedTechStacks] = useState([]);
     const [tech_stacks, setTechStacks] = useState([])
     const navigate = useNavigate()
+
+    const decodedToken = jwtDecode(token)
+
+    const owner_id = decodedToken.account.id
 
 
     const handleProjectNameChange = (event) => {
@@ -34,11 +38,6 @@ function ProjectForm(props){
         const selectedTechStackValues = selectedOptions.map(option => option.value);
         setSelectedTechStacks(selectedTechStackValues);
     };
-
-    const handleOwnerIdChange = (event) => {
-        const value = event.target.value
-        setOwnerId(value)
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -68,7 +67,6 @@ function ProjectForm(props){
             setProjectName('')
             setProjectPicture('')
             setGoal('')
-            setOwnerId('')
         }
         event.target.reset();
         navigate("/projects")
@@ -117,10 +115,6 @@ function ProjectForm(props){
                         <div className="form-floating mb-3">
                             <input onChange={handleGoalChange} value={goal} placeholder="goal" required type="text" name="goal" id="goal" className="form-control" />
                             <label htmlFor="goal">Goal</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input onChange={handleOwnerIdChange} value={owner_id} placeholder="owner_id" required type="text" name="owner_id" id="owner_id" className="form-control" />
-                            <label htmlFor="owner_id" className="form-check-label">Owner Identification</label>
                         </div>
                         <div className="form-floating mb-3">
                     <Select

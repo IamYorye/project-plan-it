@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 
