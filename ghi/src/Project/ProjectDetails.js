@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 
 
-function ProjectDetails(props){
+function ProjectDetails(){
 
 
     const {token} = useAuthContext()
@@ -15,9 +15,6 @@ function ProjectDetails(props){
     const decodedToken = jwtDecode(token)
 
     const accountId = decodedToken.account.id
-
-
-    console.log("account:", props.account)
 
     const fetchProjectDetails = async () => {
         const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects/${project_id}`
@@ -52,8 +49,6 @@ function ProjectDetails(props){
                 const data = await response.json()
                 setAccount(data)
 
-                const decodedToken = jwtDecode(token)
-				console.log(decodedToken)
             }
         } catch (error) {
             console.error("Error fetching account details:", error)

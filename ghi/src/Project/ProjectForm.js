@@ -18,6 +18,9 @@ function ProjectForm(){
 
     const owner_id = decodedToken.account.id
 
+    const techStackIds = tech_stacks.map(tech_stack => tech_stack.id);
+    console.log(techStackIds)
+
 
     const handleProjectNameChange = (event) => {
         const value = event.target.value
@@ -42,57 +45,53 @@ function ProjectForm(){
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        const data = {}
-        data.project_name = project_name
-        data.project_picture = project_picture
-        data.goal = goal
-        data.owner_id = owner_id
-
+        const projectData = {}
+        projectData.project_name = project_name
+        projectData.project_picture = project_picture
+        projectData.goal = goal
+        projectData.owner_id = owner_id
 
         const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects`
         const fetchConfig = {
             method: "post",
-            body: JSON.stringify(data),
+            body: JSON.stringify(projectData),
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             }
         }
 
-        const response = await fetch(projectUrl, fetchConfig)
-        if (response.ok) {
-            const newProject = await response.json()
+        const projectResponse = await fetch(projectUrl, fetchConfig)
+        if (projectResponse.ok) {
+            const newProject = await projectResponse.json()
             console.log(newProject)
 
             setProjectName('')
             setProjectPicture('')
             setGoal('')
         }
-        event.target.reset();
+        event.target.reset()
         navigate("/projects")
-
     }
 
     const fetchTechStackData = async () => {
-    const techStackUrl = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`;
-    const fetchConfig = {
-        headers: {
+        const techStacksUrl = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`
+        const fetchConfig = {
+            headers: {
             "Authorization": `Bearer ${token}`
+            }
         }
-    };
 
-    try {
-        const response = await fetch(techStackUrl, fetchConfig);
-        if (response.ok) {
-            const data = await response.json();
-            const tech_stacks = data.map(tech_stack => tech_stack.stacks.join(', '));
-            setTechStacks(tech_stacks || []);
+        try {
+            const response = await fetch(techStacksUrl, fetchConfig)
+            if(response.ok){
+                const techStacksData = await response.json()
+                setTechStacks(techStacksData)
+            }
+        } catch (error){
+            console.error("Error fetching tech stacks:", error)
         }
-    } catch (error) {
-        console.error("Error fetching tech stacks:", error);
-        }
-    };
-
+    }
 
     useEffect(() => {
         fetchTechStackData()
@@ -121,8 +120,8 @@ function ProjectForm(){
                         isMulti
                         name="tech_stacks"
                         options={tech_stacks.map(tech_stack => ({
-                            value: tech_stack,
-                            label: tech_stack
+                            value: tech_stack.name,
+                            label: tech_stack.name
                         }))}
                         onChange={handleTechStackChange}
                         value={selectedTechStacks.map(value => ({ value, label: value }))}

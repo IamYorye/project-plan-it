@@ -37,7 +37,7 @@ steps = [
         """
         CREATE TABLE tech_stacks (
             id SERIAL PRIMARY KEY NOT NULL,
-            stacks TEXT ARRAY
+            name VARCHAR(100) NOT NULL
         );
         """,
         """
