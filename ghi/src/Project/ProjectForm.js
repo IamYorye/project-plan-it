@@ -18,8 +18,7 @@ function ProjectForm(){
 
     const owner_id = decodedToken.account.id
 
-    const techStackIds = tech_stacks.map(tech_stack => tech_stack.id);
-    console.log(techStackIds)
+    console.log(tech_stacks)
 
 
     const handleProjectNameChange = (event) => {
