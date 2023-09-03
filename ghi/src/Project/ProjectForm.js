@@ -18,9 +18,6 @@ function ProjectForm(){
 
     const owner_id = decodedToken.account.id
 
-    console.log(tech_stacks)
-
-
     const handleProjectNameChange = (event) => {
         const value = event.target.value
         setProjectName(value)
@@ -39,6 +36,7 @@ function ProjectForm(){
     const handleTechStackChange = (selectedOptions) => {
         const selectedTechStackValues = selectedOptions.map(option => option.value);
         setSelectedTechStacks(selectedTechStackValues);
+        console.log(selectedTechStackValues)
     };
 
     const handleSubmit = async (event) => {
@@ -86,6 +84,8 @@ function ProjectForm(){
             if(response.ok){
                 const techStacksData = await response.json()
                 setTechStacks(techStacksData)
+
+                console.log("Tech Stacks:", techStacksData.map(tech_stack => tech_stack.name));
             }
         } catch (error){
             console.error("Error fetching tech stacks:", error)
