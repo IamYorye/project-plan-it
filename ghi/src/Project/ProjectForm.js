@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
 import jwtDecode from "jwt-decode";
 
-export default function NewProject() {
+export default function ProjectForm() {
     const {token} = useAuthContext();
     const [project_name, setProjectName] = useState('')
     const [project_picture, setProjectPicture] = useState('')
