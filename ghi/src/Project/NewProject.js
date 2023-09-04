@@ -1,0 +1,169 @@
+import { useState, useEffect } from "react";
+import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from "react-router-dom";
+import Select from 'react-select'
+import jwtDecode from "jwt-decode";
+
+export default function NewProject() {
+        const {token} = useAuthContext();
+    const [project_name, setProjectName] = useState('')
+    const [project_picture, setProjectPicture] = useState('')
+    const [goal, setGoal] = useState('')
+    const [selectedTechStacks, setSelectedTechStacks] = useState([]);
+    const [tech_stacks, setTechStacks] = useState([])
+    const navigate = useNavigate()
+
+    const decodedToken = jwtDecode(token)
+
+    const owner_id = decodedToken.account.id
+
+    const handleProjectNameChange = (event) => {
+        const value = event.target.value
+        setProjectName(value)
+    }
+
+    const handleProjectPictureChange = (event) => {
+        const value = event.target.value
+        setProjectPicture(value)
+    }
+
+    const handleGoalChange = (event) => {
+        const value = event.target.value
+        setGoal(value)
+    }
+
+    const handleTechStackChange = (selectedOptions) => {
+        const selectedTechStackValues = selectedOptions.map(option => option.value);
+        setSelectedTechStacks(selectedTechStackValues);
+        console.log(selectedTechStackValues)
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+
+        const projectData = {}
+        projectData.project_name = project_name
+        projectData.project_picture = project_picture
+        projectData.goal = goal
+        projectData.owner_id = owner_id
+
+        const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects`
+        const fetchConfig = {
+            method: "post",
+            body: JSON.stringify(projectData),
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }
+
+        const projectResponse = await fetch(projectUrl, fetchConfig)
+        if (projectResponse.ok) {
+            const newProject = await projectResponse.json()
+            console.log(newProject)
+
+            setProjectName('')
+            setProjectPicture('')
+            setGoal('')
+        }
+        event.target.reset()
+        navigate("/projects")
+    }
+
+    const fetchTechStackData = async () => {
+        const techStacksUrl = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`
+        const fetchConfig = {
+            headers: {
+            "Authorization": `Bearer ${token}`
+            }
+        }
+
+        try {
+            const response = await fetch(techStacksUrl, fetchConfig)
+            if(response.ok){
+                const techStacksData = await response.json()
+                setTechStacks(techStacksData)
+
+                console.log("Tech Stacks:", techStacksData.map(tech_stack => tech_stack.name));
+            }
+        } catch (error){
+            console.error("Error fetching tech stacks:", error)
+        }
+    }
+
+    useEffect(() => {
+        fetchTechStackData()
+    }, []);
+  return (
+    <>
+
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            className="mx-auto h-10 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            alt="Your Company"
+          />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Create a new Project
+          </h2>
+        </div>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form onSubmit={handleSubmit} className="space-y-6" action="#" method="POST">
+            <div>
+              <label htmlFor="project_name" className="block text-sm font-medium leading-6 text-gray-900">
+                Project Name
+              </label>
+              <div className="mt-2">
+                <input
+                  onChange={handleProjectNameChange}
+                  value={project_name}
+                  id="project_name"
+                  name="project_name"
+                  type="text"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                  Password
+                </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Not a member?{' '}
+            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              Start a 14 day free trial
+            </a>
+          </p>
+        </div>
+      </div>
+    </>
+  )
+}

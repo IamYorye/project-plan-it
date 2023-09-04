@@ -8,6 +8,8 @@ import ProjectList from "./Project/ProjectList";
 import ProjectDetails from "./Project/ProjectDetails";
 import React, { useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
+import NewProject from "./Project/NewProject";
+
 
 function App() {
 
@@ -48,6 +50,7 @@ function App() {
 				{/* <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}> */}
 					<Routes>
 						<Route path='/signup' element={<SignupForm />}></Route>
+						<Route path="/newproject" element={<NewProject />}></Route>
 						<Route path='/login' element={<LoginForm />}></Route>
 						<Route path="/projects/new" element={<ProjectForm account={account}/>}></Route>
 						<Route path="/projects" element={<ProjectList account={account}/>}></Route>
