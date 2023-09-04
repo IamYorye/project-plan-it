@@ -1,4 +1,4 @@
-import { AuthProvider, useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
 import SignupForm from "./Account/SignUpForm";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
