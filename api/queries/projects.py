@@ -34,7 +34,7 @@ class ProjectRepository:
                         DELETE FROM project
                         WHERE id = %s
                         """,
-                        [project_id]
+                        [project_id],
                     )
                     return True
         except Exception as e:

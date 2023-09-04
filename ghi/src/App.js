@@ -1,7 +1,7 @@
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
 import SignupForm from "./Account/SignUpForm";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import LoginForm from "./Account/LoginForm";
 import ProjectForm from "./Project/ProjectForm";
 import ProjectList from "./Project/ProjectList";
@@ -58,5 +58,4 @@ function App() {
 		</div>
 	);
 }
-
 export default App;
