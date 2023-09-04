@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
+const forms = require('@tailwindcss/forms');
 module.exports = {
     content: ["./index.html", "./src/**/*.{html,js}"],
     theme: {
