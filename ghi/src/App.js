@@ -9,7 +9,6 @@ import ProjectDetails from "./Project/ProjectDetails";
 import React, { useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
 
-
 function App() {
 
 	const [account, setAccount] = useState([])
