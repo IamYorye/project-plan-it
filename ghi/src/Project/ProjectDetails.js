@@ -4,9 +4,7 @@ import { useParams } from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 
 
-function ProjectDetails(){
-
-
+export default function ProjectDetails() {
     const {token} = useAuthContext()
     const {project_id} = useParams()
     const [project, setProject] = useState([])
@@ -15,6 +13,9 @@ function ProjectDetails(){
     const decodedToken = jwtDecode(token)
 
     const accountId = decodedToken.account.id
+    const accountFirstName = decodedToken.account.first_name
+    const accountLastName = decodedToken.account.last_name
+    const accountEmail = decodedToken.account.email
 
     const fetchProjectDetails = async () => {
         const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects/${project_id}`
@@ -93,26 +94,46 @@ function ProjectDetails(){
         return <div>Loading...</div>
     }
 
-    return (
-        <div className="row">
-            <div className="col-lg 6">
-                <img src={project.project_picture} alt="project_picture" />
-            </div>
-            <div className="col-lg 6">
-                <h2>{project.project_name}</h2>
-                <p>{project.goal}</p>
-                <div className="form-floating mb-3 text-center">
-                <button
+  return (
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+      <div className="px-4 sm:px-0">
+        <h3 className="text-base font-semibold leading-7 text-gray-900">Project</h3>
+        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Project Display</p>
+        <img src={project.project_picture} alt="project_picture"
+        style={{ width: '350px', height: 'auto' }}/>
+      </div>
+      <div className="mt-6">
+        <dl className="grid grid-cols-1 sm:grid-cols-2">
+          <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">Project Name</dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{project.project_name}</dd>
+          </div>
+          <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">Project Description</dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{project.goal}</dd>
+          </div>
+          <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">Project Owner</dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{accountFirstName + " " + accountLastName}</dd>
+          </div>
+          <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">Email</dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{accountEmail}</dd>
+          </div>
+          <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <button
                     onClick={handleJoinProject}
                     className="btn btn-primary"
-                    style={{ backgroundColor: 'green', marginRight: '10px' }}
-                    > Join Project
+                    style={{ backgroundColor: 'blue', marginRight: '10px' }}
+                    > Join the Team
                 </button>
-            </div>
-            </div>
-        </div>
-    )
-
+          </div>
+          <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
+          </div>
+        </dl>
+      </div>
+    </div>
+    </div>
+  )
 }
-
-export default ProjectDetails
