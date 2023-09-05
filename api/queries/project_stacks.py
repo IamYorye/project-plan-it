@@ -13,12 +13,12 @@ class Error(BaseModel):
 class ProjectStackOut(BaseModel):
     id: int
     project_id: int
-    tech_stacks_id: int
+    tech_stacks_id: List[str]
 
 
 class ProjectStackIn(BaseModel):
     project_id: int
-    tech_stacks_id: int
+    tech_stacks_id: List[str]
 
 
 class ProjectStacksRepository:
