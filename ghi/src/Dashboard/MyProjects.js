@@ -132,19 +132,6 @@ export default function MyProjects()
                                                     'block px-3 py-1 text-sm leading-6 text-gray-900'
                                                 )}
                                             >
-                                                Move<span className="sr-only">, {project.name}</span>
-                                            </a>
-                                        )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                        {({ active }) => (
-                                            <a
-                                                href="#"
-                                                className={classNames(
-                                                    active ? 'bg-gray-50' : '',
-                                                    'block px-3 py-1 text-sm leading-6 text-gray-900'
-                                                )}
-                                            >
                                                 Delete<span className="sr-only">, {project.name}</span>
                                             </a>
                                         )}
