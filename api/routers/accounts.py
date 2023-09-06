@@ -17,7 +17,6 @@ from queries.accounts import (
 from jwt_down import Token
 from pydantic import BaseModel
 from authenticator import authenticator
-from queries.accounts import AccountIn, AccountOut, AccountRepository, Error
 from typing import Union, List, Optional
 
 router = APIRouter()
