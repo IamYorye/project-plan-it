@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useParams } from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 
 
 export default function ProjectDetails() {
-    const {token} = useAuthContext()
+    const {token} = useToken()
     const {project_id} = useParams()
     const [project, setProject] = useState([])
     const [account, setAccount] = useState([])

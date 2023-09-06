@@ -1,4 +1,4 @@
-import { AuthProvider, useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
 import SignupForm from "./Account/SignUpForm";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -12,7 +12,7 @@ import jwtDecode from "jwt-decode";
 function App() {
 
 	const [account, setAccount] = useState([])
-	const {token} = useAuthContext()
+	const {token} = useToken()
 
 
 

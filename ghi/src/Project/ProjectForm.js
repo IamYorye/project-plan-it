@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
 import jwtDecode from "jwt-decode";
 
 export default function ProjectForm() {
-    const {token} = useAuthContext();
+    const {token} = useToken();
     const [project_name, setProjectName] = useState('')
     const [project_picture, setProjectPicture] = useState('')
     const [goal, setGoal] = useState('')
