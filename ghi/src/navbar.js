@@ -1,8 +1,8 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import useToken from "@galvanize-inc/jwtdown-for-react";
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import useToken, { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 
 
 function classNames(...classes)
@@ -12,25 +12,33 @@ function classNames(...classes)
 
 export default function Nav({ user })
 {
-	const { logout, token } = useToken();
+	const { logout } = useToken();
+	const { token } = useAuthContext();
 	const location = useLocation();
 	const navigate = useNavigate();
+	const { id } = useParams();
+	console.log(id)
 
-	if (location.pathname === "/login")
+	const getUser = async () =>
+	{
+		const url = `http://localhost:8000/api/accounts/${id}`
+		const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
+		if (response.ok)
+		{
+			const userData = await response.json();
+			console.log("userData:", userData)
+		}
+	}
+
+	useEffect(() =>
+	{
+		getUser();
+	}, [token])
+
+	if (location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/')
 	{
 		return null;
 	}
-
-	if (location.pathname === "/signup")
-	{
-		return null;
-	}
-
-	if (location.pathname === "/")
-	{
-		return null;
-	}
-
 
 	return (
 		<Disclosure as="nav" className="bg-gray-800">
@@ -193,8 +201,8 @@ export default function Nav({ user })
 									/>
 								</div>
 								<div className="ml-3">
-									<div className="text-base font-medium text-white">name</div>
-									<div className="text-sm font-medium text-gray-400">email</div>
+									<div className="text-base font-medium text-white">Name</div>
+									<div className="text-sm font-medium text-gray-400">Email</div>
 								</div>
 							</div>
 							<div className="mt-3 space-y-1 px-2">

@@ -1,24 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import JoinedProjects from "./JoinedProjects";
 import MyProjects from "./MyProjects";
 import useToken from '@galvanize-inc/jwtdown-for-react';
 import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
-export default function Dashboard()
+export default function Dashboard({ account })
 {
     const [selectedTab, setSelectedTab] = useState('myProjects');
-    const { token } = useToken;
-    const navigate = useNavigate();
 
     const handleTabClick = (tabKey) =>
     {
         setSelectedTab(tabKey);
     };
 
-    if (token == null)
-    {
-        return navigate
-    }
 
     return (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
