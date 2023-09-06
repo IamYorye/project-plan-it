@@ -24,7 +24,7 @@ export default function SignupForm()
     };
     register(accountData, `${process.env.REACT_APP_API_HOST}/api/accounts`);
     e.target.reset();
-    navigate("/projects");
+    navigate("/projects/new");
   };
 
   return (

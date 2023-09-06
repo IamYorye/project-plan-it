@@ -1,6 +1,6 @@
 import os
 from psycopg_pool import ConnectionPool
-from typing import List, Union, Optional
+from typing import List, Union
 from pydantic import BaseModel, ValidationError
 
 pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
