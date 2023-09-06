@@ -39,7 +39,7 @@ class AccountRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         SELECT id
                             , first_name
