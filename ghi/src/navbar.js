@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -10,27 +10,11 @@ function classNames(...classes)
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Nav()
+export default function Nav({ user })
 {
 	const { logout, token } = useToken();
 	const location = useLocation();
 	const navigate = useNavigate();
-	const [user, setUser] = useState({});
-
-	useEffect(() =>
-	{
-		if (token != null)
-		{
-			setUser(JSON.parse(atob(token.split(".")[1])).account);
-		} else
-		{
-			setUser(null);
-			navigate('/');
-		}
-	}, [token]);
-	console.log("user:", user)
-	console.log("token:", token)
-
 
 	if (location.pathname === "/login")
 	{

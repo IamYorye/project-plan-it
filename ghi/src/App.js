@@ -1,7 +1,7 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
 import SignupForm from "./Account/SignUpForm";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import LoginForm from "./Account/LoginForm";
 import ProjectForm from "./Project/ProjectForm";
 import ProjectList from "./Project/ProjectList";
@@ -18,6 +18,7 @@ function App()
 
 	const [account, setAccount] = useState([]);
 	const { token } = useToken();
+	const [user, setUser] = useState({});
 
 	const fetchAccountData = async () =>
 	{
@@ -46,13 +47,20 @@ function App()
 
 	useEffect(() =>
 	{
+		if (token != null)
+		{
+			setUser(JSON.parse(atob(token.split(".")[1])).account);
+		} else
+		{
+			setUser(null);
+		}
 		fetchAccountData()
 	}, [token])
 
 	return (
 		<div>
 			<BrowserRouter>
-				<Nav account={account} />
+				<Nav user={user} />
 				{/* <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}> */}
 				<Routes>
 					<Route path='/' element={<LandingPage />}></Route>
