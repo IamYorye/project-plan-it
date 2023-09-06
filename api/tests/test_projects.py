@@ -6,30 +6,31 @@ from pydantic import BaseModel
 
 client = TestClient(app)
 
+
 class EmptyProjectQueries:
     @staticmethod
     def get_all_projects():
         return []
 
+
 class UserOut(BaseModel):
     username: str
     email: str
 
+
 def fake_get_current_account_data():
     return UserOut(username="username", email="email@gmail.com")
 
+
 def test_get_all_projects():
 
-    #ARRANGE
     app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_account_data
     app.dependency_overrides[ProjectQueries] = EmptyProjectQueries
 
-    #ACT
     response = client.get("/api/projects")
 
     app.dependency_overrides = {}
 
-    #ASSERT
     print(response.json())
     assert response.status_code == 200
     assert response.json() == []

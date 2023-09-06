@@ -23,7 +23,7 @@ def create_project(
         return created_project
     except Exception as e:
         error_message = "An error occurred while processing the request."
-        return Error(message=error_message)
+        return e(message=error_message)
 
 
 @router.delete("/api/projects/{project_id}", response_model=bool)

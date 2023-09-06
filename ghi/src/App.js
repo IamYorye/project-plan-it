@@ -38,8 +38,8 @@ function App() {
     }
 
 	useEffect(() => {
-		fetchAccountData()
-	}, [])
+		fetchAccountData();
+	}, [token])
 
 	return (
 		<div>
