@@ -41,6 +41,57 @@ steps = [
         );
         """,
         """
+        INSERT INTO tech_stacks (name) VALUES
+            ('HTML'),
+            ('CSS'),
+            ('JavaScript'),
+            ('jQuery'),
+            ('Bootstrap'),
+            ('React'),
+            ('Angular'),
+            ('Vue.js'),
+            ('TypeScript'),
+            ('Swift'),
+            ('Kotlin'),
+            ('React Native'),
+            ('Flutter'),
+            ('Linux'),
+            ('Apache'),
+            ('MySQL'),
+            ('PHP'),
+            ('MongoDB'),
+            ('Express.js'),
+            ('Angular'),
+            ('Node.js'),
+            ('Ruby'),
+            ('Ruby on Rails'),
+            ('PostgreSQL'),
+            ('Django'),
+            ('Java'),
+            ('Spring Boot'),
+            ('Hibernate'),
+            ('C# '),
+            ('ASP.NET'),
+            ('Entity Framework'),
+            ('Ember.js'),
+            ('Backbone.js'),
+            ('Aurelia'),
+            ('Knockout.js'),
+            ('Flask'),
+            ('Sinatra'),
+            ('Play Framework'),
+            ('FastAPI'),
+            ('Nest.js'),
+            ('Phoenix'),
+            ('Meteor'),
+            ('Grails'),
+            ('Sails.js'),
+            ('LoopBack'),
+            ('Strapi'),
+            ('Prisma'),
+            ('Kubernetes'),
+        """
+        """
         DROP TABLE tech_stacks;
         """,
     ],
@@ -61,7 +112,7 @@ steps = [
         CREATE TABLE project_stacks (
             id SERIAL PRIMARY KEY NOT NULL,
             project_id INTEGER NOT NULL REFERENCES project("id") ON DELETE CASCADE,
-            tech_stacks_id INTEGER NOT NULL REFERENCES tech_stacks("id") ON DELETE CASCADE
+            tech_stacks_id VARCHAR(100) NOT NULL
         );
         """,
         """

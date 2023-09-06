@@ -1,99 +1,146 @@
 import { useState, useEffect } from "react";
-import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
 import jwtDecode from "jwt-decode";
 
-export default function ProjectForm() {
-    const {token} = useAuthContext();
-    const [project_name, setProjectName] = useState('')
-    const [project_picture, setProjectPicture] = useState('')
-    const [goal, setGoal] = useState('')
-    const [selectedTechStacks, setSelectedTechStacks] = useState([]);
-    const [tech_stacks, setTechStacks] = useState([])
-    const navigate = useNavigate()
+export default function ProjectForm()
+{
+  const { token } = useToken();
+  const [project_name, setProjectName] = useState('')
+  const [project_picture, setProjectPicture] = useState('')
+  const [goal, setGoal] = useState('')
+  const [selectedTechStacks, setSelectedTechStacks] = useState([]);
+  const [tech_stacks, setTechStacks] = useState([])
+  const navigate = useNavigate()
 
-    const decodedToken = jwtDecode(token)
+  const decodedToken = jwtDecode(token)
 
-    const owner_id = decodedToken.account.id
+  const owner_id = decodedToken.account.id
 
-    const handleProjectNameChange = (event) => {
-        const value = event.target.value
-        setProjectName(value)
+  console.log(selectedTechStacks)
+
+  const handleProjectNameChange = (event) =>
+  {
+    const value = event.target.value
+    setProjectName(value)
+  }
+
+  const handleProjectPictureChange = (event) =>
+  {
+    const value = event.target.value
+    setProjectPicture(value)
+  }
+
+  const handleGoalChange = (event) =>
+  {
+    const value = event.target.value
+    setGoal(value)
+  }
+
+  const handleTechStackChange = (selectedOptions) =>
+  {
+    const selectedTechStackValues = selectedOptions.map(option => option.value);
+    setSelectedTechStacks(selectedTechStackValues);
+    console.log(selectedTechStackValues)
+  };
+
+  const handleSubmit = async (event) =>
+  {
+    event.preventDefault()
+
+    const projectData = {}
+    projectData.project_name = project_name
+    projectData.project_picture = project_picture
+    projectData.goal = goal
+    projectData.owner_id = owner_id
+
+    const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects`
+    const fetchConfig = {
+      method: "post",
+      body: JSON.stringify(projectData),
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
     }
 
-    const handleProjectPictureChange = (event) => {
-        const value = event.target.value
-        setProjectPicture(value)
-    }
+    try
+    {
+      const projectResponse = await fetch(projectUrl, fetchConfig);
+      if (projectResponse.ok)
+      {
+        const newProject = await projectResponse.json();
+        console.log(newProject);
 
-    const handleGoalChange = (event) => {
-        const value = event.target.value
-        setGoal(value)
-    }
+        setProjectName("");
+        setProjectPicture("");
+        setGoal("");
 
-    const handleTechStackChange = (selectedOptions) => {
-        const selectedTechStackValues = selectedOptions.map(option => option.value);
-        setSelectedTechStacks(selectedTechStackValues);
-        console.log(selectedTechStackValues)
-    };
+        const projectStacksUrl = `${process.env.REACT_APP_API_HOST}/api/project-stacks`;
+        const projectStacksData = {
+          project_id: newProject.id,
+          tech_stacks_id: selectedTechStacks,
+        };
+        const projectStacksFetchConfig = {
+          method: "post",
+          body: JSON.stringify(projectStacksData),
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-
-        const projectData = {}
-        projectData.project_name = project_name
-        projectData.project_picture = project_picture
-        projectData.goal = goal
-        projectData.owner_id = owner_id
-
-        const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects`
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(projectData),
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
+        const projectStacksResponse = await fetch(projectStacksUrl, projectStacksFetchConfig);
+        if (projectStacksResponse.ok)
+        {
+          console.log("Tech stacks and project ID saved on the backend.");
+        } else
+        {
+          console.error("Failed to save tech stacks and project ID.");
         }
 
-        const projectResponse = await fetch(projectUrl, fetchConfig)
-        if (projectResponse.ok) {
-            const newProject = await projectResponse.json()
-            console.log(newProject)
+        event.target.reset();
+        navigate("/projects");
+      } else
+      {
+        console.error("Failed to create a new project.");
+      }
+    } catch (error)
+    {
+      console.error("Error:", error);
+    }
+  };
 
-            setProjectName('')
-            setProjectPicture('')
-            setGoal('')
-        }
-        event.target.reset()
-        navigate("/projects")
+  const fetchTechStackData = async () =>
+  {
+    const techStacksUrl = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`
+    const fetchConfig = {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     }
 
-    const fetchTechStackData = async () => {
-        const techStacksUrl = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`
-        const fetchConfig = {
-            headers: {
-            "Authorization": `Bearer ${token}`
-            }
-        }
+    try
+    {
+      const response = await fetch(techStacksUrl, fetchConfig)
+      if (response.ok)
+      {
+        const techStacksData = await response.json()
+        setTechStacks(techStacksData)
 
-        try {
-            const response = await fetch(techStacksUrl, fetchConfig)
-            if(response.ok){
-                const techStacksData = await response.json()
-                setTechStacks(techStacksData)
-
-                console.log("Tech Stacks:", techStacksData.map(tech_stack => tech_stack.name));
-            }
-        } catch (error){
-            console.error("Error fetching tech stacks:", error)
-        }
+        console.log("Tech Stacks:", techStacksData.map(tech_stack => tech_stack.name));
+      }
+    } catch (error)
+    {
+      console.error("Error fetching tech stacks:", error)
     }
+  }
 
-    useEffect(() => {
-        fetchTechStackData()
-    }, []);
+  useEffect(() =>
+  {
+    fetchTechStackData()
+  }, []);
   return (
     <>
 
@@ -173,16 +220,16 @@ export default function ProjectForm() {
                 </label>
               </div>
               <div className="mt-2">
-                  <Select
-                        isMulti
-                        name="tech_stacks"
-                        options={tech_stacks.map(tech_stack => ({
-                            value: tech_stack.name,
-                            label: tech_stack.name
-                        }))}
-                        onChange={handleTechStackChange}
-                        value={selectedTechStacks.map(value => ({ value, label: value }))}
-                    />
+                <Select
+                  isMulti
+                  name="tech_stacks"
+                  options={tech_stacks.map(tech_stack => ({
+                    value: tech_stack.name,
+                    label: tech_stack.name
+                  }))}
+                  onChange={handleTechStackChange}
+                  value={selectedTechStacks.map(value => ({ value, label: value }))}
+                />
               </div>
             </div>
 

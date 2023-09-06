@@ -14,7 +14,7 @@ export default function Login()
         e.preventDefault();
         login(username, password);
         e.target.reset();
-        navigate("/dashboard");
+        navigate("/projects/new");
     };
     return (
         <>
