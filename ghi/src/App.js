@@ -55,8 +55,6 @@ function App()
 				<Nav />
 				{/* <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}> */}
 				<Routes>
-					<Route path='/profile/:id/edit' element={<EditProfile />}></Route>
-					<Route path='/profile/:id' element={<Profile />}></Route>
 					<Route path='/' element={<LandingPage />}></Route>
 					<Route path='/dashboard' element={<Dashboard user={account} />}></Route>
 					<Route path='/signup' element={<SignupForm />}></Route>

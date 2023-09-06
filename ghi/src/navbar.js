@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import useToken, { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 
 function classNames(...classes)
@@ -12,8 +12,7 @@ function classNames(...classes)
 
 export default function Nav({ user })
 {
-	const { logout } = useToken();
-	const { token } = useAuthContext();
+	const { logout, token, fetchWithToken } = useToken();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { id } = useParams();
@@ -22,7 +21,7 @@ export default function Nav({ user })
 	const getUser = async () =>
 	{
 		const url = `http://localhost:8000/api/accounts/${id}`
-		const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
+		const response = await fetchWithToken(url);
 		if (response.ok)
 		{
 			const userData = await response.json();
