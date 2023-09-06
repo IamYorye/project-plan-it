@@ -63,7 +63,7 @@ function classNames(...classes)
 export default function MyProjects()
 {
     return (
-        <ul role="list" className="divide-y divide-gray-100">
+        <ul className="divide-y divide-gray-100">
             {projects.map((project) => (
                 <li key={project.id} className="flex items-center justify-between gap-x-6 py-5">
                     <div className="min-w-0">
@@ -78,15 +78,7 @@ export default function MyProjects()
                                 {project.status}
                             </p>
                         </div>
-                        <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-                            <p className="whitespace-nowrap">
-                                Due on <time dateTime={project.dueDateTime}>{project.dueDate}</time>
-                            </p>
-                            <svg viewBox="0 0 2 2" className="h-0.5 w-0.5 fill-current">
-                                <circle cx={1} cy={1} r={1} />
-                            </svg>
-                            <p className="truncate">Created by {project.createdBy}</p>
-                        </div>
+
                     </div>
                     <div className="flex flex-none items-center gap-x-4">
                         <a

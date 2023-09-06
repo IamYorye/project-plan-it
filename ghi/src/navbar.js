@@ -1,7 +1,8 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, useLocation } from 'react-router-dom';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 
 function classNames(...classes)
@@ -11,8 +12,25 @@ function classNames(...classes)
 
 export default function Nav()
 {
-
+	const { logout, token } = useToken();
 	const location = useLocation();
+	const navigate = useNavigate();
+	const [user, setUser] = useState({});
+
+	useEffect(() =>
+	{
+		if (token != null)
+		{
+			setUser(JSON.parse(atob(token.split(".")[1])).account);
+		} else
+		{
+			setUser(null);
+			navigate('/');
+		}
+	}, [token]);
+	console.log("user:", user)
+	console.log("token:", token)
+
 
 	if (location.pathname === "/login")
 	{
@@ -28,6 +46,7 @@ export default function Nav()
 	{
 		return null;
 	}
+
 
 	return (
 		<Disclosure as="nav" className="bg-gray-800">
@@ -45,7 +64,6 @@ export default function Nav()
 								</div>
 								<div className="hidden sm:ml-6 sm:block">
 									<div className="flex space-x-4">
-										{/* Use the "to" prop from react-router-dom's Link component */}
 										<Link
 											to="/dashboard"
 											className={`rounded-md px-3 py-2 text-sm font-medium ${location.pathname === '/dashboard' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
@@ -79,8 +97,6 @@ export default function Nav()
 							</div>
 							<div className="hidden sm:ml-6 sm:block">
 								<div className="flex items-center">
-
-									{/* Profile dropdown */}
 									<Menu as="div" className="relative ml-3">
 										<div>
 											<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -118,15 +134,19 @@ export default function Nav()
 												</Menu.Item>
 												<Menu.Item>
 													{({ active }) => (
-														<a
-															href="#"
+														<button
+															onClick={() =>
+															{
+																logout();
+																navigate('/');
+															}}
 															className={classNames(
 																active ? 'bg-gray-100' : '',
 																'block px-4 py-2 text-sm text-gray-700'
 															)}
 														>
 															Sign out
-														</a>
+														</button>
 													)}
 												</Menu.Item>
 											</Menu.Items>
@@ -135,7 +155,6 @@ export default function Nav()
 								</div>
 							</div>
 							<div className="-mr-2 flex sm:hidden">
-								{/* Mobile menu button */}
 								<Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
 									<span className="absolute -inset-0.5" />
 									<span className="sr-only">Open main menu</span>
@@ -151,34 +170,33 @@ export default function Nav()
 
 					<Disclosure.Panel className="sm:hidden">
 						<div className="space-y-1 px-2 pb-3 pt-2">
-							{/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
 							<Disclosure.Button
 								as="a"
-								href="#"
+								href="/dashboard"
 								className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
 							>
 								Dashboard
 							</Disclosure.Button>
 							<Disclosure.Button
 								as="a"
-								href="#"
+								href="/mentors"
 								className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
 							>
-								Team
+								Mentors
 							</Disclosure.Button>
 							<Disclosure.Button
 								as="a"
-								href="#"
+								href="/projects"
 								className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
 							>
 								Projects
 							</Disclosure.Button>
 							<Disclosure.Button
 								as="a"
-								href="#"
+								href="/projects/new"
 								className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
 							>
-								Calendar
+								Create Project
 							</Disclosure.Button>
 						</div>
 						<div className="border-t border-gray-700 pb-3 pt-4">
@@ -191,17 +209,9 @@ export default function Nav()
 									/>
 								</div>
 								<div className="ml-3">
-									<div className="text-base font-medium text-white">Tom Cook</div>
-									<div className="text-sm font-medium text-gray-400">tom@example.com</div>
+									<div className="text-base font-medium text-white">name</div>
+									<div className="text-sm font-medium text-gray-400">email</div>
 								</div>
-								<button
-									type="button"
-									className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-								>
-									<span className="absolute -inset-1.5" />
-									<span className="sr-only">View notifications</span>
-									<BellIcon className="h-6 w-6" aria-hidden="true" />
-								</button>
 							</div>
 							<div className="mt-3 space-y-1 px-2">
 								<Disclosure.Button
@@ -211,19 +221,22 @@ export default function Nav()
 								>
 									Your Profile
 								</Disclosure.Button>
-								<Disclosure.Button
-									as="a"
-									href="#"
-									className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-								>
-									Settings
-								</Disclosure.Button>
-								<Disclosure.Button
-									as="a"
-									href="#"
-									className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-								>
-									Sign out
+								<Disclosure.Button>
+									{({ active }) => (
+										<button
+											onClick={() =>
+											{
+												logout();
+												navigate('/');
+											}}
+											className={classNames(
+												active ? 'bg-gray-100' : '',
+												'block px-4 py-2 text-sm text-gray-700'
+											)}
+										>
+											Sign out
+										</button>
+									)}
 								</Disclosure.Button>
 							</div>
 						</div>

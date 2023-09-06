@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import JoinedProjects from "./JoinedProjects";
 import MyProjects from "./MyProjects";
+import useToken from '@galvanize-inc/jwtdown-for-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard()
 {
     const [selectedTab, setSelectedTab] = useState('myProjects');
+    const { token } = useToken;
+    const navigate = useNavigate();
 
     const handleTabClick = (tabKey) =>
     {
         setSelectedTab(tabKey);
     };
+
+    if (token == null)
+    {
+        return navigate
+    }
 
     return (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,7 +67,10 @@ export default function Dashboard()
                     </nav>
                 </div>
             </div>
-            {selectedTab === 'myProjects' ? <MyProjects /> : <JoinedProjects />}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                {selectedTab === 'myProjects' ? <MyProjects /> : <JoinedProjects />}
+            </div>
+
         </div>
     );
 }
