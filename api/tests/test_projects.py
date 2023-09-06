@@ -6,10 +6,12 @@ from pydantic import BaseModel
 
 client = TestClient(app)
 
+
 class EmptyProjectQueries:
     @staticmethod
     def get_all_projects():
         return []
+
 
 class UserOut(BaseModel):
     username: str
