@@ -6,11 +6,63 @@ At a minimum, you'll need to include the following information in each entry:
     At least one ah-ha! moment that you had during your coding, however small
     Keep your journal in reverse chronological order. Always put new entries at the top.
 
+## Tuesday September 5 - Tuesday September7, 2023
+
+Today, I worked on:
+
+- Navbar and Dashboard
+
+I finished the navbar and dashboard finally. The biggest hurdle was getting a filtered list to show only the projects that the logged-in user has joined; ultimately I ended up creating a new endpoint to grab all joined projects based on account_id.
+
+## August 30 - Sep 1 2023
+
+Out of class to deal with moving;
+
+## Tuesday - August 29, 2023
+
+Today, I worked on:
+
+- Navbar and Dashboard
+
+## Monday - August 28, 2023
+
+Today, I worked on:
+
+- Navbar and Dashboard
+
+## Friday - August 25, 2023
+
+Today, I worked on:
+
+- Individual Front-Ends
+
+We divvied up pages for the front-end to begin working on. I will be taking care of the NavBar and user dashboard (the homepage when logged in).
+
+## Thursday - August 24, 2023
+
+Today, I worked on:
+
+- Getting our first front-end page to work
+
+Since yesterday, we've been trying to debug a problem with a token not posting correctly when making an account. Finally fixed the errors from yesterday. We are now starting to work on the other front-end components. I will begin working on the Navbar component.
+
+After HOURS of troubleshooting... Jaspreet, Libby, and I decided that the issue we couldn't get around was the our front-end kept looking for 'username' field when we were wanting to only use 'email.' I ended up screen-sharing while adding a username field to all account-related data that needed it while they walked through it with me.
+
+## Wednesday - August 23, 2023
+
+Today, I worked on:
+
+- Our first front-end page
+
+We started working on our first front-end react page. We kept running into problems with token creation when making a new account.
+
+I also added a get_token endpoint to the backend and merged it into main after Libby approved it.
+
 ## Tuesday - August 22, 2023
 
 Today, I worked on:
 
-* Project_stacks endpoints
+- Project_stacks endpoints
 
 I started and finished the GET, GET (All), POST, PUT, and DELETE methods for the 'project_stacks' table endpoints.
 
@@ -18,7 +70,7 @@ I started and finished the GET, GET (All), POST, PUT, and DELETE methods for the
 
 Today, I worked on:
 
-* First Merge Request for Project POST/DELETE methods; Started project_stacks endpoints
+- First Merge Request for Project POST/DELETE methods; Started project_stacks endpoints
 
 I finished my endpoints for the Project POST and DELETE request methods then completed the merge request into main after it was reviewed. I also created a new branch 'project-stacks' to begin working on the endpoints (GET, GET, POST, PUT, DELETE) for the project-stacks table.
 
@@ -26,17 +78,17 @@ After pulling updated merged code from Main before prepping my own merge request
 
 ## Friday - August 18, 2023
 
-* No Class
+- No Class
 
 ## Thursday - August 17, 2023
 
-* Out of Class
+- Out of Class
 
 ## Wednesday - August 16, 2023
 
 Today, I worked on:
 
-* Project POST and DELETE Endpoints.
+- Project POST and DELETE Endpoints.
 
 I followed along with the FastAPI videos in the learn module to implement the POST request method for the project table. I also implemented/completed the DELETE request method for the project table.
 
@@ -46,7 +98,7 @@ I ran into an issue when trying to test my POST endpoint: the 'account' table do
 
 Today, I worked on:
 
-* Initial project setup & Starting Endpoint Features
+- Initial project setup & Starting Endpoint Features
 
 I completed the Docker-Compose YAML, Dockerfile.dev, and added the Psycopg line to requirements.txt to help figure out issues we were having with the docker containers. From there, we were able to successfully setup our project and database tables.
 

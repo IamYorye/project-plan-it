@@ -38,7 +38,6 @@ def delete_project(
 @router.get("/api/projects", response_model=List[ProjectOut])
 def get_all_projects(
     queries: ProjectQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return queries.get_all_projects()
 
