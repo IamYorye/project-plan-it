@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 
 
-export default function ProjectDetails()
-{
+export default function ProjectDetails() {
     const { token } = useToken()
     const { project_id } = useParams()
     const [project, setProject] = useState([])
@@ -18,8 +17,7 @@ export default function ProjectDetails()
     const accountLastName = decodedToken.account.last_name
     const accountEmail = decodedToken.account.email
 
-    const fetchProjectDetails = async () =>
-    {
+    const fetchProjectDetails = async () => {
         const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects/${project_id}`
         const fetchConfig = {
             headers: {
@@ -28,45 +26,37 @@ export default function ProjectDetails()
             }
         }
 
-        try
-        {
+        try {
             const response = await fetch(projectUrl, fetchConfig)
-            if (response.ok)
-            {
+            if (response.ok) {
                 const project = await response.json()
                 setProject(project)
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error("Error fetching project details:", error)
         }
     }
 
-    const fetchAccountData = async () =>
-    {
+    const fetchAccountData = async () => {
         const accountUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         }
-        try
-        {
+        try {
             const response = await fetch(accountUrl, fetchConfig)
-            if (response.ok)
-            {
+            if (response.ok) {
                 const data = await response.json()
                 setAccount(data)
 
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error("Error fetching account details:", error)
         }
     }
 
-    const handleJoinProject = async () =>
-    {
+    const handleJoinProject = async () => {
         const joinUrl = `${process.env.REACT_APP_API_HOST}/api/attendees`
         const data = {
             project_id: project_id,
@@ -82,34 +72,27 @@ export default function ProjectDetails()
             }
         }
 
-        try
-        {
+        try {
             const response = await fetch(joinUrl, fetchConfig)
-            if (response.ok)
-            {
+            if (response.ok) {
                 alert("You have successfully joined the project!")
-            } else
-            {
+            } else {
                 alert("Error joining the project.  Please try again later.")
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error("Error joining the project:", error)
             alert("An error occurred while attempting to join the project.")
         }
     }
 
-    useEffect(() =>
-    {
-        if (token)
-        {
+    useEffect(() => {
+        if (token) {
             fetchProjectDetails();
             fetchAccountData()
         }
     }, [token]);
 
-    if (!project)
-    {
+    if (!project) {
         return <div>Loading...</div>
     }
 

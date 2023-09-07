@@ -14,12 +14,10 @@ import EditProfile from "./Account/EditProfile";
 import Profile from "./Account/Profile";
 
 
-function App()
-{
+function App() {
 	const { token } = useToken();
 
-	if (token)
-	{
+	if (token) {
 
 
 		return (
@@ -42,8 +40,7 @@ function App()
 				</BrowserRouter>
 			</div>
 		);
-	} else
-	{
+	} else {
 		return (
 			<div>
 				<BrowserRouter>

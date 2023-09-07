@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
 import jwtDecode from "jwt-decode";
 
-export default function ProjectForm()
-{
+export default function ProjectForm() {
   const { token } = useToken();
   const [project_name, setProjectName] = useState('')
   const [project_picture, setProjectPicture] = useState('')
@@ -20,33 +19,28 @@ export default function ProjectForm()
 
   console.log(selectedTechStacks)
 
-  const handleProjectNameChange = (event) =>
-  {
+  const handleProjectNameChange = (event) => {
     const value = event.target.value
     setProjectName(value)
   }
 
-  const handleProjectPictureChange = (event) =>
-  {
+  const handleProjectPictureChange = (event) => {
     const value = event.target.value
     setProjectPicture(value)
   }
 
-  const handleGoalChange = (event) =>
-  {
+  const handleGoalChange = (event) => {
     const value = event.target.value
     setGoal(value)
   }
 
-  const handleTechStackChange = (selectedOptions) =>
-  {
+  const handleTechStackChange = (selectedOptions) => {
     const selectedTechStackValues = selectedOptions.map(option => option.value);
     setSelectedTechStacks(selectedTechStackValues);
     console.log(selectedTechStackValues)
   };
 
-  const handleSubmit = async (event) =>
-  {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     const projectData = {}
@@ -65,11 +59,9 @@ export default function ProjectForm()
       }
     }
 
-    try
-    {
+    try {
       const projectResponse = await fetch(projectUrl, fetchConfig);
-      if (projectResponse.ok)
-      {
+      if (projectResponse.ok) {
         const newProject = await projectResponse.json();
         console.log(newProject);
 
@@ -92,28 +84,23 @@ export default function ProjectForm()
         };
 
         const projectStacksResponse = await fetch(projectStacksUrl, projectStacksFetchConfig);
-        if (projectStacksResponse.ok)
-        {
+        if (projectStacksResponse.ok) {
           console.log("Tech stacks and project ID saved on the backend.");
-        } else
-        {
+        } else {
           console.error("Failed to save tech stacks and project ID.");
         }
 
         event.target.reset();
         navigate("/projects");
-      } else
-      {
+      } else {
         console.error("Failed to create a new project.");
       }
-    } catch (error)
-    {
+    } catch (error) {
       console.error("Error:", error);
     }
   };
 
-  const fetchTechStackData = async () =>
-  {
+  const fetchTechStackData = async () => {
     const techStacksUrl = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`
     const fetchConfig = {
       headers: {
@@ -121,26 +108,21 @@ export default function ProjectForm()
       }
     }
 
-    try
-    {
+    try {
       const response = await fetch(techStacksUrl, fetchConfig)
-      if (response.ok)
-      {
+      if (response.ok) {
         const techStacksData = await response.json()
         setTechStacks(techStacksData)
 
         console.log("Tech Stacks:", techStacksData.map(tech_stack => tech_stack.name));
       }
-    } catch (error)
-    {
+    } catch (error) {
       console.error("Error fetching tech stacks:", error)
     }
   }
 
-  useEffect(() =>
-  {
-    if (token)
-    {
+  useEffect(() => {
+    if (token) {
       fetchTechStackData()
     }
   }, [token]);
