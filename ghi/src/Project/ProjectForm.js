@@ -125,7 +125,7 @@ export default function ProjectForm() {
     if (token) {
       fetchTechStackData()
     }
-  }, [token]);
+  }, [token]); // eslint-disable-line
   return (
     <>
 

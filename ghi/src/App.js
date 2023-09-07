@@ -16,13 +16,15 @@ import Profile from "./Account/Profile";
 
 function App() {
 	const { token } = useToken();
+	const domain = /https:\/\/[^/]+/;
+	const basename = process.env.PUBLIC_URL.replace(domain, '');
 
 	if (token) {
 
 
 		return (
 			<div>
-				<BrowserRouter>
+				<BrowserRouter basename={basename}>
 					{/* <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}> */}
 					<Nav />
 					<Routes>
@@ -43,7 +45,7 @@ function App() {
 	} else {
 		return (
 			<div>
-				<BrowserRouter>
+				<BrowserRouter basename={basename}>
 					{/* <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}> */}
 					<Routes>
 						<Route path='/' element={<LandingPage />}></Route>

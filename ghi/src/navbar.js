@@ -1,18 +1,16 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import jwtDecode from 'jwt-decode';
 
 
-function classNames(...classes)
-{
+function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Nav()
-{
+export default function Nav() {
 	const { logout, token } = useToken();
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -20,12 +18,10 @@ export default function Nav()
 	const user = decodedToken.account;
 	console.log(user)
 
-	if (location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/')
-	{
+	if (location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/') {
 		return null;
 	}
-	if (token)
-	{
+	if (token) {
 		return (
 			<Disclosure as="nav" className="bg-gray-800">
 				{({ open }) => (
@@ -100,8 +96,7 @@ export default function Nav()
 													<Menu.Item>
 														{({ active }) => (
 															<button
-																onClick={() =>
-																{
+																onClick={() => {
 																	navigate(`/profile/${user.id}`);
 																}}
 																className={classNames(
@@ -116,8 +111,7 @@ export default function Nav()
 													<Menu.Item>
 														{({ active }) => (
 															<button
-																onClick={() =>
-																{
+																onClick={() => {
 																	logout();
 																	navigate('/');
 																}}
@@ -198,8 +192,7 @@ export default function Nav()
 									<Disclosure.Button>
 										{({ active }) => (
 											<button
-												onClick={() =>
-												{
+												onClick={() => {
 													navigate(`/profile/${user.id}`);
 												}}
 												className={classNames(
@@ -214,8 +207,7 @@ export default function Nav()
 									<Disclosure.Button>
 										{({ active }) => (
 											<button
-												onClick={() =>
-												{
+												onClick={() => {
 													logout();
 													navigate('/');
 												}}

@@ -1,6 +1,3 @@
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { NavLink } from 'react-router-dom'
 
 const statuses = {
@@ -8,13 +5,11 @@ const statuses = {
     false: 'text-gray-600 bg-gray-50 ring-gray-500/10',
 }
 
-function classNames(...classes)
-{
+function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function JoinedProjects({ accounts, attendees })
-{
+export default function JoinedProjects({ attendees }) {
 
     const joinedProjects = attendees;
 
