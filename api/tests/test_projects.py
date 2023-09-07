@@ -24,16 +24,13 @@ def fake_get_current_account_data():
 
 def test_get_all_projects():
 
-#ARRANGE
     app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_account_data
     app.dependency_overrides[ProjectQueries] = EmptyProjectQueries
 
-#ACT
     response = client.get("/api/projects")
 
     app.dependency_overrides = {}
 
-#ASSERT
     print(response.json())
     assert response.status_code == 200
     assert response.json() == []
