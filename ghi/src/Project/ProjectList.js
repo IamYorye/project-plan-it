@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { Link } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 
 export default function ProjectList() {
 
     const { token } = useToken();
     const [project_name, setProjectName] = useState("");
     const [projects, setProjects] = useState([]);
-    const [account, setAccount] = useState([])
 
 
     const handleProjectNameChange = (event) => {
@@ -34,27 +32,6 @@ export default function ProjectList() {
         }
     };
 
-    const fetchAccountData = async () => {
-        const accountUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`
-        const fetchConfig = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }
-        try {
-            const response = await fetch(accountUrl, fetchConfig)
-            if (response.ok) {
-                const data = await response.json()
-                setAccount(data)
-
-                const decodedToken = jwtDecode(token)
-                console.log(decodedToken)
-            }
-        } catch (error) {
-            console.error("Error fetching account details:", error)
-        }
-    }
-
 
     const handleFilterSubmit = (event) => {
         event.preventDefault();
@@ -71,7 +48,6 @@ export default function ProjectList() {
     useEffect(() => {
         if (token) {
             fetchProjectData();
-            fetchAccountData();
         }
     }, [token]);
 

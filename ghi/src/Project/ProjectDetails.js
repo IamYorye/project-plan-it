@@ -8,7 +8,6 @@ export default function ProjectDetails() {
     const { token } = useToken()
     const { project_id } = useParams()
     const [project, setProject] = useState([])
-    const [account, setAccount] = useState([])
 
     const decodedToken = jwtDecode(token)
 
@@ -34,25 +33,6 @@ export default function ProjectDetails() {
             }
         } catch (error) {
             console.error("Error fetching project details:", error)
-        }
-    }
-
-    const fetchAccountData = async () => {
-        const accountUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`
-        const fetchConfig = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }
-        try {
-            const response = await fetch(accountUrl, fetchConfig)
-            if (response.ok) {
-                const data = await response.json()
-                setAccount(data)
-
-            }
-        } catch (error) {
-            console.error("Error fetching account details:", error)
         }
     }
 
@@ -88,7 +68,6 @@ export default function ProjectDetails() {
     useEffect(() => {
         if (token) {
             fetchProjectDetails();
-            fetchAccountData()
         }
     }, [token]);
 

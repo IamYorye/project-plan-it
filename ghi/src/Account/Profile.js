@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAuthContext } from '@galvanize-inc/jwtdown-for-react';
 function Profile() {
     const { id } = useParams();
@@ -10,12 +10,11 @@ function Profile() {
     const [years, setYears] = useState('');
     const [education, setEducation] = useState('');
     const [isMentor, setIsMentor] = useState(false);
-    const [userStacks, setUserStacks] = useState([]);
 
 
     const fetchData = async () => {
         const url = `http://localhost:8000/api/accounts/${id}`;
-        const response = await fetch(url, { headers: {'Authorization': `Bearer ${token}`}});
+        const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
         if (response.ok) {
             const data = await response.json();
             console.log(data);
@@ -35,11 +34,11 @@ function Profile() {
 
     return (
         <>
-        {firstName} {lastName}
-        <img src={picture} />
-        <p>years of experience: {years}</p>
-        <p>education: {education}</p>
-        <p>{isMentor && ('mentor')}</p>
+            {firstName} {lastName}
+            <img src={picture} />
+            <p>years of experience: {years}</p>
+            <p>education: {education}</p>
+            <p>{isMentor && ('mentor')}</p>
         </>
     )
 }
