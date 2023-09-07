@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import JoinedProjects from "./JoinedProjects";
 import MyProjects from "./MyProjects";
 import useToken from '@galvanize-inc/jwtdown-for-react';
-import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
 export default function Dashboard() {

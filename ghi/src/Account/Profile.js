@@ -35,7 +35,7 @@ function Profile() {
     return (
         <>
             {firstName} {lastName}
-            <img src={picture} />
+            <img alt="" src={picture} />
             <p>years of experience: {years}</p>
             <p>education: {education}</p>
             <p>{isMentor && ('mentor')}</p>

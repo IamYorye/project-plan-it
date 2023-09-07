@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
@@ -99,7 +99,7 @@ function LandingPage() {
           <h2>Empowering Coders: Where Collaboration Ignites Brilliance!</h2>
           <div className="features-grid">
             <div className="grid-item">
-              <img src={require("./media/lightbulb.png")} className="icon" />
+              <img alt="" src={require("./media/lightbulb.png")} className="icon" />
               <h3>Ideas</h3>
               <p>
                 Ignite innovation in our creative hub! Share and refine coding
@@ -110,7 +110,7 @@ function LandingPage() {
             </div>
 
             <div className="grid-item">
-              <img src={require("./media/gears.png")} className="icon" />
+              <img alt="" src={require("./media/gears.png")} className="icon" />
               <h3>Create</h3>
               <p>
                 Transform ideas into reality with our intuitive project creation
@@ -120,7 +120,7 @@ function LandingPage() {
               </p>
             </div>
             <div className="grid-item">
-              <img src={require("./media/group.png")} className="icon" />
+              <img alt="" src={require("./media/group.png")} className="icon" />
               <h3>Collaborate</h3>
               <p>
                 Join forces with a community of passionate coders. Find mentors,
@@ -130,7 +130,7 @@ function LandingPage() {
               </p>
             </div>
             <div className="grid-item">
-              <img src={require("./media/publish.png")} className="icon" />
+              <img alt="" src={require("./media/publish.png")} className="icon" />
               <h3>Publish</h3>
               <p>
                 It's time to unveil your masterpiece to the world. With a few
@@ -152,60 +152,70 @@ function LandingPage() {
             <div className="icon-grid">
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/pythonlogo.png")}
                   className="logo-icon"
                 />
               </div>
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/reactlogo.png")}
                   className="logo-icon"
                 />
               </div>
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/jslogo.png")}
                   className="logo-icon"
                 />
               </div>
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/html5logo.png")}
                   className="logo-icon"
                 />
               </div>
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/csslogo.png")}
                   className="logo-icon"
                 />
               </div>
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/nodejs.png")}
                   className="logo-icon"
                 />
               </div>
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/npmlogo.png")}
                   className="logo-icon"
                 />
               </div>
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/sqllogo.png")}
                   className="logo-icon"
                 />
               </div>
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/tslogo.png")}
                   className="logo-icon"
                 />
               </div>
               <div className="grid-item">
                 <img
+                  alt=""
                   src={require("./media/vsclogo.png")}
                   className="logo-icon"
                 />

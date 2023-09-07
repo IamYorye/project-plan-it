@@ -9,19 +9,15 @@ const statuses = {
     false: 'text-gray-600 bg-gray-50 ring-gray-500/10',
 }
 
-function classNames(...classes)
-{
+function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function MyProjects({ projects, user })
-{
+export default function MyProjects({ projects, user }) {
     const { token } = useToken();
 
-    const handleDelete = async (projectsId) =>
-    {
-        try
-        {
+    const handleDelete = async (projectsId) => {
+        try {
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/projects/${projectsId}`, {
                 method: "DELETE",
                 headers: {
@@ -30,12 +26,10 @@ export default function MyProjects({ projects, user })
                 },
             });
             console.log(response)
-            if (!response.ok)
-            {
+            if (!response.ok) {
                 console.error('Error deleting hat:', response.status);
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error('Network Error', error);
         }
     }
@@ -88,10 +82,10 @@ export default function MyProjects({ projects, user })
                                 leaveTo="transform opacity-0 scale-95"
                             >
                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                                    <Menu.Item>
+                                    {/* <Menu.Item>
                                         {({ active }) => (
                                             <a
-                                                href="#"
+                                                href=""
                                                 className={classNames(
                                                     active ? 'bg-gray-50' : '',
                                                     'block px-3 py-1 text-sm leading-6 text-gray-900'
@@ -100,12 +94,11 @@ export default function MyProjects({ projects, user })
                                                 Edit<span className="sr-only">, {project.project_name}</span>
                                             </a>
                                         )}
-                                    </Menu.Item>
+                                    </Menu.Item> */}
                                     <Menu.Item>
                                         {({ active }) => (
                                             <button
-                                                onClick={() =>
-                                                {
+                                                onClick={() => {
                                                     handleDelete(project.id);
                                                 }}
                                                 className={classNames(
