@@ -41,23 +41,24 @@ function Carousel({ projects }) {
   const [showRightArrow, setShowRightArrow] = useState(true);
 
   useEffect(() => {
+    const currentRef = contentRef.current
     const handleScroll = () => {
-      if (contentRef.current) {
+      if (currentRef) {
         const maxScrollLeft =
-          contentRef.current.scrollWidth - contentRef.current.clientWidth;
-        setShowLeftArrow(contentRef.current.scrollLeft > 0);
-        setShowRightArrow(contentRef.current.scrollLeft < maxScrollLeft);
+          currentRef.scrollWidth - currentRef.clientWidth;
+        setShowLeftArrow(currentRef.scrollLeft > 0);
+        setShowRightArrow(currentRef.scrollLeft < maxScrollLeft);
       }
     };
 
-    if (contentRef.current) {
-      contentRef.current.addEventListener("scroll", handleScroll);
+    if (currentRef) {
+      currentRef.addEventListener("scroll", handleScroll);
       handleScroll(); // Call once to set the initial states
     }
 
     return () => {
-      if (contentRef.current) {
-        contentRef.current.removeEventListener("scroll", handleScroll);
+      if (currentRef) {
+        currentRef.removeEventListener("scroll", handleScroll);
       }
     };
   }, []);
