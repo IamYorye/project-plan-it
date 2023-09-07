@@ -32,7 +32,32 @@ export default function ProjectList() {
         }
     };
 
+<<<<<<< HEAD
 
+=======
+    const fetchAccountData = async () => {
+        const accountUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`
+        const fetchConfig = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+        try {
+            const response = await fetch(accountUrl, fetchConfig)
+            if (response.ok) {
+                const data = await response.json()
+                setAccount(data)
+
+                const decodedToken = jwtDecode(token)
+                console.log(decodedToken)
+            }
+        } catch (error) {
+            console.error("Error fetching account details:", error)
+        }
+    }
+
+
+>>>>>>> 8d52012336ddae7cd835dfaa0bf7c2ded8e5293e
     const handleFilterSubmit = (event) => {
         event.preventDefault();
         if (project_name) {
