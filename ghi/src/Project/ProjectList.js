@@ -3,7 +3,8 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
-export default function ProjectList() {
+export default function ProjectList()
+{
 
     const { token } = useToken();
     const [project_name, setProjectName] = useState("");
@@ -11,65 +12,88 @@ export default function ProjectList() {
     const [account, setAccount] = useState([])
 
 
-    const handleProjectNameChange = (event) => {
+    const handleProjectNameChange = (event) =>
+    {
         const value = event.target.value;
         setProjectName(value);
     };
 
-    const fetchProjectData = async () => {
+    const fetchProjectData = async () =>
+    {
         const projectsUrl = `${process.env.REACT_APP_API_HOST}/api/projects`;
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
         };
-        try {
+        try
+        {
             const response = await fetch(projectsUrl, fetchConfig);
-            if (response.ok) {
+            if (response.ok)
+            {
                 const data = await response.json();
                 setProjects(data);
             }
-        } catch (error) {
+        } catch (error)
+        {
             console.error("Error fetching projects:", error);
         }
     };
 
-    const fetchAccountData = async () => {
+    const fetchAccountData = async () =>
+    {
         const accountUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         }
-        try {
+        try
+        {
             const response = await fetch(accountUrl, fetchConfig)
+<<<<<<< HEAD
             if (response.ok) {
+=======
+            if (response.ok)
+            {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
                 const data = await response.json()
                 setAccount(data)
 
                 const decodedToken = jwtDecode(token)
                 console.log(decodedToken)
             }
-        } catch (error) {
+        } catch (error)
+        {
             console.error("Error fetching account details:", error)
         }
     }
 
 
-    const handleFilterSubmit = (event) => {
+    const handleFilterSubmit = (event) =>
+    {
         event.preventDefault();
-        if (project_name) {
+        if (project_name)
+        {
             const filteredProjects = projects.filter(
                 (project) => project.project_name === project_name
             );
             setProjects(filteredProjects);
-        } else {
+        } else
+        {
             fetchProjectData();
         }
     };
 
+<<<<<<< HEAD
     useEffect(() => {
         if (token) {
+=======
+    useEffect(() =>
+    {
+        if (token)
+        {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
             fetchProjectData();
             fetchAccountData();
         }

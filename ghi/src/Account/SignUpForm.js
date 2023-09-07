@@ -129,7 +129,12 @@ export default function SignupForm() {
                   type="text"
                   autoComplete="picture"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+<<<<<<< HEAD
                   onChange={(e) => {
+=======
+                  onChange={(e) =>
+                  {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
                     setPicture(e.target.value);
                   }}
                 />

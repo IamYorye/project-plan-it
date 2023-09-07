@@ -4,7 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
 import jwtDecode from "jwt-decode";
 
+<<<<<<< HEAD
 export default function ProjectForm() {
+=======
+export default function ProjectForm()
+{
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
   const { token } = useToken();
   const [project_name, setProjectName] = useState('')
   const [project_picture, setProjectPicture] = useState('')
@@ -19,28 +24,53 @@ export default function ProjectForm() {
 
   console.log(selectedTechStacks)
 
+<<<<<<< HEAD
   const handleProjectNameChange = (event) => {
+=======
+  const handleProjectNameChange = (event) =>
+  {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
     const value = event.target.value
     setProjectName(value)
   }
 
+<<<<<<< HEAD
   const handleProjectPictureChange = (event) => {
+=======
+  const handleProjectPictureChange = (event) =>
+  {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
     const value = event.target.value
     setProjectPicture(value)
   }
 
+<<<<<<< HEAD
   const handleGoalChange = (event) => {
+=======
+  const handleGoalChange = (event) =>
+  {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
     const value = event.target.value
     setGoal(value)
   }
 
+<<<<<<< HEAD
   const handleTechStackChange = (selectedOptions) => {
+=======
+  const handleTechStackChange = (selectedOptions) =>
+  {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
     const selectedTechStackValues = selectedOptions.map(option => option.value);
     setSelectedTechStacks(selectedTechStackValues);
     console.log(selectedTechStackValues)
   };
 
+<<<<<<< HEAD
   const handleSubmit = async (event) => {
+=======
+  const handleSubmit = async (event) =>
+  {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
     event.preventDefault()
 
     const projectData = {}
@@ -59,9 +89,17 @@ export default function ProjectForm() {
       }
     }
 
+<<<<<<< HEAD
     try {
       const projectResponse = await fetch(projectUrl, fetchConfig);
       if (projectResponse.ok) {
+=======
+    try
+    {
+      const projectResponse = await fetch(projectUrl, fetchConfig);
+      if (projectResponse.ok)
+      {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
         const newProject = await projectResponse.json();
         console.log(newProject);
 
@@ -84,23 +122,45 @@ export default function ProjectForm() {
         };
 
         const projectStacksResponse = await fetch(projectStacksUrl, projectStacksFetchConfig);
+<<<<<<< HEAD
         if (projectStacksResponse.ok) {
           console.log("Tech stacks and project ID saved on the backend.");
         } else {
+=======
+        if (projectStacksResponse.ok)
+        {
+          console.log("Tech stacks and project ID saved on the backend.");
+        } else
+        {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
           console.error("Failed to save tech stacks and project ID.");
         }
 
         event.target.reset();
         navigate("/projects");
+<<<<<<< HEAD
       } else {
         console.error("Failed to create a new project.");
       }
     } catch (error) {
+=======
+      } else
+      {
+        console.error("Failed to create a new project.");
+      }
+    } catch (error)
+    {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
       console.error("Error:", error);
     }
   };
 
+<<<<<<< HEAD
   const fetchTechStackData = async () => {
+=======
+  const fetchTechStackData = async () =>
+  {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
     const techStacksUrl = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`
     const fetchConfig = {
       headers: {
@@ -108,21 +168,41 @@ export default function ProjectForm() {
       }
     }
 
+<<<<<<< HEAD
     try {
       const response = await fetch(techStacksUrl, fetchConfig)
       if (response.ok) {
+=======
+    try
+    {
+      const response = await fetch(techStacksUrl, fetchConfig)
+      if (response.ok)
+      {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
         const techStacksData = await response.json()
         setTechStacks(techStacksData)
 
         console.log("Tech Stacks:", techStacksData.map(tech_stack => tech_stack.name));
       }
+<<<<<<< HEAD
     } catch (error) {
+=======
+    } catch (error)
+    {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
       console.error("Error fetching tech stacks:", error)
     }
   }
 
+<<<<<<< HEAD
   useEffect(() => {
     if (token) {
+=======
+  useEffect(() =>
+  {
+    if (token)
+    {
+>>>>>>> 59e6449b4c46d889fc1c8aed79b41ba6bcd7462d
       fetchTechStackData()
     }
   }, [token]);
@@ -131,11 +211,6 @@ export default function ProjectForm() {
 
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
-            src={process.env.PUBLIC_URL + "/project_logo.png"}
-            alt="Your Company"
-          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Create a new Project
           </h2>
