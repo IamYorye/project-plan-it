@@ -98,7 +98,7 @@ steps = [
         CREATE TABLE user_stacks (
             id SERIAL PRIMARY KEY NOT NULL,
             account_id INTEGER NOT NULL REFERENCES account("id") ON DELETE CASCADE,
-            tech_stack_id INTEGER NOT NULL REFERENCES tech_stacks("id") ON DELETE CASCADE
+            tech_stack_id VARCHAR(100) NOT NULL
         );
         """,
         """

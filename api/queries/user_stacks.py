@@ -13,12 +13,17 @@ class Error(BaseModel):
 class UserStackOut(BaseModel):
     id: int
     account_id: int
-    tech_stack_id: int  # Adjusted the name for consistency
+    tech_stack_id: List[str]
+
+
+class SingleUserStackOut(UserStackOut):
+    tech_stack_name: str
+    username: str
 
 
 class UserStackIn(BaseModel):
     account_id: int
-    tech_stack_id: int  # Adjusted the name for consistency
+    tech_stack_id: List[str]
 
 
 class UserStackRepository:
@@ -30,7 +35,7 @@ class UserStackRepository:
         return UserStackOut(
             id=record[0],
             account_id=record[1],
-            tech_stack_id=record[2],  # Adjusted the name for consistency
+            tech_stack_id=record[2],
         )
 
     def create_user_stack(self, user_stack: UserStackIn) -> UserStackOut:
@@ -76,6 +81,36 @@ class UserStackRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get all user stacks"}
+
+    def list_user_stacks(
+        self, account_id: int
+    ) -> Union[Error, List[SingleUserStackOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT us.id, us.account_id, us.tech_stack_id, ts.name, a.username
+                        FROM user_stacks as us
+                        INNER JOIN tech_stacks as ts ON ts.id = us.tech_stack_id
+                        INNER JOIN account as a ON a.id = us.account_id
+                        WHERE us.account_id = %s
+                        """,
+                        [account_id],
+                    )
+                    return [
+                        SingleUserStackOut(
+                            id=record[0],
+                            account_id=record[1],
+                            tech_stack_id=record[2],
+                            tech_stack_name=record[3],
+                            username=record[4],
+                        )
+                        for record in db.fetchall()
+                    ]
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get user's tech stacks"}
 
     def get_user_stack(
         self, user_stack_id: int
