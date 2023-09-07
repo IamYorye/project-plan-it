@@ -102,7 +102,7 @@ export default function Nav()
 															<button
 																onClick={() =>
 																{
-																	navigate(`api/accounts/${user.id}`);
+																	navigate(`/profile/${user.id}`);
 																}}
 																className={classNames(
 																	active ? 'bg-gray-100' : '',
@@ -200,7 +200,7 @@ export default function Nav()
 											<button
 												onClick={() =>
 												{
-													navigate('api/accounts/');
+													navigate(`/profile/${user.id}`);
 												}}
 												className={classNames(
 													active ? 'bg-gray-100' : '',
