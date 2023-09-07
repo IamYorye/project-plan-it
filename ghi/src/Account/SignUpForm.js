@@ -9,6 +9,7 @@ export default function SignupForm()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [picture, setPicture] = useState("");
   const { register } = useToken();
   const navigate = useNavigate();
 
@@ -20,11 +21,12 @@ export default function SignupForm()
       last_name: last_name,
       username: username,
       email: email,
+      picture: picture,
       password: password,
     };
     register(accountData, `${process.env.REACT_APP_API_HOST}/api/accounts`);
     e.target.reset();
-    navigate("/projects/new");
+    navigate("/dashboard");
   };
 
   return (
@@ -122,7 +124,25 @@ export default function SignupForm()
               </div>
             </div>
 
-
+            <div>
+              <label htmlFor="picture" className="block text-sm font-medium leading-6 text-gray-900">
+                Profile Picture
+              </label>
+              <div className="mt-2">
+                <input
+                  id="picture"
+                  name="picture"
+                  type="text"
+                  autoComplete="picture"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={(e) =>
+                  {
+                    setPicture(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
 
             <div>
               <div className="flex items-center justify-between">
