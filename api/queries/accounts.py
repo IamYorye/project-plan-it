@@ -34,6 +34,17 @@ class AccountIn(BaseModel):
     is_mentor: bool = False
 
 
+class AccountInNoPassword(BaseModel):
+    username: str
+    email: str
+    first_name: str
+    last_name: str
+    years_of_experience: Optional[int]
+    education: Optional[str]
+    picture: Optional[str]
+    is_mentor: bool = False
+
+
 class AccountRepository:
     def get_all_accounts(self) -> Union[Error, List[AccountOut]]:
         try:
@@ -121,7 +132,7 @@ class AccountRepository:
             return False
 
     def update_account(
-        self, account_id: int, account: AccountIn
+        self, account_id: int, account: AccountInNoPassword
     ) -> Union[AccountOut, Error]:
         try:
             with pool.connection() as conn:
@@ -133,7 +144,6 @@ class AccountRepository:
                             , last_name = %s
                             , email = %s
                             , username = %s
-                            , password = %s
                             , years_of_experience = %s
                             , education = %s
                             , picture = %s
@@ -145,7 +155,6 @@ class AccountRepository:
                             account.last_name,
                             account.email,
                             account.username,
-                            account.password,
                             account.years_of_experience,
                             account.education,
                             account.picture,
