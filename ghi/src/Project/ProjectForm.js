@@ -139,9 +139,11 @@ export default function ProjectForm()
 
   useEffect(() =>
   {
-    fetchTechStackData()
+    if (token)
+    {
+      fetchTechStackData()
+    }
   }, [token]);
-
   return (
     <>
 

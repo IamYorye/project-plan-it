@@ -101,9 +101,12 @@ export default function ProjectDetails()
 
     useEffect(() =>
     {
-        fetchProjectDetails();
-        fetchAccountData()
-    }, []);
+        if (token)
+        {
+            fetchProjectDetails();
+            fetchAccountData()
+        }
+    }, [token]);
 
     if (!project)
     {

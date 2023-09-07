@@ -4,6 +4,7 @@ from queries.user_stacks import (
     UserStackIn,
     UserStackOut,
     UserStackRepository,
+    SingleUserStackOut,
     Error,
 )
 from typing import Union, List, Optional
@@ -30,6 +31,18 @@ def get_user_stacks(
 ):
     user_stacks = repo.get_user_stacks()
     return user_stacks
+
+
+@router.get(
+    "/api/user-stacks/{account_id}",
+    response_model=List[SingleUserStackOut],
+)
+def list_user_stacks(
+    account_id: int,
+    repo: UserStackRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return repo.list_user_stacks(account_id)
 
 
 @router.get(

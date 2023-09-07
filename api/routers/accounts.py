@@ -13,6 +13,7 @@ from queries.accounts import (
     AccountRepository,
     Error,
     DuplicateAccountError,
+    AccountInNoPassword,
 )
 from jwt_down import Token
 from pydantic import BaseModel
@@ -35,7 +36,7 @@ def get_all_accounts(
 )
 def update_account(
     account_id: int,
-    account: AccountIn,
+    account: AccountInNoPassword,
     repo: AccountRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, AccountOut]:

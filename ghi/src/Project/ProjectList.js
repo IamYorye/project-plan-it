@@ -83,9 +83,12 @@ export default function ProjectList()
 
     useEffect(() =>
     {
-        fetchProjectData();
-        fetchAccountData();
-    }, []);
+        if (token)
+        {
+            fetchProjectData();
+            fetchAccountData();
+        }
+    }, [token]);
 
     return (
         <div>

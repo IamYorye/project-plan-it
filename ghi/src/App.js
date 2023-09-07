@@ -10,6 +10,8 @@ import React from "react";
 import LandingPage from "./Landingpage/LandingPage";
 import Nav from "./navbar";
 import Dashboard from "./Dashboard/Dashboard";
+import EditProfile from "./Account/EditProfile";
+import Profile from "./Account/Profile";
 
 
 function App()
@@ -29,6 +31,9 @@ function App()
 						<Route path='/dashboard' element={<Dashboard />}></Route>
 						<Route path='/signup' element={<SignupForm />}></Route>
 						<Route path='/login' element={<LoginForm />}></Route>
+						<Route path='/' element={<LandingPage />}></Route>
+						<Route path='/profile/edit' element={<EditProfile />}></Route>
+						<Route path='/profile/:id' element={<Profile />}></Route>
 						<Route path="/projects/new" element={<ProjectForm />}></Route>
 						<Route path="/projects" element={<ProjectList />}></Route>
 						<Route path="/project-details/:project_id/" element={<ProjectDetails />}></Route>
