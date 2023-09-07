@@ -39,8 +39,6 @@ steps = [
             id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(100) NOT NULL
         );
-        """,
-        """
         INSERT INTO tech_stacks VALUES
             (1, 'HTML'),
             (2, 'CSS'),
@@ -89,8 +87,8 @@ steps = [
             (45, 'LoopBack'),
             (46, 'Strapi'),
             (47, 'Prisma'),
-            (48, 'Kubernetes'),
-        """
+            (48, 'Kubernetes')
+        """,
         """
         DROP TABLE tech_stacks;
         """,
