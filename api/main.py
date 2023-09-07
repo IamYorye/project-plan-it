@@ -23,7 +23,7 @@ app.include_router(user_stacks.router)
 origins = [
     os.environ.get("CORS_HOST"),
     "http://localhost:3000",
-    "https://planiteers.gitlab.io/project-plan-it/",
+    "https://planiteers.gitlab.io",
 ]
 
 
