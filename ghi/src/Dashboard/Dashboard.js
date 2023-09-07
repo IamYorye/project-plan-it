@@ -5,8 +5,7 @@ import useToken from '@galvanize-inc/jwtdown-for-react';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
-export default function Dashboard()
-{
+export default function Dashboard() {
     const [selectedTab, setSelectedTab] = useState('myProjects');
     const [projects, setProjects] = useState([]);
     const [attendees, setAttendees] = useState([]);
@@ -15,84 +14,70 @@ export default function Dashboard()
     const decodedToken = jwtDecode(token);
     const user = decodedToken.account;
 
-    const handleTabClick = (tabKey) =>
-    {
+    const handleTabClick = (tabKey) => {
         setSelectedTab(tabKey);
     };
 
-    const fetchAccountsData = async () =>
-    {
+    const fetchAccountsData = async () => {
         const accountsUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`;
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
         };
-        try
-        {
+        try {
             const response = await fetch(accountsUrl, fetchConfig);
-            if (response.ok)
-            {
+            if (response.ok) {
                 const data = await response.json();
                 setAccounts(data);
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error("Error fetching projects:", error);
         }
     };
     console.log(accounts)
 
-    const fetchProjectData = async () =>
-    {
+    const fetchProjectData = async () => {
         const projectsUrl = `${process.env.REACT_APP_API_HOST}/api/projects`;
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
         };
-        try
-        {
+        try {
             const response = await fetch(projectsUrl, fetchConfig);
-            if (response.ok)
-            {
+            if (response.ok) {
                 const data = await response.json();
                 setProjects(data);
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error("Error fetching projects:", error);
         }
     };
 
-    const fetchAttendeeData = async () =>
-    {
+    const fetchAttendeeData = async () => {
         const attendeesUrl = `${process.env.REACT_APP_API_HOST}/api/attendees/account/${user.id}`;
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
         };
-        try
-        {
+        try {
             const response = await fetch(attendeesUrl, fetchConfig);
-            if (response.ok)
-            {
+            if (response.ok) {
                 const data = await response.json();
                 setAttendees(data);
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error("Error fetching projects:", error);
         }
     };
 
-    useEffect(() =>
-    {
+    useEffect(() => {
         fetchAccountsData();
         fetchProjectData();
         fetchAttendeeData();
-    }, [])
+    }, []) // eslint-disable-line
 
 
     return (

@@ -30,7 +30,7 @@ function Profile() {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, []); // eslint-disable-line
 
     return (
         <>
