@@ -18,6 +18,15 @@ class ProjectAttendeeOut(BaseModel):
     username: str
 
 
+class AttendeeProjectOut(BaseModel):
+    id: int
+    project_name: str
+    project_picture: str
+    goal: str
+    is_completed: str
+    owner_id: int
+
+
 class AttendeeIn(BaseModel):
     project_id: int
     account_id: int
@@ -105,6 +114,39 @@ class AttendeeRepo:
                             last_name=record[2],
                             email=record[3],
                             username=record[4],
+                        )
+                        for record in db.fetchall()
+                    ]
+        except ValidationError as e:
+            print(e)
+            return {"message": "Could not get attendees"}
+
+    def get_all_attendees_projects(
+        self, account_id: int
+    ) -> Union[Error, List[AttendeeProjectOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT project.id, project.project_name, project.project_picture, project.goal, project.is_completed, project.owner_id
+                        FROM project
+                        INNER JOIN attendees
+                        ON project.id = attendees.project_id
+                        INNER JOIN account
+                        ON account.id = attendees.account_id
+                        WHERE account.id = %s
+                        """,
+                        [account_id],
+                    )
+                    return [
+                        AttendeeProjectOut(
+                            id=record[0],
+                            project_name=record[1],
+                            project_picture=record[2],
+                            goal=record[3],
+                            is_completed=record[4],
+                            owner_id=record[5],
                         )
                         for record in db.fetchall()
                     ]

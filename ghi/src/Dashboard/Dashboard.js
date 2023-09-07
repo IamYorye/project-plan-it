@@ -10,6 +10,7 @@ export default function Dashboard()
     const [selectedTab, setSelectedTab] = useState('myProjects');
     const [projects, setProjects] = useState([]);
     const [attendees, setAttendees] = useState([]);
+    const [accounts, setAccounts] = useState([]);
     const { token } = useToken();
     const decodedToken = jwtDecode(token);
     const user = decodedToken.account;
@@ -18,6 +19,29 @@ export default function Dashboard()
     {
         setSelectedTab(tabKey);
     };
+
+    const fetchAccountsData = async () =>
+    {
+        const accountsUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`;
+        const fetchConfig = {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        };
+        try
+        {
+            const response = await fetch(accountsUrl, fetchConfig);
+            if (response.ok)
+            {
+                const data = await response.json();
+                setAccounts(data);
+            }
+        } catch (error)
+        {
+            console.error("Error fetching projects:", error);
+        }
+    };
+    console.log(accounts)
 
     const fetchProjectData = async () =>
     {
@@ -43,7 +67,7 @@ export default function Dashboard()
 
     const fetchAttendeeData = async () =>
     {
-        const attendeesUrl = `${process.env.REACT_APP_API_HOST}/api/attendees/`;
+        const attendeesUrl = `${process.env.REACT_APP_API_HOST}/api/attendees/account/${user.id}`;
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -65,6 +89,7 @@ export default function Dashboard()
 
     useEffect(() =>
     {
+        fetchAccountsData();
         fetchProjectData();
         fetchAttendeeData();
     }, [])
@@ -118,7 +143,7 @@ export default function Dashboard()
                 </div>
             </div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                {selectedTab === 'myProjects' ? <MyProjects projects={projects} user={user} /> : <JoinedProjects projects={projects} user={user} attendees={attendees} />}
+                {selectedTab === 'myProjects' ? <MyProjects projects={projects} user={user} accounts={accounts} /> : <JoinedProjects accounts={accounts} attendees={attendees} />}
             </div>
 
         </div>

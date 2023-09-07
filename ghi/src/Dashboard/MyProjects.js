@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { NavLink } from 'react-router-dom'
+import useToken from '@galvanize-inc/jwtdown-for-react'
 
 const statuses = {
     true: 'text-green-700 bg-green-50 ring-green-600/20',
@@ -15,7 +16,32 @@ function classNames(...classes)
 
 export default function MyProjects({ projects, user })
 {
+    const { token } = useToken();
+
+    const handleDelete = async (projectsId) =>
+    {
+        try
+        {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/projects/${projectsId}`, {
+                method: "DELETE",
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log(response)
+            if (!response.ok)
+            {
+                console.error('Error deleting hat:', response.status);
+            }
+        } catch (error)
+        {
+            console.error('Network Error', error);
+        }
+    }
+
     const userProjects = projects.filter(project => project.owner_id === user.id);
+
     return (
         <ul className="divide-y divide-gray-100">
             {userProjects.map((project) => (
@@ -39,7 +65,6 @@ export default function MyProjects({ projects, user })
                             <svg viewBox="0 0 2 2" className="h-0.5 w-0.5 fill-current">
                                 <circle cx={1} cy={1} r={1} />
                             </svg>
-                            <p className="truncate">Created by {project.owner_id}</p>
                         </div>
                     </div>
                     <div className="flex flex-none items-center gap-x-4">
@@ -78,15 +103,18 @@ export default function MyProjects({ projects, user })
                                     </Menu.Item>
                                     <Menu.Item>
                                         {({ active }) => (
-                                            <a
-                                                href="#"
+                                            <button
+                                                onClick={() =>
+                                                {
+                                                    handleDelete(project.id);
+                                                }}
                                                 className={classNames(
                                                     active ? 'bg-gray-50' : '',
                                                     'block px-3 py-1 text-sm leading-6 text-gray-900'
                                                 )}
                                             >
-                                                Delete<span className="sr-only">, {project.project_name}</span>
-                                            </a>
+                                                Delete
+                                            </button>
                                         )}
                                     </Menu.Item>
                                 </Menu.Items>
