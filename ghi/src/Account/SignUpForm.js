@@ -2,8 +2,7 @@ import { useState } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 
-export default function SignupForm()
-{
+export default function SignupForm() {
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -13,8 +12,7 @@ export default function SignupForm()
   const { register } = useToken();
   const navigate = useNavigate();
 
-  const handleRegistration = (e) =>
-  {
+  const handleRegistration = (e) => {
     e.preventDefault();
     const accountData = {
       first_name: first_name,
@@ -56,8 +54,7 @@ export default function SignupForm()
                   type="text"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={(e) =>
-                  {
+                  onChange={(e) => {
                     setFirstName(e.target.value)
                   }}
                 />
@@ -76,8 +73,7 @@ export default function SignupForm()
                   autoComplete="last_name"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={(e) =>
-                  {
+                  onChange={(e) => {
                     setLastName(e.target.value);
                   }}
                 />
@@ -96,8 +92,7 @@ export default function SignupForm()
                   autoComplete="username"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={(e) =>
-                  {
+                  onChange={(e) => {
                     setUsername(e.target.value);
                   }}
                 />
@@ -116,8 +111,7 @@ export default function SignupForm()
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={(e) =>
-                  {
+                  onChange={(e) => {
                     setEmail(e.target.value);
                   }}
                 />
@@ -134,10 +128,8 @@ export default function SignupForm()
                   name="picture"
                   type="text"
                   autoComplete="picture"
-                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={(e) =>
-                  {
+                  onChange={(e) => {
                     setPicture(e.target.value);
                   }}
                 />
@@ -158,8 +150,7 @@ export default function SignupForm()
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={(e) =>
-                  {
+                  onChange={(e) => {
                     setPassword(e.target.value);
                   }}
                 />
