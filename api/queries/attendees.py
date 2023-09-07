@@ -57,6 +57,29 @@ class AttendeeRepo:
             account_id=attendee.account_id,
         )
 
+    def get_all_project_attendees(self) -> Union[Error, List[AttendeeOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT id, project_id, account_id
+                        FROM attendees
+                        ORDER BY id;
+                        """
+                    )
+                    return [
+                        AttendeeOut(
+                            id=record[0],
+                            project_id=record[1],
+                            account_id=record[2],
+                        )
+                        for record in db
+                    ]
+        except ValidationError as e:
+            print(e)
+            return {"message": "Could not get attendees"}
+
     def get_attendees(
         self, project_id: int
     ) -> Union[Error, List[ProjectAttendeeOut]]:

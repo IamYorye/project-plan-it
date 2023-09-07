@@ -5,14 +5,69 @@ import useToken from '@galvanize-inc/jwtdown-for-react';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
-export default function Dashboard({ account })
+export default function Dashboard()
 {
     const [selectedTab, setSelectedTab] = useState('myProjects');
+    const [projects, setProjects] = useState([]);
+    const [attendees, setAttendees] = useState([]);
+    const { token } = useToken();
+    const decodedToken = jwtDecode(token);
+    const user = decodedToken.account;
 
     const handleTabClick = (tabKey) =>
     {
         setSelectedTab(tabKey);
     };
+
+    const fetchProjectData = async () =>
+    {
+        const projectsUrl = `${process.env.REACT_APP_API_HOST}/api/projects`;
+        const fetchConfig = {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        };
+        try
+        {
+            const response = await fetch(projectsUrl, fetchConfig);
+            if (response.ok)
+            {
+                const data = await response.json();
+                setProjects(data);
+            }
+        } catch (error)
+        {
+            console.error("Error fetching projects:", error);
+        }
+    };
+
+    const fetchAttendeeData = async () =>
+    {
+        const attendeesUrl = `${process.env.REACT_APP_API_HOST}/api/attendees/`;
+        const fetchConfig = {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        };
+        try
+        {
+            const response = await fetch(attendeesUrl, fetchConfig);
+            if (response.ok)
+            {
+                const data = await response.json();
+                setAttendees(data);
+            }
+        } catch (error)
+        {
+            console.error("Error fetching projects:", error);
+        }
+    };
+
+    useEffect(() =>
+    {
+        fetchProjectData();
+        fetchAttendeeData();
+    }, [])
 
 
     return (
@@ -63,7 +118,7 @@ export default function Dashboard({ account })
                 </div>
             </div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                {selectedTab === 'myProjects' ? <MyProjects /> : <JoinedProjects />}
+                {selectedTab === 'myProjects' ? <MyProjects projects={projects} user={user} /> : <JoinedProjects projects={projects} user={user} attendees={attendees} />}
             </div>
 
         </div>

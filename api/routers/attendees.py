@@ -32,3 +32,15 @@ def get_project_attendees(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_attendees(project_id)
+
+
+@router.get(
+    "/api/attendees/",
+    response_model=Union[List[AttendeeOut], Error],
+)
+def get_all_project_attendees(
+    repo: AttendeeRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    attendees = repo.get_all_project_attendees()
+    return attendees

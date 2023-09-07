@@ -28,7 +28,7 @@ def test_get_all_tech_stacks():
     ] = fake_get_current_account_data
     app.dependency_overrides[TechStacksRepository] = EmptyTechStackQueries
 
-    response = client.get("/api/tech-stacks")
+    response = client.get("/api/tech-stacks/")
 
     app.dependency_overrides = {}
 
