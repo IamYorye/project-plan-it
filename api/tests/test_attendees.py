@@ -9,8 +9,7 @@ client = TestClient(app)
 
 
 class EmptyAttendeeRepo:
-    @staticmethod
-    def get_attendees(project_id: int):
+    def get_all_project_attendees(self):
         return []
 
     @staticmethod
@@ -32,13 +31,13 @@ def fake_get_current_account_data():
 
 
 # Test for get_project_attendees endpoint
-def test_get_project_attendees():
+def test_get_all_attendees():
     app.dependency_overrides[
         authenticator.get_current_account_data
     ] = fake_get_current_account_data
     app.dependency_overrides[AttendeeRepo] = EmptyAttendeeRepo
 
-    response = client.get("/api/attendees/1")
+    response = client.get("/api/attendees/")
 
     app.dependency_overrides = {}
 

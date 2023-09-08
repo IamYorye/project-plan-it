@@ -1,9 +1,9 @@
-import os
-from psycopg_pool import ConnectionPool
+# import os
+from queries.pool import pool
 from typing import List, Union, Optional
 from pydantic import BaseModel
 
-pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
+# pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
 
 class Error(BaseModel):
