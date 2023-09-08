@@ -13,16 +13,15 @@ import Dashboard from "./Dashboard/Dashboard";
 import EditProfile from "./Account/EditProfile";
 import Profile from "./Account/Profile";
 import MentorsList from "./Mentors/MentorsList";
+import MentorProfile from "./Mentors/MentorProfile";
 
 
-function App()
-{
+function App() {
 	const { token } = useToken();
 	const domain = /https:\/\/[^/]+/;
 	const basename = process.env.PUBLIC_URL.replace(domain, '');
 
-	if (token)
-	{
+	if (token) {
 		return (
 			<div>
 				<BrowserRouter basename={basename}>
@@ -34,6 +33,7 @@ function App()
 						<Route path='/' element={<LandingPage />}></Route>
 						<Route path='/profile/edit' element={<EditProfile />}></Route>
 						<Route path='/profile' element={<Profile />}></Route>
+						<Route path='/profile/:id' element={<MentorProfile />}></Route>
 						<Route path="/projects/new" element={<ProjectForm />}></Route>
 						<Route path="/projects" element={<ProjectList />}></Route>
 						<Route path="/project-details/:project_id/" element={<ProjectDetails />}></Route>
@@ -42,8 +42,7 @@ function App()
 				</BrowserRouter>
 			</div>
 		);
-	} else
-	{
+	} else {
 		return (
 			<div>
 				<BrowserRouter basename={basename}>

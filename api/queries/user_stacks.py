@@ -13,12 +13,12 @@ class Error(BaseModel):
 class UserStackOut(BaseModel):
     id: int
     account_id: int
-    tech_stack_id: List[str]
+    tech_stacks: List[str]
 
 
 class UserStackIn(BaseModel):
     account_id: int
-    tech_stack_id: List[str]
+    tech_stacks: List[str]
 
 
 class UserStackRepository:
@@ -30,7 +30,7 @@ class UserStackRepository:
         return UserStackOut(
             id=record[0],
             account_id=record[1],
-            tech_stack_id=record[2],
+            tech_stacks=record[2],
         )
 
     def create_user_stack(self, user_stack: UserStackIn) -> UserStackOut:
@@ -39,16 +39,16 @@ class UserStackRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        INSERT INTO user_stacks (account_id, tech_stack_id)
+                        INSERT INTO user_stacks (account_id, tech_stacks)
                         VALUES (%s, %s)
                         RETURNING id;
                         """,
-                        [user_stack.account_id, user_stack.tech_stack_id],
+                        [user_stack.account_id, user_stack.tech_stacks],
                     )
                     result = db.fetchone()
                     id = result[0]
                     return self.user_stack_out(
-                        (id, user_stack.account_id, user_stack.tech_stack_id)
+                        (id, user_stack.account_id, user_stack.tech_stacks)
                     )
         except Exception as e:
             print(e)
@@ -60,7 +60,7 @@ class UserStackRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT id, account_id, tech_stack_id
+                        SELECT id, account_id, tech_stacks
                         FROM user_stacks
                         ORDER BY id;
                         """
@@ -69,7 +69,7 @@ class UserStackRepository:
                         UserStackOut(
                             id=record[0],
                             account_id=record[1],
-                            tech_stack_id=record[2],
+                            tech_stacks=record[2],
                         )
                         for record in db.fetchall()
                     ]
@@ -85,7 +85,7 @@ class UserStackRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT us.id, us.account_id, us.tech_stack_id
+                        SELECT us.id, us.account_id, us.tech_stacks
                         FROM user_stacks as us
                         INNER JOIN account as a ON a.id = us.account_id
                         WHERE us.account_id = %s
@@ -96,7 +96,7 @@ class UserStackRepository:
                         UserStackOut(
                             id=record[0],
                             account_id=record[1],
-                            tech_stack_id=record[2],
+                            tech_stacks=record[2],
                         )
                         for record in db.fetchall()
                     ]
@@ -112,7 +112,7 @@ class UserStackRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT id, account_id, tech_stack_id
+                        SELECT id, account_id, tech_stacks
                         FROM user_stacks
                         WHERE id = %s
                         """,
@@ -135,12 +135,12 @@ class UserStackRepository:
                     db.execute(
                         """
                         UPDATE user_stacks
-                        SET account_id = %s, tech_stack_id = %s
+                        SET account_id = %s, tech_stacks = %s
                         WHERE id = %s
                         """,
                         [
                             user_stack.account_id,
-                            user_stack.tech_stack_id,
+                            user_stack.tech_stacks,
                             user_stack_id,
                         ],
                     )
@@ -148,7 +148,7 @@ class UserStackRepository:
                         (
                             user_stack_id,
                             user_stack.account_id,
-                            user_stack.tech_stack_id,
+                            user_stack.tech_stacks,
                         )
                     )
         except Exception as e:

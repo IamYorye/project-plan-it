@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo } from "react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { NavLink } from 'react-router-dom';
 
 const MentorCard = memo(({ mentor }) => {
   return (
@@ -27,6 +28,14 @@ const MentorCard = memo(({ mentor }) => {
             <span className="ml-3 text-md text-gray-500 overflow-hidden">
               {mentor?.education || "education"}
             </span>
+          </div>
+          <div className="ml-4 text-sm">
+            <span className="ml-3 text-md text-gray-500 overflow-hidden"></span>
+            <NavLink to={`/profile/${mentor?.id}`}
+              className="hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
+            >
+              View profile<span className="sr-only">, {mentor?.first_name}</span>
+            </NavLink>
           </div>
         </div>
       </div>
@@ -101,4 +110,3 @@ function MentorCards() {
 
 export default MentorCards;
 export { MentorCard };
-

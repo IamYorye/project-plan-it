@@ -54,6 +54,7 @@ function EditProfile() {
             setPicture(data.picture);
             setEducation(data.education);
             setIsMentor(data.is_mentor);
+            setSelectedTechStacks(data.tech_stacks)
         }
     };
 
@@ -78,6 +79,7 @@ function EditProfile() {
         data.years_of_experience = years;
         data.picture = picture;
         data.is_mentor = isMentor;
+        data.tech_stacks = selectedTechStacks;
 
         const url = `${process.env.REACT_APP_API_HOST}/api/accounts/${id}`;
         const fetchConfig = {
@@ -90,24 +92,10 @@ function EditProfile() {
         };
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
-            const userStacksData = {}
-            userStacksData.account_id = id;
-            userStacksData.tech_stack_id = selectedTechStacks;
 
-            const userStacksurl = `${process.env.REACT_APP_API_HOST}/api/user-stacks`;
-            const userStacksFetchConfig = {
-                method: "post",
-                body: JSON.stringify(userStacksData),
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            };
-            const userStacksResponse = await fetch(userStacksurl, userStacksFetchConfig);
-            if (userStacksResponse.ok) {
-                navigate('/profile');
-                fetchAccountData();
-            }
+            navigate('/profile');
+            fetchAccountData();
+
         }
     };
 

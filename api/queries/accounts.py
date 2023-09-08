@@ -20,6 +20,7 @@ class AccountOut(BaseModel):
     picture: Optional[str]
     is_mentor: bool = False
     username: str
+    tech_stacks: Optional[List[str]]
 
 
 class AccountIn(BaseModel):
@@ -32,6 +33,7 @@ class AccountIn(BaseModel):
     education: Optional[str]
     picture: Optional[str]
     is_mentor: bool = False
+    tech_stacks: Optional[List[str]]
 
 
 class AccountInNoPassword(BaseModel):
@@ -43,6 +45,7 @@ class AccountInNoPassword(BaseModel):
     education: Optional[str]
     picture: Optional[str]
     is_mentor: bool = False
+    tech_stacks: Optional[List[str]]
 
 
 class AccountRepository:
@@ -62,6 +65,7 @@ class AccountRepository:
                             , picture
                             , is_mentor
                             , username
+                            , tech_stacks
                         FROM account
                         ORDER BY first_name, last_name;
                         """
@@ -79,6 +83,7 @@ class AccountRepository:
                             picture=record[7],
                             is_mentor=record[8],
                             username=record[9],
+                            tech_stacks=record[10],
                         )
                         for record in db
                     ]
@@ -102,6 +107,7 @@ class AccountRepository:
                             , picture
                             , is_mentor
                             , username
+                            , tech_stacks
                         FROM account
                         WHERE id = %s
                         """,
@@ -148,6 +154,7 @@ class AccountRepository:
                             , education = %s
                             , picture = %s
                             , is_mentor = %s
+                            , tech_stacks = %s
                         WHERE id = %s
                         """,
                         [
@@ -159,6 +166,7 @@ class AccountRepository:
                             account.education,
                             account.picture,
                             account.is_mentor,
+                            account.tech_stacks,
                             account_id,
                         ],
                     )
@@ -183,6 +191,7 @@ class AccountRepository:
             picture=record[7],
             is_mentor=record[8],
             username=record[9],
+            tech_stacks=record[10],
         )
 
 
@@ -223,10 +232,10 @@ class AccountRepo:
                 result = db.execute(
                     """
                     INSERT INTO account (
-                        first_name, last_name, username, email, password, years_of_experience, education, picture, is_mentor
+                        first_name, last_name, username, email, password, years_of_experience, education, picture, is_mentor, tech_stacks
                     )
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-                    RETURNING id, first_name, last_name, username, email, password, years_of_experience, education, picture, is_mentor
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    RETURNING id, first_name, last_name, username, email, password, years_of_experience, education, picture, is_mentor, tech_stacks
                     """,
                     [
                         account.first_name,
@@ -238,6 +247,7 @@ class AccountRepo:
                         account.education,
                         account.picture,
                         account.is_mentor,
+                        account.tech_stacks,
                     ],
                 )
                 id = result.fetchone()[0]
@@ -255,6 +265,7 @@ class AccountRepo:
             education=account.education,
             picture=account.picture,
             is_mentor=account.is_mentor,
+            tech_stacks=account.tech_stacks,
         )
 
 

@@ -21,6 +21,9 @@ export default function SignupForm() {
       email: email,
       picture: picture,
       password: password,
+      years_of_experience: '',
+      education: '',
+      tech_stacks: []
     };
     register(accountData, `${process.env.REACT_APP_API_HOST}/api/accounts`);
     e.target.reset();

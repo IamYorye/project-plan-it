@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
 from queries.pool import pool
 
@@ -13,6 +13,7 @@ class ProjectIn(BaseModel):
     goal: str
     is_completed: bool = False
     owner_id: int
+    tech_stacks: Optional[List[str]]
 
 
 class ProjectOut(BaseModel):
@@ -22,6 +23,7 @@ class ProjectOut(BaseModel):
     goal: str
     is_completed: bool = False
     owner_id: int
+    tech_stacks: Optional[List[str]]
 
 
 class ProjectRepository:
@@ -48,9 +50,9 @@ class ProjectRepository:
                     """
                     INSERT INTO project
                         (project_name, project_picture, goal, is_completed,
-                        owner_id)
+                        owner_id, tech_stacks)
                     VALUES
-                        (%s, %s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s, %s)
                     RETURNING id;
                     """,
                     [
@@ -59,6 +61,7 @@ class ProjectRepository:
                         project.goal,
                         project.is_completed,
                         project.owner_id,
+                        project.tech_stacks,
                     ],
                 )
                 id = result.fetchone()[0]
@@ -74,7 +77,7 @@ class ProjectQueries:
                     cur.execute(
                         """
                         SELECT id, project_name, project_picture, goal,
-                            is_completed, owner_id
+                            is_completed, owner_id, tech_stacks
                         FROM project"""
                     )
 
@@ -86,6 +89,7 @@ class ProjectQueries:
                             goal=row[3],
                             is_completed=row[4],
                             owner_id=row[5],
+                            tech_stacks=row[6],
                         )
                         for row in cur.fetchall()
                     ]
@@ -100,7 +104,7 @@ class ProjectQueries:
                     cur.execute(
                         """
                         SELECT id, project_name, project_picture, goal,
-                            is_completed, owner_id
+                            is_completed, owner_id, tech_stacks
                         FROM project
                         WHERE id = %s
                         """,
@@ -116,6 +120,7 @@ class ProjectQueries:
                             goal=row[3],
                             is_completed=row[4],
                             owner_id=row[5],
+                            tech_stacks=row[6],
                         )
         except Exception as e:
             print(e)
@@ -132,7 +137,8 @@ class ProjectQueries:
                             project_picture = %s,
                             goal = %s,
                             is_completed = %s,
-                            owner_id = %s
+                            owner_id = %s,
+                            tech_stacks = %s
                         WHERE id = %s
                         """,
                         [
@@ -141,6 +147,7 @@ class ProjectQueries:
                             data.goal,
                             data.is_completed,
                             data.owner_id,
+                            data.tech_stacks,
                             id,
                         ],
                     )

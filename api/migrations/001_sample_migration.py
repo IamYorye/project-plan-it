@@ -8,10 +8,11 @@ steps = [
             username VARCHAR(50) UNIQUE NOT NULL,
             email TEXT UNIQUE NOT NULL,
             password VARCHAR(500) NOT NULL,
-            years_of_experience NUMERIC(10, 2),
+            years_of_experience VARCHAR(100),
             education VARCHAR(150),
             picture TEXT,
-            is_mentor BOOLEAN
+            is_mentor BOOLEAN,
+            tech_stacks TEXT ARRAY
         );
         """,
         """
@@ -26,7 +27,8 @@ steps = [
             project_picture VARCHAR(255) NOT NULL,
             goal TEXT NOT NULL,
             is_completed BOOLEAN NULL,
-            owner_id INTEGER NOT NULL REFERENCES account("id") ON DELETE CASCADE
+            owner_id INTEGER NOT NULL REFERENCES account("id") ON DELETE CASCADE,
+            tech_stacks TEXT ARRAY
         );
         """,
         """
@@ -98,7 +100,7 @@ steps = [
         CREATE TABLE user_stacks (
             id SERIAL PRIMARY KEY NOT NULL,
             account_id INTEGER NOT NULL REFERENCES account("id") ON DELETE CASCADE,
-            tech_stack_id VARCHAR(100) NOT NULL
+            tech_stacks TEXT ARRAY
         );
         """,
         """
@@ -110,7 +112,7 @@ steps = [
         CREATE TABLE project_stacks (
             id SERIAL PRIMARY KEY NOT NULL,
             project_id INTEGER NOT NULL REFERENCES project("id") ON DELETE CASCADE,
-            tech_stacks_id VARCHAR(100) NOT NULL
+            tech_stacks TEXT ARRAY
         );
         """,
         """

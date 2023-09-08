@@ -8,6 +8,7 @@ export default function ProjectDetails() {
     const { token } = useToken()
     const { project_id } = useParams()
     const [project, setProject] = useState([])
+    const [techStacks, setTechStacks] = useState([])
 
     const decodedToken = jwtDecode(token)
 
@@ -30,6 +31,7 @@ export default function ProjectDetails() {
             if (response.ok) {
                 const project = await response.json()
                 setProject(project)
+                setTechStacks(project.tech_stacks)
             }
         } catch (error) {
             console.error("Error fetching project details:", error)
@@ -101,6 +103,18 @@ export default function ProjectDetails() {
                         <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
                             <dt className="text-sm font-medium leading-6 text-gray-900">Email</dt>
                             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{accountEmail}</dd>
+                        </div>
+                        <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                            <dt className="text-sm font-medium leading-6 text-gray-900">Tech Stacks</dt>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+                                <ul>
+                                    {techStacks.map(stack => {
+                                        return (
+                                            <li key={stack}>{stack}</li>
+                                        )
+                                    })}
+                                </ul>
+                            </dd>
                         </div>
                         <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <button

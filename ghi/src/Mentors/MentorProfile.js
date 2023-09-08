@@ -1,9 +1,10 @@
+import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import useToken from '@galvanize-inc/jwtdown-for-react';
-import jwtDecode from 'jwt-decode';
 
-function Profile() {
+
+function MentorProfile() {
+    const { id } = useParams();
     const { token } = useToken();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -12,11 +13,7 @@ function Profile() {
     const [education, setEducation] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const navigate = useNavigate();
     const [techStacks, setTechStacks] = useState([]);
-
-    const decodedToken = jwtDecode(token)
-    const id = decodedToken.account.id
 
     const fetchData = async () => {
         const url = `${process.env.REACT_APP_API_HOST}/api/accounts/${id}`;
@@ -55,16 +52,7 @@ function Profile() {
                     <div className="px-4 sm:px-0">
                         <h3 className="text-base font-semibold leading-7 text-gray-900">Profile</h3>
                         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500"></p>
-                        <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0" style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
-                            <button
-                                onClick={() => {
-                                    navigate('/profile/edit')
-                                }}
-                                className="btn btn-primary"
-                                style={{ backgroundColor: 'blue', marginRight: '10px' }}
-                            > Edit Profile
-                            </button>
-                        </div>
+
                         <img src={picture} alt=""
                             style={{ width: '350px', height: 'auto' }} />
                     </div>
@@ -92,16 +80,16 @@ function Profile() {
                             </div>
                             <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
                                 <dt className="text-sm font-medium leading-6 text-gray-900">Tech Stacks</dt>
-                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
-                                    <ul>
-                                        {techStacks.map(stack => {
-                                            return (
-                                                <li key={stack}>{stack}</li>
-                                            )
-                                        })}
-                                    </ul>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2"><ul>
+                                    {techStacks.map(stack => {
+                                        return (
+                                            <li key={stack}>{stack}</li>
+                                        )
+                                    })}
+                                </ul>
                                 </dd>
                             </div>
+
                         </dl>
                     </div>
                 </div>
@@ -110,4 +98,4 @@ function Profile() {
         </>
     )
 }
-export default Profile
+export default MentorProfile
