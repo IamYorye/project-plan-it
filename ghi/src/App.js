@@ -15,18 +15,17 @@ import Profile from "./Account/Profile";
 import MentorsList from "./Mentors/MentorsList";
 
 
-function App() {
+function App()
+{
 	const { token } = useToken();
 	const domain = /https:\/\/[^/]+/;
 	const basename = process.env.PUBLIC_URL.replace(domain, '');
 
-	if (token) {
-
-
+	if (token)
+	{
 		return (
 			<div>
 				<BrowserRouter basename={basename}>
-					{/* <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}> */}
 					<Nav />
 					<Routes>
 						<Route path='/dashboard' element={<Dashboard />}></Route>
@@ -40,21 +39,19 @@ function App() {
 						<Route path="/project-details/:project_id/" element={<ProjectDetails />}></Route>
 						<Route path="/mentors" element={<MentorsList />}></Route>
 					</Routes>
-					{/* </AuthProvider> */}
 				</BrowserRouter>
 			</div>
 		);
-	} else {
+	} else
+	{
 		return (
 			<div>
 				<BrowserRouter basename={basename}>
-					{/* <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}> */}
 					<Routes>
 						<Route path='/' element={<LandingPage />}></Route>
 						<Route path='/signup' element={<SignupForm />}></Route>
 						<Route path='/login' element={<LoginForm />}></Route>
 					</Routes>
-					{/* </AuthProvider> */}
 				</BrowserRouter>
 			</div>
 		);

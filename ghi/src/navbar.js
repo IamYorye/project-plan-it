@@ -16,7 +16,6 @@ export default function Nav() {
 	const navigate = useNavigate();
 	const decodedToken = jwtDecode(token);
 	const user = decodedToken.account;
-	console.log(user)
 
 	if (location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/') {
 		return null;

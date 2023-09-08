@@ -6,11 +6,13 @@ At a minimum, you'll need to include the following information in each entry:
     At least one ah-ha! moment that you had during your coding, however small
     Keep your journal in reverse chronological order. Always put new entries at the top.
 
-## Tuesday - September 5, 2023
+## Tuesday September 5 - Tuesday September 7, 2023
 
 Today, I worked on:
 
 - Navbar and Dashboard
+
+I finished the navbar and dashboard finally. The biggest hurdle was getting a filtered list to show only the projects that the logged-in user has joined; ultimately I ended up creating a new endpoint to grab all joined projects based on account_id. We also deployed our application and are just waiting for a few more merges.
 
 ## August 30 - Sep 1 2023
 
