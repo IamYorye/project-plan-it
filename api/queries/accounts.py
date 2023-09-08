@@ -15,7 +15,7 @@ class AccountOut(BaseModel):
     email: str
     first_name: str
     last_name: str
-    years_of_experience: Optional[int]
+    years_of_experience: Optional[str]
     education: Optional[str]
     picture: Optional[str]
     is_mentor: bool = False
@@ -28,7 +28,7 @@ class AccountIn(BaseModel):
     password: str
     first_name: str
     last_name: str
-    years_of_experience: Optional[int]
+    years_of_experience: Optional[str]
     education: Optional[str]
     picture: Optional[str]
     is_mentor: bool = False
@@ -39,7 +39,7 @@ class AccountInNoPassword(BaseModel):
     email: str
     first_name: str
     last_name: str
-    years_of_experience: Optional[int]
+    years_of_experience: Optional[str]
     education: Optional[str]
     picture: Optional[str]
     is_mentor: bool = False

@@ -56,3 +56,28 @@ Today I worked on the edit profile React component:
 
 - had to create a new endpoint to get a specific user's tech stacks so that I can list them as the user adds them to their profile
 - created a placeholder Profile.js so that Edit Profile would have a page to redirect to
+
+8/30/23, 8/31/23
+
+On these 2 days I worked on the edit profile React component:
+
+-finished the page, but would like to go back and redo adding tech stacks so that a user can select multiple and they can be included in the form with all the other information
+
+9/4/23
+
+Today I worked with the team on merging the front end pages we've been working on, and I worked independently on finishing the Edit Profile page:
+
+-implemented Tailwind
+-implemented select multiple for the tech stacks. Had to make some changes to the endpoints to get this to work and now the backend endpoints aren't working, so when I want to display a user's tech stacks on their profile I won't be able to fetch them
+
+9/5/23
+
+Today I worked on fixing the bug with the user stacks endpoints. The project stacks endpoints are having the same issue, and even though we can create user stacks and project stacks entries using the frontend, we won't be able to fetch any of that data until we fix the GET methods.
+
+9/6/23
+
+Today I worked with the group on:
+
+-merging the frontend pages we've created so far
+-started deployment
+-still trying to solve the bug with the user stacks and projects stacks endpoints

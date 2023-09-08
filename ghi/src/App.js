@@ -34,7 +34,7 @@ function App() {
 						<Route path='/login' element={<LoginForm />}></Route>
 						<Route path='/' element={<LandingPage />}></Route>
 						<Route path='/profile/edit' element={<EditProfile />}></Route>
-						<Route path='/profile/:id' element={<Profile />}></Route>
+						<Route path='/profile' element={<Profile />}></Route>
 						<Route path="/projects/new" element={<ProjectForm />}></Route>
 						<Route path="/projects" element={<ProjectList />}></Route>
 						<Route path="/project-details/:project_id/" element={<ProjectDetails />}></Route>

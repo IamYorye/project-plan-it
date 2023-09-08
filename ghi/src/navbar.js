@@ -97,7 +97,7 @@ export default function Nav() {
 														{({ active }) => (
 															<button
 																onClick={() => {
-																	navigate(`/profile/${user.id}`);
+																	navigate('/profile');
 																}}
 																className={classNames(
 																	active ? 'bg-gray-100' : '',

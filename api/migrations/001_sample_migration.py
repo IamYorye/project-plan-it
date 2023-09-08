@@ -8,7 +8,7 @@ steps = [
             username VARCHAR(50) UNIQUE NOT NULL,
             email TEXT UNIQUE NOT NULL,
             password VARCHAR(500) NOT NULL,
-            years_of_experience INTEGER,
+            years_of_experience NUMERIC(10, 2),
             education VARCHAR(150),
             picture TEXT,
             is_mentor BOOLEAN

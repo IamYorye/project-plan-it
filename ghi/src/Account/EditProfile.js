@@ -42,7 +42,7 @@ function EditProfile() {
     };
 
     const fetchAccountData = async () => {
-        const url = `http://localhost:8000/api/accounts/${id}`;
+        const url = `${process.env.REACT_APP_API_HOST}/api/accounts/${id}`;
         const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
         if (response.ok) {
             const data = await response.json();
@@ -50,11 +50,15 @@ function EditProfile() {
             setFirstName(data.first_name);
             setLastName(data.last_name);
             setEmail(data.email);
+            setYears(data.years_of_experience);
+            setPicture(data.picture);
+            setEducation(data.education);
+            setIsMentor(data.is_mentor);
         }
     };
 
     const fetchTechStacks = async () => {
-        const url = 'http://localhost:8000/api/tech-stacks/';
+        const url = `${process.env.REACT_APP_API_HOST}/api/tech-stacks/`;
         const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
         if (response.ok) {
             const data = await response.json();
@@ -75,7 +79,7 @@ function EditProfile() {
         data.picture = picture;
         data.is_mentor = isMentor;
 
-        const url = `http://localhost:8000/api/accounts/${id}`;
+        const url = `${process.env.REACT_APP_API_HOST}/api/accounts/${id}`;
         const fetchConfig = {
             method: "put",
             body: JSON.stringify(data),
@@ -90,7 +94,7 @@ function EditProfile() {
             userStacksData.account_id = id;
             userStacksData.tech_stack_id = selectedTechStacks;
 
-            const userStacksurl = 'http://localhost:8000/api/user-stacks';
+            const userStacksurl = `${process.env.REACT_APP_API_HOST}/api/user-stacks`;
             const userStacksFetchConfig = {
                 method: "post",
                 body: JSON.stringify(userStacksData),
@@ -101,7 +105,8 @@ function EditProfile() {
             };
             const userStacksResponse = await fetch(userStacksurl, userStacksFetchConfig);
             if (userStacksResponse.ok) {
-                navigate(`/profile/${id}`)
+                navigate('/profile');
+                fetchAccountData();
             }
         }
     };
@@ -111,10 +116,14 @@ function EditProfile() {
 
 
 
+
+
     useEffect(() => {
-        fetchAccountData();
-        fetchTechStacks();
-    }, []); // eslint-disable-line
+        if (token) {
+            fetchAccountData();
+            fetchTechStacks();
+        }
+    }, [token]); // eslint-disable-line
 
     return (
         <>

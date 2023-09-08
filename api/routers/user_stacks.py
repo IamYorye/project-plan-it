@@ -4,7 +4,6 @@ from queries.user_stacks import (
     UserStackIn,
     UserStackOut,
     UserStackRepository,
-    SingleUserStackOut,
     Error,
 )
 from typing import Union, List, Optional
@@ -35,7 +34,7 @@ def get_user_stacks(
 
 @router.get(
     "/api/user-stacks/{account_id}",
-    response_model=List[SingleUserStackOut],
+    response_model=List[UserStackOut],
 )
 def list_user_stacks(
     account_id: int,

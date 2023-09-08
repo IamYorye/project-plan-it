@@ -1,44 +1,115 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAuthContext } from '@galvanize-inc/jwtdown-for-react';
+import { useNavigate } from 'react-router-dom';
+import useToken from '@galvanize-inc/jwtdown-for-react';
+import jwtDecode from 'jwt-decode';
+
 function Profile() {
-    const { id } = useParams();
-    const { token } = useAuthContext();
+    const { token } = useToken();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [picture, setPicture] = useState('');
     const [years, setYears] = useState('');
     const [education, setEducation] = useState('');
     const [isMentor, setIsMentor] = useState(false);
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const navigate = useNavigate();
 
+    const decodedToken = jwtDecode(token)
+    const id = decodedToken.account.id
 
     const fetchData = async () => {
-        const url = `http://localhost:8000/api/accounts/${id}`;
+        const url = `${process.env.REACT_APP_API_HOST}/api/accounts/${id}`;
         const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
             setFirstName(data.first_name);
             setLastName(data.last_name);
             setPicture(data.picture);
             setYears(data.years_of_experience);
             setEducation(data.education);
             setIsMentor(data.is_mentor);
+            setUsername(data.username);
+            setEmail(data.email);
+        };
 
-        }
-    }
+
+    };
+
+
+
+
+
+
 
     useEffect(() => {
-        fetchData();
-    }, []); // eslint-disable-line
+        if (token) {
+            fetchData();
+        }
+    }, [token]); // eslint-disable-line
 
     return (
         <>
-            {firstName} {lastName}
-            <img alt="" src={picture} />
-            <p>years of experience: {years}</p>
-            <p>education: {education}</p>
-            <p>{isMentor && ('mentor')}</p>
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+                    <div className="px-4 sm:px-0">
+                        <h3 className="text-base font-semibold leading-7 text-gray-900">Profile</h3>
+                        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500"></p>
+                        <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0" style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
+                            <button
+                                onClick={() => {
+                                    navigate('/profile/edit')
+                                }}
+                                className="btn btn-primary"
+                                style={{ backgroundColor: 'blue', marginRight: '10px' }}
+                            > Edit Profile
+                            </button>
+                        </div>
+                        <img src={picture} alt=""
+                            style={{ width: '350px', height: 'auto' }} />
+                    </div>
+                    <div className="mt-6">
+                        <dl className="grid grid-cols-1 sm:grid-cols-2">
+                            <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <dt className="text-sm font-medium leading-6 text-gray-900">Name</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{firstName} {lastName}</dd>
+                            </div>
+                            <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <dt className="text-sm font-medium leading-6 text-gray-900">Username</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{username}</dd>
+                            </div>
+                            <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <dt className="text-sm font-medium leading-6 text-gray-900">Education</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{education}</dd>
+                            </div>
+                            <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <dt className="text-sm font-medium leading-6 text-gray-900">Email</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{email}</dd>
+                            </div>
+                            <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <dt className="text-sm font-medium leading-6 text-gray-900">Years of Experience</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{years}</dd>
+                            </div>
+                            <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <dt className="text-sm font-medium leading-6 text-gray-900">Tech Stacks</dt>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2"></dd>
+                            </div>
+                            <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
+                                {isMentor && (
+                                    <button
+                                        onClick={() => {
+                                            navigate(`/mentors/${id}`)
+                                        }}
+                                        className="btn btn-primary"
+                                        style={{ backgroundColor: 'blue', marginRight: '10px' }}
+                                    > Mentor Page
+                                    </button>)}
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
         </>
     )
 }
