@@ -1,0 +1,42 @@
+.mentor-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(500px, 1fr)
+  ); /* It will adjust based on the width of the card */
+  gap: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-items: center;
+  align-items: start;
+  overflow: hidden;
+}
+
+/* When screen size is 600px or less, stack cards vertically */
+@media (max-width: 600px) {
+  .mentor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mentorname {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+  align-self: start !important;
+}
+
+.mentorsbackground {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    to right,
+    rgb(106, 17, 203) 0%,
+    rgb(119, 212, 255) 100%
+  );
+}

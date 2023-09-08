@@ -12,6 +12,7 @@ import Nav from "./navbar";
 import Dashboard from "./Dashboard/Dashboard";
 import EditProfile from "./Account/EditProfile";
 import Profile from "./Account/Profile";
+import MentorsList from "./Mentors/MentorsList";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
 						<Route path="/projects/new" element={<ProjectForm />}></Route>
 						<Route path="/projects" element={<ProjectList />}></Route>
 						<Route path="/project-details/:project_id/" element={<ProjectDetails />}></Route>
+						<Route path="/mentors" element={<MentorsList />}></Route>
 					</Routes>
 					{/* </AuthProvider> */}
 				</BrowserRouter>
@@ -58,5 +60,4 @@ function App() {
 		);
 	}
 }
-
 export default App;
