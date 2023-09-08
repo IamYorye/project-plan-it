@@ -23,6 +23,9 @@ made the nav bar at the top scroll with the page.
 25 August 2023
 24 August 2023
 23 August 2023
+
+We worked together on adding in some authentication to the back end / security features with tokens. We mostly finished up the back end and are moving onto the front end. We collaborated on the first page of the front end for the login page and worked on trouble shooting some errors.
+
 22 August 2023
 
 this morning I got my code functioning and updated my merge request. My partners confirmed the code is working and I merged to main. I then got started on the next job of creating the user_stacks backend API. since i spent so much time creating the other back end I learned a lot and this was much, much easier to code and implement. I've already got most of it working and think I'll be merging before the end of the day.
@@ -33,7 +36,7 @@ I am still trouble shooting code but I believe I finally have it working. I crea
 
 17 August 2023
 
-I've overall completed the coding for the FastAPI and necessary functions and now I'm trouble shooting. I realized there are issues with some of my naming conventions and inconsistencies. I also need to add in better trouble shooting and error functioning. I'm also trying to work with Gabe a bit and see if we can align our code more with naming conventions. It is obvious two separate people created the code simply because of how we are naming and a few other differneces in how we've implemented.
+I've overall completed the coding for the FastAPI and necessary functions and now I'm trouble shooting. I realized there are issues with some of my naming conventions and inconsistencies. I also need to add in better trouble shooting and error functioning. I'm also trying to work with Gabe a bit and see if we can align our code more with naming conventions. It is obvious two separate people created the code simply because of how we are naming and a few other differences in how we've implemented.
 
 16 August 2023
 

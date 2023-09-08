@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
-    <App />
+      <App />
     </AuthProvider>
   </React.StrictMode>
 );

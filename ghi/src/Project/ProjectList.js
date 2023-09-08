@@ -32,6 +32,7 @@ export default function ProjectList() {
         }
     };
 
+
     const handleFilterSubmit = (event) => {
         event.preventDefault();
         if (project_name) {
