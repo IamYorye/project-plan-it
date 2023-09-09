@@ -53,13 +53,13 @@ Now you will be able to use Project Plan-It and explore the features we have cre
 
 ## Test Endpoints -
 
-[FastAPI - Swagged UI](https://may-11-pt-planiteersapi.mod3projects.com/docs)
+[FastAPI - Swagger UI](https://may-11-pt-planiteersapi.mod3projects.com/docs)
 
 ## Team Journals
 
 Want a closer look as to what each team members did, here's our journals -
 
-[Gabe's Journal](/journals/Gabriel_Svetcos.md)
-[Libby's Journal](/journals/libby_eilbert.md)
-[Brad's Journal](/journals/Bradley_Belcher.MD)
-[Jaspreet's Journal](/journals/JASPREET_SANGHA.MD)
+- [Gabe's Journal](/journals/Gabriel_Svetcos.md)
+- [Libby's Journal](/journals/libby_eilbert.md)
+- [Brad's Journal](/journals/Bradley_Belcher.MD)
+- [Jaspreet's Journal](/journals/JASPREET_SANGHA.MD)

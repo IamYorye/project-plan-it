@@ -1,4 +1,4 @@
-## Project Plan-It API Documentation
+# Project Plan-It API Documentation
 
 Anyone with access to our project can access these endpoints.  To access the endpoints on a local project, please go to http://localhost:8000/docs.  If you are on our deployed project, you can visit https://may-11-pt-planiteersapi.mod3projects.com/docs.
 
@@ -44,15 +44,15 @@ The account endpoints are CRUD operations.  A user can create an account, get al
 
 ```
 
-## Create an account
+### Create an account
 
-# POST method
+#### POST method
 
-# Path: /api/accounts
+#### Path: /api/accounts
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -73,7 +73,7 @@ The account endpoints are CRUD operations.  A user can create an account, get al
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -91,15 +91,15 @@ The account endpoints are CRUD operations.  A user can create an account, get al
 
 ```
 
-## Get all accounts
+### Get all accounts
 
-# GET method
+#### GET method
 
-# Path: /api/accounts
+#### Path: /api/accounts
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 [
@@ -118,7 +118,7 @@ The account endpoints are CRUD operations.  A user can create an account, get al
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 {
   "detail": [
@@ -133,15 +133,15 @@ The account endpoints are CRUD operations.  A user can create an account, get al
   ]
 }
 
-## Get an account by id
+### Get an account by id
 
-# GET method
+#### GET method
 
-# Path: /api/accounts/{account_id}
+#### Path: /api/accounts/{account_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 
@@ -159,7 +159,7 @@ The account endpoints are CRUD operations.  A user can create an account, get al
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -178,15 +178,15 @@ The account endpoints are CRUD operations.  A user can create an account, get al
 
 ```
 
-## Update an account by passing in its id
+### Update an account by passing in its id
 
-# PUT method
+#### PUT method
 
-# Path: /api/accounts/{account_id}
+#### Path: /api/accounts/{account_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -203,7 +203,7 @@ The account endpoints are CRUD operations.  A user can create an account, get al
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -222,22 +222,22 @@ The account endpoints are CRUD operations.  A user can create an account, get al
 
 ```
 
-## Delete an account by passing in its id
+### Delete an account by passing in its id
 
-# DELETE method
+#### DELETE method
 
-# Path: /api/accounts/{account_id}
+#### Path: /api/accounts/{account_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 true
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -280,15 +280,15 @@ The project endpoints are CRUD operations.  A user can create a project get all 
 
 ```
 
-## Create a project
+### Create a project
 
-# POST method
+#### POST method
 
-# Path: /api/projects
+#### Path: /api/projects
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -302,7 +302,7 @@ The project endpoints are CRUD operations.  A user can create a project get all 
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -320,15 +320,15 @@ The project endpoints are CRUD operations.  A user can create a project get all 
 
 ```
 
-## Get all projects
+### Get all projects
 
-# GET method
+#### GET method
 
-# Path: /api/projects
+#### Path: /api/projects
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 [
@@ -344,15 +344,15 @@ The project endpoints are CRUD operations.  A user can create a project get all 
 
 ```
 
-## Get a project by its id
+### Get a project by its id
 
-# GET method
+#### GET method
 
-# Path: /api/projects/{project_id}
+#### Path: /api/projects/{project_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 {
   "id": 0,
@@ -363,7 +363,7 @@ The project endpoints are CRUD operations.  A user can create a project get all 
   "owner_id": 0
 }
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -382,15 +382,15 @@ The project endpoints are CRUD operations.  A user can create a project get all 
 
 ```
 
-## Update a project by its id
+### Update a project by its id
 
-# PUT method
+#### PUT method
 
-# Path: /api/projects/{project_id}
+#### Path: /api/projects/{project_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 {
   "id": 0,
@@ -401,7 +401,7 @@ The project endpoints are CRUD operations.  A user can create a project get all 
   "owner_id": 0
 }
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -420,22 +420,22 @@ The project endpoints are CRUD operations.  A user can create a project get all 
 
 ```
 
-## Delete a project by its id
+### Delete a project by its id
 
-# DELETE method
+#### DELETE method
 
-# Path: /api/projects/{project_id}
+#### Path: /api/projects/{project_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 true
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -474,15 +474,15 @@ The attendees endpoints are CRUD operations.  A user can create an attendee, get
 
 ```
 
-## Create an attendee
+### Create an attendee
 
-# POST method
+#### POST method
 
-# Path: /api/attendees
+#### Path: /api/attendees
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 
@@ -494,7 +494,7 @@ The attendees endpoints are CRUD operations.  A user can create an attendee, get
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -513,15 +513,15 @@ The attendees endpoints are CRUD operations.  A user can create an attendee, get
 
 ```
 
-## Get all project attendees
+### Get all project attendees
 
-# GET method
+#### GET method
 
-# Path: /api/attendees
+#### Path: /api/attendees
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 
@@ -535,7 +535,7 @@ The attendees endpoints are CRUD operations.  A user can create an attendee, get
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -554,15 +554,15 @@ The attendees endpoints are CRUD operations.  A user can create an attendee, get
 
 ```
 
-## Get project attendees by passing in project_id
+### Get project attendees by passing in project_id
 
-# GET method
+#### GET method
 
-# Path: /api/attendees/project/{project_id}
+#### Path: /api/attendees/project/{project_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 
@@ -578,7 +578,7 @@ The attendees endpoints are CRUD operations.  A user can create an attendee, get
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -597,15 +597,15 @@ The attendees endpoints are CRUD operations.  A user can create an attendee, get
 
 ```
 
-## Get attendees projects by passing in account_id
+### Get attendees projects by passing in account_id
 
-# GET method
+#### GET method
 
-# Path: /api/attendees/account/{account_id}
+#### Path: /api/attendees/account/{account_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 
@@ -622,7 +622,7 @@ The attendees endpoints are CRUD operations.  A user can create an attendee, get
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -711,15 +711,15 @@ The tech stacks endpoints are CRUD operations.  A user can create a tech stack, 
 
 ```
 
-## Create a tech stack
+### Create a tech stack
 
-# POST method
+#### POST method
 
-# Path: /api/tech-stacks
+#### Path: /api/tech-stacks
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -729,7 +729,7 @@ The tech stacks endpoints are CRUD operations.  A user can create a tech stack, 
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -748,15 +748,15 @@ The tech stacks endpoints are CRUD operations.  A user can create a tech stack, 
 
 ```
 
-## Get all tech stacks
+### Get all tech stacks
 
-# GET method
+#### GET method
 
-# Path: /api/tech-stacks/
+#### Path: /api/tech-stacks/
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 [
@@ -956,7 +956,7 @@ The tech stacks endpoints are CRUD operations.  A user can create a tech stack, 
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -976,15 +976,15 @@ The tech stacks endpoints are CRUD operations.  A user can create a tech stack, 
 
 ```
 
-## Get a specific tech stack by passing in its id
+### Get a specific tech stack by passing in its id
 
-# GET method
+#### GET method
 
-# Path: /api/tech-stacks/{tech_stack_id}
+#### Path: /api/tech-stacks/{tech_stack_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -994,7 +994,7 @@ The tech stacks endpoints are CRUD operations.  A user can create a tech stack, 
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -1013,15 +1013,15 @@ The tech stacks endpoints are CRUD operations.  A user can create a tech stack, 
 
 ```
 
-## Update a specific tech stack by passing in its id
+### Update a specific tech stack by passing in its id
 
-# PUT method
+#### PUT method
 
-# Path: /api/tech-stacks/{tech_stack_id}
+#### Path: /api/tech-stacks/{tech_stack_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 
@@ -1032,7 +1032,7 @@ The tech stacks endpoints are CRUD operations.  A user can create a tech stack, 
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -1051,22 +1051,22 @@ The tech stacks endpoints are CRUD operations.  A user can create a tech stack, 
 
 ```
 
-## Delete a specific tech stack by passing in its id
+### Delete a specific tech stack by passing in its id
 
-# DELETE method
+#### DELETE method
 
-# Path: /api/tech-stacks/{tech_stack_id}
+#### Path: /api/tech-stacks/{tech_stack_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 true
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -1106,15 +1106,15 @@ The project endpoints are CRUD operations.  A user can create a project stack, g
 
 ```
 
-## Create a project stack
+### Create a project stack
 
-# POST method
+#### POST method
 
-# Path: /api/project-stacks
+#### Path: /api/project-stacks
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 
 ```
@@ -1129,7 +1129,7 @@ The project endpoints are CRUD operations.  A user can create a project stack, g
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 
@@ -1149,15 +1149,15 @@ The project endpoints are CRUD operations.  A user can create a project stack, g
 ```
 
 
-## Get all project stacks
+### Get all project stacks
 
-# GET method
+#### GET method
 
-# Path: /api/project-stacks/
+#### Path: /api/project-stacks/
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 [
@@ -1172,7 +1172,7 @@ The project endpoints are CRUD operations.  A user can create a project stack, g
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1190,15 +1190,15 @@ The project endpoints are CRUD operations.  A user can create a project stack, g
 
 ```
 
-## Get a project stack by passing in its project stacks id
+### Get a project stack by passing in its project stacks id
 
-# GET method
+#### GET method
 
-# Path: /api/project-stacks/{project_stack_id}
+#### Path: /api/project-stacks/{project_stack_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 
@@ -1212,7 +1212,7 @@ The project endpoints are CRUD operations.  A user can create a project stack, g
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1230,15 +1230,15 @@ The project endpoints are CRUD operations.  A user can create a project stack, g
 
 ```
 
-## Update a project stack by passing in its project stacks id
+### Update a project stack by passing in its project stacks id
 
-# PUT method
+#### PUT method
 
-# Path: /api/project-stacks/{project_stack_id}
+#### Path: /api/project-stacks/{project_stack_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -1251,7 +1251,7 @@ The project endpoints are CRUD operations.  A user can create a project stack, g
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1269,22 +1269,22 @@ The project endpoints are CRUD operations.  A user can create a project stack, g
 
 ```
 
-## Delete a project stack by passing in its project stacks id
+### Delete a project stack by passing in its project stacks id
 
-# DELETE method
+#### DELETE method
 
-# Path: /api/project-stacks/{project_stack_id}
+#### Path: /api/project-stacks/{project_stack_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 true
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 
 ```
@@ -1324,15 +1324,15 @@ The user stacks endpoints are CRUD operations.  A user can create a user stack, 
 
 ```
 
-## Create a user stack
+### Create a user stack
 
-# POST method
+#### POST method
 
-# Path: /api/user-stacks
+#### Path: /api/user-stacks
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -1345,7 +1345,7 @@ The user stacks endpoints are CRUD operations.  A user can create a user stack, 
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1363,15 +1363,15 @@ The user stacks endpoints are CRUD operations.  A user can create a user stack, 
 
 ```
 
-## Get all user stacks
+### Get all user stacks
 
-# GET method
+#### GET method
 
-# Path: /api/user-stacks/
+#### Path: /api/user-stacks/
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 
@@ -1387,7 +1387,7 @@ The user stacks endpoints are CRUD operations.  A user can create a user stack, 
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1405,15 +1405,15 @@ The user stacks endpoints are CRUD operations.  A user can create a user stack, 
 
 ```
 
-## Get a specific user stack by passing in the user stack id or account id
+### Get a specific user stack by passing in the user stack id or account id
 
-# GET method
+#### GET method
 
-# Path: /api/user-stacks/{user_stack_id} or /api/user-stacks/{account_id}
+#### Path: /api/user-stacks/{user_stack_id} or /api/user-stacks/{account_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -1426,7 +1426,7 @@ The user stacks endpoints are CRUD operations.  A user can create a user stack, 
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1444,15 +1444,15 @@ The user stacks endpoints are CRUD operations.  A user can create a user stack, 
 
 ```
 
-## Update a specific user stack by passing in the user stack id
+### Update a specific user stack by passing in the user stack id
 
-# PUT method
+#### PUT method
 
-# Path: /api/user-stacks/{user_stack_id}
+#### Path: /api/user-stacks/{user_stack_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -1464,7 +1464,7 @@ The user stacks endpoints are CRUD operations.  A user can create a user stack, 
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1482,22 +1482,22 @@ The user stacks endpoints are CRUD operations.  A user can create a user stack, 
 
 ```
 
-## Delete a specific user stack by passing in the user stack id
+### Delete a specific user stack by passing in the user stack id
 
-# DELETE method
+#### DELETE method
 
-# Path: /api/user-stacks/{user_stack_id}
+#### Path: /api/user-stacks/{user_stack_id}
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 true
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1519,15 +1519,15 @@ true
 
 Set up so you can create an account and login, giving you a token that gives you access to use all of the other endpoints in our application.
 
-## Create a token
+### Create a token
 
-# POST method
+#### POST method
 
-# Path: /token
+#### Path: /token
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 {
@@ -1537,7 +1537,7 @@ Set up so you can create an account and login, giving you a token that gives you
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1555,15 +1555,15 @@ Set up so you can create an account and login, giving you a token that gives you
 
 ```
 
-## Get a token
+### Get a token
 
-# GET method
+#### GET method
 
-# Path: /token
+#### Path: /token
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 
@@ -1585,7 +1585,7 @@ Set up so you can create an account and login, giving you a token that gives you
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
@@ -1603,22 +1603,22 @@ Set up so you can create an account and login, giving you a token that gives you
 
 ```
 
-## Delete a token
+### Delete a token
 
-# DELETE method
+#### DELETE method
 
-# Path: /token
+#### Path: /token
 
-# Responses:
+#### Responses:
 
-# Status 200 - Successful Response -
+#### Status 200 - Successful Response -
 
 ```
 true
 
 ```
 
-# Status 422 - Validation Error -
+#### Status 422 - Validation Error -
 
 ```
 {
