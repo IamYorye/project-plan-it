@@ -8,14 +8,14 @@ export default function ProjectDetails() {
     const { token } = useToken()
     const { project_id } = useParams()
     const [project, setProject] = useState([])
-    const [techStacks, setTechStacks] = useState([])
+    const [techStacks, setTechStacks] = useState([]);
+    const [ownerName, setOwnerName] = useState('');
+    const [ownerEmail, setOwnerEmail] = useState('');
+    const [joinedTeam, setJoinedTeam] = useState(false);
 
     const decodedToken = jwtDecode(token)
 
     const accountId = decodedToken.account.id
-    const accountFirstName = decodedToken.account.first_name
-    const accountLastName = decodedToken.account.last_name
-    const accountEmail = decodedToken.account.email
 
     const fetchProjectDetails = async () => {
         const projectUrl = `${process.env.REACT_APP_API_HOST}/api/projects/${project_id}`
@@ -32,9 +32,32 @@ export default function ProjectDetails() {
                 const project = await response.json()
                 setProject(project)
                 setTechStacks(project.tech_stacks)
+
+                fetchOwnerInfo(project.owner_id);
             }
         } catch (error) {
             console.error("Error fetching project details:", error)
+        }
+    }
+
+    const fetchOwnerInfo = async (ownerId) => {
+        const ownerUrl = `${process.env.REACT_APP_API_HOST}/api/accounts/${ownerId}`;
+        const fetchConfig = {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }
+
+        try {
+            const response = await fetch(ownerUrl, fetchConfig);
+            if (response.ok) {
+                const ownerInfo = await response.json();
+                setOwnerName(`${ownerInfo.first_name} ${ownerInfo.last_name}`);
+                setOwnerEmail(ownerInfo.email);
+            }
+        } catch (error) {
+            console.error("Error fetching owner details:", error);
         }
     }
 
@@ -58,6 +81,8 @@ export default function ProjectDetails() {
             const response = await fetch(joinUrl, fetchConfig)
             if (response.ok) {
                 alert("You have successfully joined the project!")
+
+                setJoinedTeam(true);
             } else {
                 alert("Error joining the project.  Please try again later.")
             }
@@ -98,11 +123,11 @@ export default function ProjectDetails() {
                         </div>
                         <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
                             <dt className="text-sm font-medium leading-6 text-gray-900">Project Owner</dt>
-                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{accountFirstName + " " + accountLastName}</dd>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{ownerName}</dd>
                         </div>
                         <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
                             <dt className="text-sm font-medium leading-6 text-gray-900">Email</dt>
-                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{accountEmail}</dd>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">{ownerEmail}</dd>
                         </div>
                         <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
                             <dt className="text-sm font-medium leading-6 text-gray-900">Tech Stacks</dt>
@@ -116,14 +141,16 @@ export default function ProjectDetails() {
                                 </ul>
                             </dd>
                         </div>
-                        <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <button
-                                onClick={handleJoinProject}
-                                className="btn btn-primary"
-                                style={{ backgroundColor: 'blue', marginRight: '10px' }}
-                            > Join the Team
-                            </button>
-                        </div>
+                        {!joinedTeam && (
+                            <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <button
+                                    onClick={handleJoinProject}
+                                    className="btn btn-primary"
+                                    style={{ backgroundColor: 'blue', marginRight: '10px' }}
+                                > Join the Team
+                                </button>
+                            </div>
+                        )}
                         <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
                         </div>
                     </dl>

@@ -123,7 +123,7 @@ function Projectcards() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const projectsUrl = "http://localhost:8000/api/projects";
+  const projectsUrl = `${process.env.REACT_APP_API_HOST}/api/projects`
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -144,7 +144,7 @@ function Projectcards() {
     };
 
     fetchProjects();
-  }, []);
+  }, []); // eslint-disable-line
 
   if (isLoading) {
     return <div>Loading...</div>;

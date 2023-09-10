@@ -45,7 +45,7 @@ const MentorCard = memo(({ mentor }) => {
 
 function MentorCards() {
   const { token } = useAuthContext();
-  const mentorsUrl = "http://localhost:8000/api/accounts";
+  const mentorsUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`;
   const [mentors, setMentors] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -77,7 +77,7 @@ function MentorCards() {
     }
 
     fetchMentors();
-  }, [token]);
+  }, [token]); // eslint-disable-line
 
   if (isLoading) {
     return <div>Loading...</div>;

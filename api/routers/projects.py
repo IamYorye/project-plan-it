@@ -56,6 +56,20 @@ def get_project(
     return project
 
 
+@router.get("/api/projects/{owner_id}", response_model=Optional[ProjectOut])
+def get_project_owner(
+    owner_id: int,
+    queries: ProjectQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    project = queries.get_project(owner_id)
+    if project is None:
+        raise HTTPException(
+            status_code=404, detail=f"No project found with id {owner_id}"
+        )
+    return project
+
+
 @router.put("/api/projects/{project_id}", response_model=ProjectOut)
 def update_project(
     project_id: int,
