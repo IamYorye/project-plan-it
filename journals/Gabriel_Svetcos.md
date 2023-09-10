@@ -6,7 +6,23 @@ At a minimum, you'll need to include the following information in each entry:
     At least one ah-ha! moment that you had during your coding, however small
     Keep your journal in reverse chronological order. Always put new entries at the top.
 
-## Tuesday September 5 - Tuesday September 7, 2023
+# Sunday, September 10
+
+Today, I worked on:
+
+- ReadMe
+
+I completed my half of the ReadMe file (Meet the team, Our Objective, Functionality[logged in, logged out]).
+
+# Friday, September 8
+
+Today, I worked on:
+
+- Code Cleanup and Bug Fixes
+
+We got our site deployed. We ran into some bugs in the process that we were able to sort out easily enough. Some members started running into a dependency issue when pulling/merging branches. I had ran into the issue before so I shared that my solution was to delete the docker containers, images and volumes. THEN, delete the node_modules directory from the project before doing a rebuild with the 'docker-compose up' command. Those issues were solved. For the rest of the day we went through code doing clean up of unused imports and code like console.logs. Jaspreet and I split up the ReadMe and I will be taking the first half of it.
+
+# Tuesday September 5 - Thursday September 7, 2023
 
 Today, I worked on:
 
@@ -16,19 +32,19 @@ I finished the navbar and dashboard finally. The biggest hurdle was getting a fi
 
 ## August 30 - Sep 1 2023
 
-Out of class to deal with moving;
+Out of class to deal with moving; Over the weekend Jaspreet and I worked to add Tailwind to basically all the pages and it looks super good!
 
 ## Tuesday - August 29, 2023
 
 Today, I worked on:
 
-- Navbar and Dashboard
+- Navbar and Dashboard and Moving
 
 ## Monday - August 28, 2023
 
 Today, I worked on:
 
-- Navbar and Dashboard
+- Navbar and Dashboard and Moving
 
 ## Friday - August 25, 2023
 
