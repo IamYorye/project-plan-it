@@ -81,3 +81,18 @@ Today I worked with the group on:
 -merging the frontend pages we've created so far
 -started deployment
 -still trying to solve the bug with the user stacks and projects stacks endpoints
+
+9/7/23
+
+Today I worked with the group on finishing deployment.
+
+I also worked on the Account profile page:
+- created Profile.js in the src/Account directory
+- most of the profile information is on there but I still have to figure out how to list the tech stacks
+
+9/8/23
+
+Today I worked on finishing up my front end pages:
+
+- Finally figured out how to display tech stacks for accounts and projects. Had to make them a property of the account and project tables instead of their own separate database tables.
+- Also created a link from the mentors list that goes to a different version of the profile page (one without an Edit Profile button) so that users can click on View Profile to contact a mentor
