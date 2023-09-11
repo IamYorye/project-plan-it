@@ -5,12 +5,22 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background: linear-gradient(
+    to right,
+    rgb(106, 17, 203) 0%,
+    rgb(119, 212, 255) 100%
+  ) 
+}
+
+#root {
+	min-height: 100vh;
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

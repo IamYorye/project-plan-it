@@ -52,16 +52,19 @@ export default function ProjectList() {
     }, [token]); // eslint-disable-line
 
     return (
-        <div>
-            <h1 style={{ fontSize: '24px', marginBottom: '20px', color: '#333' }}>Search Projects</h1>
-            <form style={{ width: '400px', backgroundColor: '#f5f5f5', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }} onSubmit={handleFilterSubmit}>
-                <label htmlFor="project_name" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Enter Project Name: </label>
+        <div className="flex flex-col items-center justify-center text-center p-5 max-w-[1200px] mx-auto">
+            <h1 style={{ fontSize: '50px', color: 'white' }} className="p-10">Here Is A List of Projects Currently Being Worked On!</h1>
+            <h2 style={{ fontSize: '30px', color: 'white' }}>You can search for a project by name, or browse and find something you may be interested in. If you find something that interests you, on the project details to be taken to the projects page. Once you get all the information, you can join the project if you want!</h2>
+            <form style={{ width: '500px', backgroundColor: 'white', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }} onSubmit={handleFilterSubmit}>
+                <label htmlFor="project_name" style={{ display: 'block', marginBottom: '15px', fontWeight: 'bold', fontSize: '18px' }}>Enter Project Name: </label>
+
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <input type="text" id="project_name" value={project_name} onChange={handleProjectNameChange} style={{ flex: 1, padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }} />
                     <button type="submit" style={{ backgroundColor: '#007bff', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', transition: 'background-color 0.3s ease' }}>Search</button>
                 </div>
             </form>
-            <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3" style={{ marginTop: '30px' }}>
+
                 {projects && projects.map((project) => (
                     <li
                         key={project.id}

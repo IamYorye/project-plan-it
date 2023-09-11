@@ -14,14 +14,13 @@
 }
 
 .container-fluid-1 {
-  position: relative;
-  background: linear-gradient(
-    to right,
-    rgb(106, 17, 203) 0%,
-    rgb(119, 212, 255) 100%
-  );
+  position: relative;  
   color: white;
   padding-top: 2rem;
+}
+
+.container-w {
+  background: white;
 }
 .nav-container {
   display: flex;

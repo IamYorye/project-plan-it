@@ -94,7 +94,7 @@ function LandingPage() {
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="container-w">
         <div className="page-section">
           <h2>Empowering Coders: Where Collaboration Ignites Brilliance!</h2>
           <div className="features-grid">
@@ -224,7 +224,7 @@ function LandingPage() {
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="container-w">
         <div className="page-section">
           <Projectcards />
         </div>

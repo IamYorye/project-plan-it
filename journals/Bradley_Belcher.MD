@@ -1,3 +1,12 @@
+
+8 September 2023
+
+still working on styling and a few other items. Added backgrounds to all pages to match the plan-it logo that Gabe designed. I'm getting better and things are moving a lot quicker and smoother than before. 
+
+7 September 2023
+
+Doing mostly work on asthsetics and styling. I've been getting a lot better with css and tailwind. A lot of our pages work perfectly but the styling and formatting needs a lot of work. I'm also going to try to create a navbar that will populate at each page. 
+
 6 September 2023
 
 Today I focused on coding and creating a test function for the attendees API. i decided to create a separate branch for this testing, and chose to create a virtual environment to test. I used the pytest command as written in the learn relating to testing. I spent 2 hours trouble shooting issues. I eventually asked my project mates for help and they had run into similar issues. They first had me run the tests through my docker container instead of the virtual environment. At first I got an identical error message. then they told me to use the cmd python -m pytest rather than just pytest. I got different error codes, but the only thing we had to do was add to my imports. After that the tests passed.
