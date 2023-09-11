@@ -147,7 +147,7 @@ function LandingPage() {
           <div className="page-section">
             <h2>
               All programming languages are welcome! If it's used to program,
-              than you'll find it here!
+              then you'll find it here!
             </h2>
             <div className="icon-grid">
               <div className="grid-item">
@@ -232,7 +232,7 @@ function LandingPage() {
       <div className="container-fluid-1">
         <div className="page-section">
           <h2>
-            Join our community and become start building your dream projects
+            Join our community and  start building your dream projects
             today! Click the image below to get started!
           </h2>
           <div>

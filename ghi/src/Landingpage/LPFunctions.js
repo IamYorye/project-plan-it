@@ -78,7 +78,7 @@ function Carousel({ projects }) {
   return (
     <div className="relative">
       <div className="text-center py-4  text-xl font-bold">
-        Here's Some Projects Currently Being Worked On! Sign Up Now To Join The
+        Here Are Some Projects Currently Being Worked On! Sign Up Now To Join The
         Effort Of Bringing New Applications To Life!
       </div>
       <div
