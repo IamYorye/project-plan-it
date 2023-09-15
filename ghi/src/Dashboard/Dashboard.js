@@ -4,8 +4,7 @@ import MyProjects from "./MyProjects";
 import useToken from '@galvanize-inc/jwtdown-for-react';
 import jwtDecode from 'jwt-decode';
 
-export default function Dashboard()
-{
+export default function Dashboard() {
     const [selectedTab, setSelectedTab] = useState('myProjects');
     const [projects, setProjects] = useState([]);
     const [attendees, setAttendees] = useState([]);
@@ -14,79 +13,65 @@ export default function Dashboard()
     const decodedToken = jwtDecode(token);
     const user = decodedToken.account;
 
-    const handleTabClick = (tabKey) =>
-    {
+    const handleTabClick = (tabKey) => {
         setSelectedTab(tabKey);
     };
 
-    const fetchAccountsData = async () =>
-    {
+    const fetchAccountsData = async () => {
         const accountsUrl = `${process.env.REACT_APP_API_HOST}/api/accounts`;
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
         };
-        try
-        {
+        try {
             const response = await fetch(accountsUrl, fetchConfig);
-            if (response.ok)
-            {
+            if (response.ok) {
                 const data = await response.json();
                 setAccounts(data);
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error("Error fetching projects:", error);
         }
     };
 
-    const fetchProjectData = async () =>
-    {
+    const fetchProjectData = async () => {
         const projectsUrl = `${process.env.REACT_APP_API_HOST}/api/projects`;
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
         };
-        try
-        {
+        try {
             const response = await fetch(projectsUrl, fetchConfig);
-            if (response.ok)
-            {
+            if (response.ok) {
                 const data = await response.json();
                 setProjects(data);
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error("Error fetching projects:", error);
         }
     };
 
-    const fetchAttendeeData = async () =>
-    {
+    const fetchAttendeeData = async () => {
         const attendeesUrl = `${process.env.REACT_APP_API_HOST}/api/attendees/account/${user.id}`;
         const fetchConfig = {
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
         };
-        try
-        {
+        try {
             const response = await fetch(attendeesUrl, fetchConfig);
-            if (response.ok)
-            {
+            if (response.ok) {
                 const data = await response.json();
                 setAttendees(data);
             }
-        } catch (error)
-        {
+        } catch (error) {
             console.error("Error fetching projects:", error);
         }
     };
 
-    useEffect(() =>
-    {
+    useEffect(() => {
         fetchAccountsData();
         fetchProjectData();
         fetchAttendeeData();
@@ -114,7 +99,7 @@ export default function Dashboard()
                 <div className="hidden sm:block">
                     <nav className="isolate flex divide-x divide-gray-200 rounded-lg shadow" aria-label="Tabs">
                         <button
-                            className={`group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10 ${selectedTab === 'myProjects' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700'} rounded-l-lg`}
+                            className={`group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10 ${selectedTab === 'myProjects' ? 'text-gray-900' : 'text-gray-900 hover:text-gray-700'} rounded-l-lg`}
                             aria-current={selectedTab === 'myProjects' ? 'page' : undefined}
                             onClick={() => handleTabClick('myProjects')}
                         >

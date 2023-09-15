@@ -40,10 +40,10 @@ export default function MyProjects({ projects, user }) {
         <div className="m-10">
             <ul className="divide-y divide-gray-50 pt-2 m-10">
                 {userProjects.map((project) => (
-                    <li key={project.id} className="flex items-center justify-between p-5 bg-white m-2 rounded-lg shadow-lg overflow-hidden">
+                    <li key={project.id} className="flex items-center justify-between p-3 bg-white m-4 rounded-lg shadow-lg overflow-hidden">
                         <div className="min-w-0">
                             <div className="flex items-start gap-x-5 pb-3">
-                                <p className="text-XL font-semibold text-gray-900">{project.project_name}</p>
+                                <h1 className="text-2xl font-semibold text-gray-900">{project.project_name}</h1>
                                 <p
                                     className={classNames(
                                         statuses[project.is_completed],
@@ -53,8 +53,7 @@ export default function MyProjects({ projects, user }) {
                                     {project.is_completed ? 'Complete' : 'In Progress'}
                                 </p>
                             </div>
-                            <div className="flex-grow flex items-center text-m text-gray-500">
-
+                            <div className="flex-grow flex items-center text-lg text-gray-600">
 
                                 <p className="pr-2">
                                     Goal: {project.goal}
